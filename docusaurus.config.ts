@@ -4,8 +4,8 @@ import type * as Preset from "@docusaurus/preset-classic";
 import backlinkResolver from "./lib/backlinks";
 
 const config: Config = {
-  title: "Docusaurus",
-  favicon: "img/favicon.ico",
+  title: "notes by jui",
+  favicon: "img/namu.svg",
 
   // Set the production url of your site here
   url: "https://your-docusaurus-site.example.com",
@@ -59,19 +59,19 @@ const config: Config = {
       title: "나무쥐키",
       logo: {
         alt: "My Site Logo",
-        src: "img/logo.svg",
+        src: "img/namu.svg",
       },
       items: [
         {
           type: "docSidebar",
           sidebarId: "tutorialSidebar",
           position: "left",
-          label: "docs",
+          label: "Docs",
         },
       ],
+      hideOnScroll: true,
     },
     footer: {
-      style: "dark",
       copyright: `Copyright © ${new Date().getFullYear()} 쥐. Built with Docusaurus.`,
     },
     prism: {
@@ -79,6 +79,16 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+
+  headTags: [
+    {
+      tagName: "link",
+      attributes: {
+        rel: "stylesheet",
+        href: "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css",
+      },
+    },
+  ],
 };
 
 export default config;
