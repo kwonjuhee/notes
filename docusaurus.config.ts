@@ -27,6 +27,16 @@ const config: Config = {
         docs: {
           routeBasePath: "/",
           sidebarPath: "./sidebars.ts",
+          remarkPlugins: [
+            [
+              require("remark-wiki-link").default,
+              {
+                pageResolver: (name: string) => [name],
+                hrefTemplate: (permalink: string) => `/${permalink}`,
+                aliasDivider: "|",
+              },
+            ],
+          ],
         },
         blog: false,
         theme: {
