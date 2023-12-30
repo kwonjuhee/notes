@@ -7,16 +7,11 @@ const config: Config = {
   title: "notes by jui",
   favicon: "img/namu.svg",
 
-  // Set the production url of your site here
-  url: "https://your-docusaurus-site.example.com",
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/",
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: "kwonjuhee", // Usually your GitHub org/user name.
-  projectName: "notes", // Usually your repo name.
+  url: "https://kwonjuhee.github.io/",
+  baseUrl: "/notes/",
+  organizationName: "kwonjuhee",
+  projectName: "notes",
+  trailingSlash: false,
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
