@@ -1,6 +1,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import backlinkResolver from "./lib/backlinks";
 
 const config: Config = {
   title: "Docusaurus",
@@ -31,7 +32,7 @@ const config: Config = {
             [
               require("remark-wiki-link").default,
               {
-                pageResolver: (name: string) => [name],
+                pageResolver: (name: string) => [...backlinkResolver.get(name)],
                 hrefTemplate: (permalink: string) => `/${permalink}`,
                 aliasDivider: "|",
               },
