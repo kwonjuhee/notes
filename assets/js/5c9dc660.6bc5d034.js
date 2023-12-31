@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunknotes=self.webpackChunknotes||[]).push([[3],{4092:t=>{t.exports=JSON.parse('{"title":"\ud83d\udcc1Test","slug":"/category/test","permalink":"/notes/category/test","navigation":{"previous":{"title":"Intro","permalink":"/notes/"},"next":{"title":"test","permalink":"/notes/test/"}}}')}}]);
