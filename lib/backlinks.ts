@@ -34,7 +34,7 @@ class BacklinkResolver {
       const [realSlug, heading] = slug.split("#");
       return (
         this.resolver
-          .get(realSlug)
+          .get(realSlug.replace(/\(/g, "\\(").replace(/\)/g, "\\)"))
           ?.map((v) => `${v}#${heading.replace(/ /g, "-").toLowerCase()}`) ?? []
       );
     }
