@@ -1,0 +1,1 @@
+https://itchallenger.tistory.com/m/entry/React-children-with-typescript-%EB%A6%AC%EC%95%A1%ED%8A%B8-children-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%ED%83%80%EC%9D%B4%ED%95%91
