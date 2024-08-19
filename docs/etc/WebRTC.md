@@ -18,11 +18,11 @@ peer간 단순 연결시 작동하지 않음
 - P2P 네트워킹에서 두 컴퓨터가 직접 서로 통신하는 방법을 찾기 위해 사용되는 프레임워크
 - 위의 작업들을 수행하기 위해 **STUN**과 **TURN** 서버 **둘 다 혹은 하나**의 서버를 사용
 
-![Untitled](attachments/WebRTC/Untitled.png)
+![Untitled](../attachments/WebRTC/Untitled.png)
 
 ## STUN (Session Traversal Utilities for NAT)
 
-![Untitled](attachments/WebRTC/Untitled%201.png)
+![Untitled](../attachments/WebRTC/Untitled%201.png)
 
 - 클라이언트는 STUN 서버에 다음을 요청함
     - 클라이언트 자신의 Public Address (IP:Port)
@@ -51,7 +51,7 @@ P2P 연결을 위해서, peer간의 offer와 answer를 통한 session 정보를 
 
 # 서버의 종류
 
-![Untitled](attachments/WebRTC/Untitled%202.png)
+![Untitled](../attachments/WebRTC/Untitled%202.png)
 
 Uplink : 나의 데이터를 연결된 다른 사용자에게 보내는 갯수
 
@@ -79,9 +79,9 @@ Downlink: 연결된 다른 사용자의 데이터가 나에게 들어오는 갯�
 
 ## 1. SDP 교환 - Offer, Answer
 
-![Untitled](attachments/WebRTC/Untitled%203.png)
+![Untitled](../attachments/WebRTC/Untitled%203.png)
 
-![Untitled](attachments/WebRTC/Untitled%204.png)
+![Untitled](../attachments/WebRTC/Untitled%204.png)
 
 1. Alice 가 SDP 형태의 Offer 메시지를 생성한다.
 2. Alice가 생성된 Offer 메시지를 본인의 LocalDescription으로 등록한다.
@@ -107,4 +107,4 @@ SDP를 서로 교환한 후, 각 peer들은 서로의 주소 값을 알기 위�
 
 [http://jaynewho.com/post/36](http://jaynewho.com/post/36)
 
-![Untitled](attachments/WebRTC/Untitled%205.png)
+![Untitled](../attachments/WebRTC/Untitled%205.png)

@@ -46,7 +46,7 @@
 
 - 작업(work) 이란 수행되어야 하는 모든 계산을 말한다. 보통 업데이트의 결과다. (e.g. `setState`)
 
-> 🔎 [Scheduling Design Principle](reactjs.org/docs/design-principles.html)에서 Fiber가 필요한 이유를 잘 설명한다.
+> 🔎 [Scheduling Design Principle](https://reactjs.org/docs/design-principles.html)에서 Fiber가 필요한 이유를 잘 설명한다.
 > 
 > - 모든 업데이트가 즉각적으로 UI에 반영될 필요는 없다. 그렇게 하면 프레임이 드랍되고 사용자 경험을 저하시키기 때문에 낭비일 수 있기 때문이다.
 >   

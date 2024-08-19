@@ -10,13 +10,13 @@
 - Apache
     - 클라이언트로부터 받은 요청을 처리할 때 새로운 프로세스 또는 스레드를 생성하여 처리한다. 요청마다 스레드가 생성되므로 접속하는 사용자가 많으면 그만큼 스레드가 생성되어 CPU와 메모리 자원의 소모가 커진다.
     
-    ![Untitled](attachments/Nginx/Untitled.png)
+    ![Untitled](../attachments/Nginx/Untitled.png)
     
 - 프로세스나 스레드라는 개념 대신 이벤트 처리 방식
     - 한 개 또는 고정된 프로세스만 생성하여 사용하고, 비동기 방식으로 요청들을 Concurrency 하게 처리할 수 있다.
 - 프로세스와 스레드 생성 비용이 존재하지 않고 적은 자원으로도 효율적인 운용이 가능하다. 단일 서버에서도 동시에 많은 연결을 처리할 수 있다.
 
-![Untitled](attachments/Nginx/Untitled%201.png)
+![Untitled](../attachments/Nginx/Untitled%201.png)
 
 - http 블록
     - HTTP 부분과 관련된 모듈의 지시어와 블록을 정의
@@ -46,7 +46,7 @@ server {
 > 리버스 프록시란 외부 클라이언트에서 서버로 접근 시 중간에서 중개자 역할을 하여 내부 서버로 접근할 수 있도록 도와주는 서버
 > 
 
-![Untitled](attachments/Nginx/Untitled%202.png)
+![Untitled](../attachments/Nginx/Untitled%202.png)
 
 - **보안** : 외부 사용자로부터 내부망에 있는 서버의 존재를 숨길 수 있다. 모든 요청은 리버스 프록시 서버에서 받으며, 매핑되는 내부 서버로 요청을 전달한다. 또한 Nginx는 SSL 설정도 가능하다.
 - **로드밸런싱** : 리버스 프록시 서버가 내부 서버에 대한 정보를 알고 있으므로, 각 서버의 상태에 따라 부하를 분산시키며 요청을 전달할 수 있다.
@@ -73,12 +73,12 @@ http {
 
 - Forward Proxy란
     
-    ![Untitled](attachments/Nginx/Untitled%203.png)
+    ![Untitled](../attachments/Nginx/Untitled%203.png)
     
 
 # Redirect HTTP to HTTPS
 
-![Untitled](attachments/Nginx/Untitled%204.png)
+![Untitled](../attachments/Nginx/Untitled%204.png)
 
 - 데이터를 보호하기 위해 https 기반 통신 구현
     - 오디오 및 비디오의 스트림을 주고 받을 때 서버 연결 자체의 보안은 TLS/SSL 기반의 HTTPS, 미디어 스트림의 보안은 DTLS 을 사용하여 보안성을 확보한다.

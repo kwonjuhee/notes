@@ -41,7 +41,7 @@ type B = unknown extends string? true : false; // false
 
 ## upcast & downcast
 
-<img src="https://user-images.githubusercontent.com/62097867/222366711-3a629688-0c66-43f5-b716-3da136bbf847.png" width="600px">
+<img src="https://user-images.githubusercontent.com/62097867/222366711-3a629688-0c66-43f5-b716-3da136bbf847.png" width="600px" />
 
 ### 업캐스트 (upcast)
 

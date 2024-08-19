@@ -23,13 +23,13 @@
 
 # Server Side Rendering
 
-![Untitled](attachments/CSR와%20SSR/Untitled.png)
+![Untitled](../attachments/CSR와%20SSR/Untitled.png)
 
 사용자가 페이지를 요청할 때마다 해당 요청에 대한 HTML 파일을 받아와서 렌더링한다.
 
 사용자가 요청할 때마다 다음과 같은 과정을 거치기 때문에 사용자는 잠시동안 빈화면을 마주해야 한다.
 
-![클라이언트 요청 → 서버 응답 → 브라우저 렌더링 → View](attachments/CSR와%20SSR/Untitled%201.png)
+![클라이언트 요청 → 서버 응답 → 브라우저 렌더링 → View](../attachments/CSR와%20SSR/Untitled%201.png)
 
 클라이언트 요청 → 서버 응답 → 브라우저 렌더링 → View
 
@@ -49,13 +49,13 @@ Ajax의 등장으로 현재의 화면은 유치한 채 변경될 부분만 교�
 
 브라우저의 자바스크립트 엔진과 서버 사이간에 비동기적으로 XML (혹은 JSON)을 주고받을 수 있기 때문
 
-![Untitled](attachments/CSR와%20SSR/Untitled%202.png)
+![Untitled](../attachments/CSR와%20SSR/Untitled%202.png)
 
 하지만 여전히 사용자에게 보여줄 템플릿을 생성하는 입장은 서버측이었다. 이 책임을 클라이언트단으로 옮긴 것이 CSR 방식!
 
 # Client Side Rendering
 
-![Untitled](attachments/CSR와%20SSR/Untitled%203.png)
+![Untitled](../attachments/CSR와%20SSR/Untitled%203.png)
 
 어플리케이션 초기 실행시에 HTML과 static 파일을 요청한 후 로드되면, 사용자의 상호작용에 따라 JavaScript를 통해 동적으로 렌더링한다.
 

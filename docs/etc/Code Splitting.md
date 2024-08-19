@@ -1,6 +1,6 @@
 
 
-![Untitled](attachments/Code%20Splitting/Untitled.png)
+![Untitled](../attachments/Code%20Splitting/Untitled.png)
 
 출처: [https://crystallize.com/comics/no-code-splitting-vs-code-splitting](https://crystallize.com/comics/no-code-splitting-vs-code-splitting)
 

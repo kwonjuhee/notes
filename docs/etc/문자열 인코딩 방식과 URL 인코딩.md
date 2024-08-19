@@ -51,7 +51,7 @@
 > **UTF-8 방식**
 > 인코딩하려는 문자의 코드가 속한 범위에 따라 1byte ~ 4byte로 인코딩하는 가변 길이 인코딩 방식
 > 
-> ![Untitled](attachments/문자열%20인코딩%20방식과%20URL%20인코딩/Untitled.png)
+> ![Untitled](../attachments/문자열%20인코딩%20방식과%20URL%20인코딩/Untitled.png)
 > 
 
 # URL Encoding이 필요한 이유

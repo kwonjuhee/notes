@@ -8,4 +8,4 @@
 
 data 구조
 
-![Untitled](attachments/useInfiniteQuery/Untitled.png)
+![Untitled](../attachments/useInfiniteQuery/Untitled.png)

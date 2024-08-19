@@ -21,7 +21,7 @@
 
 cold-start 방식(* 최초로 실행되어 이전에 캐싱한 데이터가 없는 경우)으로 개발 서버를 구동할 때, 번들러 기반의 도구의 경우 애플리케이션 내 모든 소스 코드에 대해 크롤링 및 빌드 작업을 마쳐야지만이 실제 페이지를 제공할 수 있었다.
 
-![Untitled](attachments/Vite/Untitled.png)
+![Untitled](../attachments/Vite/Untitled.png)
 
 ### Vite는 어떻게 해결했나?
 
@@ -31,7 +31,7 @@ Dependencies는 개발시 그 내용이 바뀌지 않을 plain JavaScript 소스
 
 그렇다면, 컴파일링이 필요하고 수정 또한 매우 잦은 non-plain JavaScript 소스코드는 어떻게 할까? (예: JSX, CSS, Vue/Svelte 컴포넌트…) Vite는 Native ESM을 기반으로 하기 때문에 브라우저가 소스코드를 불러오면서 의존성이 있는 모듈을 전달해주는 역할을 한다. 따라서 dynamic import 이후의 코드는 현재 화면에서 실제로 사용이 되어야만 처리가 된다.
 
-![Untitled](attachments/Vite/Untitled%201.png)
+![Untitled](../attachments/Vite/Untitled%201.png)
 
 ## HMR
 
