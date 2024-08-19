@@ -4,11 +4,11 @@ import type * as Preset from "@docusaurus/preset-classic";
 import backlinkResolver from "./lib/backlinks";
 
 const config: Config = {
-  title: "notes by jui",
+  title: "namujwiki",
   favicon: "img/namu.svg",
 
-  url: "https://kwonjuhee.github.io/",
-  baseUrl: "/notes/",
+  url: "https://namujwiki.vercel.app",
+  baseUrl: "/",
   organizationName: "kwonjuhee",
   projectName: "notes",
   trailingSlash: false,
