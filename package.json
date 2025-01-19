@@ -2,6 +2,7 @@
   "name": "nextjs-starter",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,8 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "plop": "plop"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.13.1",
@@ -37,6 +39,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
+    "plop": "^4.0.1",
     "storybook": "^8.0.0",
     "typescript": "^5"
   }
