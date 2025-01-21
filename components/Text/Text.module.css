@@ -1,0 +1,52 @@
+.heading20 {
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-semibold);
+}
+
+.heading24 {
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+}
+
+.heading30 {
+  font-size: var(--font-size-30);
+  font-weight: var(--font-weight-bold);
+}
+
+.label14 {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+}
+
+.label16 {
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+}
+
+.body14 {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-regular);
+}
+
+.body16 {
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-regular);
+}
+
+.caption12 {
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-regular);
+}
+
+.caption14 {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-regular);
+}
+
+.size {
+  font-size: var(--font-size);
+}
+
+.weight {
+  font-weight: var(--font-weight);
+}
