@@ -1,0 +1,55 @@
+:root {
+  /** background */
+  --bg-surface-white: var(--white);
+  --bg-surface: var(--gray-50);
+  --bg-surface-subtle: var(--gray-25);
+
+  --bg-gray-subtle: var(--gray-100);
+  --bg-gray-subtle-hovered: var(--gray-200);
+  --bg-gray-subtle-pressed: var(--gray-300);
+
+  --bg-gray-default: var(--gray-600);
+  --bg-gray-default-hovered: var(--gray-700);
+  --bg-gray-default-pressed: var(--gray-800);
+
+  --bg-brand-subtle: var(--brand-100);
+  --bg-brand-subtle-hovered: var(--brand-200);
+  --bg-brand-subtle-pressed: var(--brand-300);
+
+  --bg-brand: var(--brand-600);
+  --bg-brand-hovered: var(--brand-700);
+  --bg-brand-pressed: var(--brand-800);
+
+  --bg-transparent: var(--transparent);
+  --bg-transparent-hovered: var(--gray-100);
+
+  /** border */
+  --border-gray: var(--gray-200);
+  --border-gray-hovered: var(--gray-300);
+  --border-gray-focused: var(--gray-300);
+  --border-gray-bold: var(--gray-400);
+
+  --border-brand: var(--brand-300);
+  --border-brand-hovered: var(--brand-400);
+  --border-brand-focused: var(--brand-400);
+  --border-brand-bold: var(--brand-400);
+
+  /** text */
+  --text-bold: var(--gray-900);
+  --text-default: var(--gray-800);
+  --text-subtle: var(--gray-700);
+  --text-subtlest: var(--gray-500);
+
+  --text-brand-bold: var(--brand-900);
+  --text-brand-default: var(--brand-800);
+
+  /** state */
+  --bg-selected: var(--brand-100);
+  --bg-selected-bold: var(--brand-600);
+  --text-selected: var(--brand-700);
+  --border-selected: var(--brand-700);
+
+  --bg-disabled: var(--gray-a100);
+  --text-disabled: var(--gray-a600);
+  --border-disabled: var(--gray-a600);
+}
