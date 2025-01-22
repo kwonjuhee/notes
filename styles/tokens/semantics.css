@@ -52,4 +52,12 @@
   --bg-disabled: var(--gray-a100);
   --text-disabled: var(--gray-a600);
   --border-disabled: var(--gray-a600);
+
+  /** radius */
+  --radius-none: 0px;
+  --radius-small: var(--radius-4);
+  --radius-medium: var(--radius-6);
+  --radius-large: var(--radius-8);
+  --radius-xlarge: var(--radius-12);
+  --radius-full: 9999px;
 }

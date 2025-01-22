@@ -67,13 +67,12 @@
 
   /** radius */
   --radius-2: 2px;
-  --radius-3: 4px;
+  --radius-4: 4px;
   --radius-6: 6px;
-  --radius-7: 8px;
+  --radius-8: 8px;
   --radius-12: 12px;
   --radius-16: 16px;
   --radius-24: 24px;
-  --radius-full: 9999px;
 
   /** zIndex */
   --hide: -1;
