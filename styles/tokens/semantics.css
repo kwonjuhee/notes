@@ -7,7 +7,6 @@
   --bg-gray-subtle: var(--gray-100);
   --bg-gray-subtle-hovered: var(--gray-200);
   --bg-gray-subtle-pressed: var(--gray-300);
-
   --bg-gray-default: var(--gray-600);
   --bg-gray-default-hovered: var(--gray-700);
   --bg-gray-default-pressed: var(--gray-800);
@@ -15,13 +14,16 @@
   --bg-brand-subtle: var(--brand-100);
   --bg-brand-subtle-hovered: var(--brand-200);
   --bg-brand-subtle-pressed: var(--brand-300);
-
   --bg-brand: var(--brand-600);
   --bg-brand-hovered: var(--brand-700);
   --bg-brand-pressed: var(--brand-800);
 
   --bg-transparent: var(--transparent);
   --bg-transparent-hovered: var(--gray-100);
+  --bg-transparent-gray-hovered: var(--gray-100);
+  --bg-transparent-gray-pressed: var(--gray-200);
+  --bg-transparent-brand-hovered: var(--brand-100);
+  --bg-transparent-brand-pressed: var(--brand-200);
 
   /** border */
   --border-gray: var(--gray-200);
@@ -40,8 +42,13 @@
   --text-subtle: var(--gray-700);
   --text-subtlest: var(--gray-500);
 
+  --text-gray-bold: var(--gray-900);
+  --text-gray-default: var(--gray-800);
+  --text-gray-subtle: var(--gray-700);
+
   --text-brand-bold: var(--brand-900);
   --text-brand-default: var(--brand-800);
+  --text-brand-subtle: var(--brand-700);
 
   /** state */
   --bg-selected: var(--brand-100);
