@@ -9,7 +9,7 @@ export default meta;
 
 export const Primary: StoryObj<typeof Flex> = {
   render: (args) => (
-    <Flex {...args} style={{ width: "500px" }}>
+    <Flex width="500px" {...args}>
       {Array.from({ length: 5 }, (_, i) => (
         <Box
           key={i}

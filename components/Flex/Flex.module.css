@@ -1,4 +1,52 @@
 .flex {
+  --margin: 0;
+  --margin-left: var(--margin);
+  --margin-x: var(--margin);
+  --margin-y: var(--margin);
+  --margin-top: var(--margin-y, --margin);
+  --margin-right: var(--margin-x, --margin);
+  --margin-bottom: var(--margin-y, --margin);
+  --margin-left: var(--margin-x, --margin);
+  --padding: 0;
+  --padding-x: var(--padding);
+  --padding-y: var(--padding);
+  --padding-top: var(--padding-y, --padding);
+  --padding-right: var(--padding-x, --padding);
+  --padding-bottom: var(--padding-y, --padding);
+  --padding-left: var(--padding-x, --padding);
+  --width: auto;
+  --min-width: auto;
+  --max-width: auto;
+  --height: auto;
+  --min-height: auto;
+  --max-height: auto;
+  --position: static;
+  --top: auto;
+  --right: auto;
+  --bottom: auto;
+  --left: auto;
+  --flex-basis: auto;
+  --flex-grow: auto;
+  --flex-shrink: auto;
+  --flex-gap: 0;
+
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  width: var(--width);
+  min-width: var(--min-width);
+  max-width: var(--max-width);
+  height: var(--height);
+  min-height: var(--min-height);
+  max-height: var(--max-height);
+  position: var(--position);
+  top: var(--top);
+  right: var(--right);
+  bottom: var(--bottom);
+  left: var(--left);
+  flex-basis: var(--flex-basis);
+  flex-grow: var(--flex-grow);
+  flex-shrink: var(--flex-shrink);
+
   gap: var(--flex-gap);
 
   &.display-none {
