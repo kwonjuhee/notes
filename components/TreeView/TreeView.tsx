@@ -16,6 +16,7 @@ export interface TreeItemProps {
   current?: boolean;
   depth?: number;
   children: React.ReactNode;
+  href?: string;
   onClick?: () => void;
 }
 
@@ -24,6 +25,7 @@ export const TreeItem = ({
   current,
   depth = 0,
   children,
+  href,
   onClick,
 }: TreeItemProps) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
@@ -58,6 +60,7 @@ export const TreeItem = ({
         fullWidth
         className={styles.button}
         onClick={toggle}
+        href={hasSubTree ? undefined : href}
       >
         <span className={styles.indent} style={{ "--depth": depth } as React.CSSProperties} />
         <span className={styles.icon}>

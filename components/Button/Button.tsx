@@ -16,7 +16,9 @@ export interface CommonButtonProps {
 
 export interface ButtonProps
   extends CommonButtonProps,
-    Omit<React.ComponentPropsWithoutRef<"button">, "color"> {}
+    Omit<React.ComponentPropsWithoutRef<"button">, "color"> {
+  href?: undefined;
+}
 
 export interface AnchorProps
   extends CommonButtonProps,
@@ -44,7 +46,7 @@ export const Button = ({
     className
   );
 
-  if ("href" in props) {
+  if (props.href !== undefined) {
     return (
       <Link style={buttonStyle} className={buttonClassName} {...props}>
         {children}

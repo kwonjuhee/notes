@@ -12,28 +12,45 @@ export const Primary: StoryObj<typeof SideNavBar> = {
     navItems: [
       {
         id: "Item1",
+        path: "",
         childNodes: [
           {
             id: "Item1-1",
-            childNodes: [{ id: "item1-1-1" }, { id: "item1-1-2" }, { id: "item1-1-3" }],
+            path: "",
+            childNodes: [
+              { id: "item1-1-1", path: "" },
+              { id: "item1-1-2", path: "" },
+              { id: "item1-1-3", path: "" },
+            ],
           },
           {
             id: "Item1-2",
-            childNodes: [{ id: "item1-2-1" }, { id: "item1-2-2" }, { id: "item1-2-3" }],
+            path: "",
+            childNodes: [
+              { id: "item1-2-1", path: "" },
+              { id: "item1-2-2", path: "" },
+              { id: "item1-2-3", path: "" },
+            ],
           },
         ],
       },
       {
         id: "Item2",
+        path: "",
         childNodes: [
           {
             id: "Item2-1",
-            childNodes: [{ id: "item2-1-1" }, { id: "item2-1-2" }, { id: "item2-1-3" }],
+            path: "",
+            childNodes: [
+              { id: "item2-1-1", path: "" },
+              { id: "item2-1-2", path: "" },
+              { id: "item2-1-3", path: "" },
+            ],
           },
         ],
       },
-      { id: "item1" },
-      { id: "item2" },
+      { id: "item1", path: "" },
+      { id: "item2", path: "" },
     ],
   },
 };
