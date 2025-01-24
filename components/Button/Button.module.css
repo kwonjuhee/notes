@@ -172,4 +172,10 @@
     color: var(--text-disabled);
     cursor: not-allowed;
   }
+
+  /** ==================== full width ====================*/
+
+  &.fullWidth {
+    width: 100%;
+  }
 }

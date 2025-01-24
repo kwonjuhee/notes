@@ -11,6 +11,7 @@ export interface CommonButtonProps {
   variant?: Variant;
   color?: Color;
   radius?: Radius;
+  fullWidth?: boolean;
 }
 
 export interface ButtonProps
@@ -27,6 +28,7 @@ export const Button = ({
   variant = "solid",
   color = "brand",
   radius = "medium",
+  fullWidth = false,
   style,
   className,
   children,
@@ -38,6 +40,7 @@ export const Button = ({
     styles[`size-${size}`],
     styles[`variant-${variant}`],
     styles[`color-${color}`],
+    fullWidth && styles.fullWidth,
     className
   );
 

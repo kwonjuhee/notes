@@ -23,6 +23,7 @@ export const Playground: StoryObj<typeof Button> = {
     color: "brand",
     radius: "medium",
     disabled: false,
+    fullWidth: false,
     children: "Button",
   },
 };
