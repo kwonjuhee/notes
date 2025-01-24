@@ -49,6 +49,10 @@ type FlexItemProps = {
 type StyleProps = {
   backgroundColor?: Color;
   borderWidth?: string;
+  borderTopWidth?: string;
+  borderRightWidth?: string;
+  borderBottomWidth?: string;
+  borderLeftWidth?: string;
   borderColor?: Color;
   borderRadius?: Radius;
 };
@@ -113,6 +117,10 @@ const getBoxCustomProperties = (props: BoxProps) => {
     flexShrink,
     backgroundColor,
     borderWidth,
+    borderTopWidth,
+    borderRightWidth,
+    borderBottomWidth,
+    borderLeftWidth,
     borderColor,
     borderRadius,
     ...rest
@@ -149,6 +157,10 @@ const getBoxCustomProperties = (props: BoxProps) => {
       "--flex-shrink": flexShrink,
       "--background-color": `var(--bg-${backgroundColor}-subtle)`,
       "--border-width": borderWidth,
+      "--border-top-width": borderTopWidth,
+      "--border-right-width": borderRightWidth,
+      "--border-bottom-width": borderBottomWidth,
+      "--border-left-width": borderLeftWidth,
       "--border-color": `var(--border-${borderColor})`,
       "--border-radius": `var(--radius-${borderRadius})`,
     },

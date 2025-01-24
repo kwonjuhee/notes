@@ -23,6 +23,10 @@
   flex-shrink: var(--flex-shrink);
   background-color: var(--background-color);
   border: var(--border-width) solid var(--border-color);
+  border-top: var(--border-top-width) solid var(--border-color);
+  border-right: var(--border-right-width) solid var(--border-color);
+  border-bottom: var(--border-bottom-width) solid var(--border-color);
+  border-left: var(--border-left-width) solid var(--border-color);
   border-radius: var(--border-radius);
 
   &.display-none {
