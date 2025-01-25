@@ -36,7 +36,7 @@ export const Primary: StoryObj<typeof Text> = {
   render: () => (
     <>
       {variants.map((variant) => (
-        <Text as="div" variant={variant}>
+        <Text key={variant} as="div" variant={variant}>
           {variant}
         </Text>
       ))}
