@@ -1,2 +1,105 @@
 .Markdown {
+  color: var(--text-default);
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  table,
+  pre {
+    margin: 0;
+    margin-bottom: 16px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+
+  & > :first-child {
+    margin-top: 0;
+  }
+
+  p {
+    margin-bottom: 12px;
+    line-height: 145%;
+  }
+
+  blockquote {
+    margin: 0;
+    padding: 0 16px;
+    color: var(--text-subtlest);
+    border-left: 3px solid var(--border-gray);
+  }
+
+  ul,
+  ol {
+    padding-left: 24px;
+
+    ul {
+      margin-bottom: 0;
+    }
+    ol {
+      margin-bottom: 0;
+    }
+  }
+
+  li {
+    list-style: initial;
+
+    &::marker {
+      color: var(--text-subtlest);
+    }
+
+    & + li {
+      margin-top: 4px;
+    }
+  }
+
+  pre {
+    margin: 0;
+    padding: 12px 16px;
+    background-color: var(--bg-gray-subtle);
+    border-radius: var(--radius-medium);
+    line-height: 1.45;
+    white-space: pre-wrap;
+  }
+
+  hr {
+    border-width: 2px 0 0 0;
+    border-style: solid;
+    border-color: var(--border-gray);
+  }
+
+  a {
+    color: var(--text-selected);
+    text-decoration: none;
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  strong {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 8px 12px;
+      border: 1px solid var(--border-gray);
+    }
+
+    th {
+      background-color: var(--bg-gray-subtle);
+    }
+  }
 }
