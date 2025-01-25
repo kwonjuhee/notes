@@ -67,6 +67,12 @@
     white-space: pre-wrap;
   }
 
+  & code {
+    padding: 2px 4px;
+    background-color: var(--bg-gray-subtle);
+    border-radius: var(--radius-small);
+  }
+
   & hr {
     border-width: 2px 0 0 0;
     border-style: solid;
