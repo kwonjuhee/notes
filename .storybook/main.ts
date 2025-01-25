@@ -12,6 +12,9 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  features: {
+    experimentalRSC: true,
+  },
   webpackFinal: (config) => {
     if (config.resolve) {
       config.resolve.alias = {
