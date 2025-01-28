@@ -1,0 +1,23 @@
+.Breadcrumb {
+  .list {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .item {
+    color: var(--text-subtlest);
+    text-decoration: none;
+
+    &:last-child {
+      color: var(--text-default);
+    }
+  }
+
+  .seperator {
+    display: inline-flex;
+    align-items: center;
+    justify-items: center;
+    color: var(--text-subtlest);
+  }
+}
