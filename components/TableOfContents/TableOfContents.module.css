@@ -11,8 +11,17 @@
   }
 
   .item {
+    color: var(--text-subtlest);
+    font-size: var(--font-size-14);
+    font-weight: var(--font-weight-regular);
+
+    &.active {
+      color: var(--text-default);
+      font-weight: var(--font-weight-medium);
+    }
+
     & > a {
-      color: var(--text-subtlest);
+      color: inherit;
       text-decoration: none;
     }
 

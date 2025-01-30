@@ -29,7 +29,7 @@ export const Primary: StoryObj<typeof TableOfContents> = {
 
     return (
       <nav className={styles.TableOfContents}>
-        <TOCItems tocItems={tocItems} />
+        <TOCItems tocItems={tocItems} activeId="heading1" />
       </nav>
     );
   },

@@ -3,13 +3,13 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { MARKDOWN_ID } from "@/constants/markdown";
-import { Text } from "../Text";
 import styles from "./TableOfContents.module.css";
 
 type TOCItem = {
   id: string;
   level: number;
   text: string;
+  current?: boolean;
 };
 
 export type NestedTOCItem = TOCItem & { childItems: NestedTOCItem[] };
@@ -39,6 +39,7 @@ export const buildTOC = (items: TOCItem[]) => {
 
 export const TableOfContents = () => {
   const [tocItems, setTOCItems] = useState<NestedTOCItem[]>([]);
+  const [activeId, setActiveId] = useState("");
 
   useEffect(() => {
     const markdown = document.getElementById(MARKDOWN_ID);
@@ -54,30 +55,60 @@ export const TableOfContents = () => {
         }))
       )
     );
+
+    if (elements.length > 0) {
+      setActiveId(elements[0].id);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -80% 0px",
+      }
+    );
+    elements.forEach((element) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <nav className={styles.TableOfContents}>
-      <TOCItems tocItems={tocItems} />
+      <TOCItems tocItems={tocItems} activeId={activeId} />
     </nav>
   );
 };
 
-export const TOCItems = ({ tocItems }: { tocItems: NestedTOCItem[] }) => {
+export const TOCItems = ({
+  tocItems,
+  activeId,
+}: {
+  tocItems: NestedTOCItem[];
+  activeId: string;
+}) => {
   return tocItems.map(({ id, level, text, childItems }, i) =>
     childItems.length > 0 ? (
       <ol key={i} className={styles.list}>
-        <TOCItem id={id} level={level} text={text} />
-        {childItems.length > 0 && <TOCItems tocItems={childItems} />}
+        <TOCItem id={id} level={level} text={text} current={id === activeId} />
+        {childItems.length > 0 && <TOCItems tocItems={childItems} activeId={activeId} />}
       </ol>
     ) : (
-      <TOCItem key={i} id={id} level={level} text={text} />
+      <TOCItem key={i} id={id} level={level} text={text} current={id === activeId} />
     )
   );
 };
 
-const TOCItem = ({ id, level, text }: TOCItem) => (
-  <li id={id} className={clsx(styles.item, styles[`heading${level}`])}>
-    <a href={`#${id}`}>{<Text variant="body14">{text}</Text>}</a>
-  </li>
-);
+const TOCItem = ({ id, level, text, current }: TOCItem) => {
+  return (
+    <li id={id} className={clsx(styles.item, styles[`heading${level}`], current && styles.active)}>
+      <a href={`#${id}`}>{text}</a>
+    </li>
+  );
+};
