@@ -25,23 +25,72 @@ export type TextProps = {
   weight?: FontWeight;
 } & (H1Props | H2Props | H3Props | SpanProps | DivProps | ParagraphProps | LabelProps);
 
-export const Text = ({ as = "span", variant, size, weight, children }: TextProps) => {
-  const Tag = as || "span";
-  const style = {
-    "--font-size": size && `var(--font-size-${size})`,
-    "--font-weight": weight && `var(--font-weight-${weight})`,
-  } as React.CSSProperties;
+export const Text = ({
+  variant,
+  size,
+  weight,
+  children,
+  className,
+  style,
+  ...props
+}: TextProps) => {
+  const commonProps = {
+    className: clsx(
+      variant && styles[`${variant}`],
+      size && styles.size,
+      weight && styles.weight,
+      className
+    ),
+    style: {
+      "--font-size": size && `var(--font-size-${size})`,
+      "--font-weight": weight && `var(--font-weight-${weight})`,
+      ...style,
+    } as React.CSSProperties,
+  };
 
-  return (
-    <Tag
-      className={clsx(
-        variant && styles[`${variant}`],
-        size && styles.size,
-        weight && styles.weight
-      )}
-      style={style}
-    >
-      {children}
-    </Tag>
-  );
+  switch (props.as) {
+    case "h1":
+      return (
+        <h1 {...commonProps} {...props}>
+          {children}
+        </h1>
+      );
+    case "h2":
+      return (
+        <h2 {...commonProps} {...props}>
+          {children}
+        </h2>
+      );
+    case "h3":
+      return (
+        <h3 {...commonProps} {...props}>
+          {children}
+        </h3>
+      );
+    case "div":
+      return (
+        <div {...commonProps} {...props}>
+          {children}
+        </div>
+      );
+    case "p":
+      return (
+        <p {...commonProps} {...props}>
+          {children}
+        </p>
+      );
+    case "label":
+      return (
+        <label {...commonProps} {...props}>
+          {children}
+        </label>
+      );
+    case "span":
+    default:
+      return (
+        <span {...commonProps} {...props}>
+          {children}
+        </span>
+      );
+  }
 };
