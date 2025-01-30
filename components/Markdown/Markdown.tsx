@@ -1,7 +1,9 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 import remarkWikiLink from "remark-wiki-link";
+import { MARKDOWN_ID } from "@/constants/markdown";
 import { Text } from "../Text";
 import styles from "./Markdown.module.css";
 
@@ -25,7 +27,7 @@ const components: MDXRemoteProps["components"] = {
 
 export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
   return (
-    <div className={styles.Markdown}>
+    <div id={MARKDOWN_ID} className={styles.Markdown}>
       <MDXRemote
         source={source}
         options={{
@@ -42,7 +44,7 @@ export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
                 },
               ],
             ],
-            rehypePlugins: [],
+            rehypePlugins: [rehypeSlug],
           },
         }}
         {...props}

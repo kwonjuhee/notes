@@ -1,4 +1,8 @@
+"use client";
+
 import clsx from "clsx";
+import { useEffect, useState } from "react";
+import { MARKDOWN_ID } from "@/constants/markdown";
 import { Text } from "../Text";
 import styles from "./TableOfContents.module.css";
 
@@ -8,9 +12,9 @@ type TOCItem = {
   text: string;
 };
 
-type NestedTOCItem = TOCItem & { childItems: NestedTOCItem[] };
+export type NestedTOCItem = TOCItem & { childItems: NestedTOCItem[] };
 
-const buildTOCItems = (items: TOCItem[]) => {
+export const buildTOC = (items: TOCItem[]) => {
   const root: NestedTOCItem[] = [];
   const stack: NestedTOCItem[] = [];
 
@@ -33,12 +37,24 @@ const buildTOCItems = (items: TOCItem[]) => {
   return root;
 };
 
-export interface TableOfContentsProps {
-  items: TOCItem[];
-}
+export const TableOfContents = () => {
+  const [tocItems, setTOCItems] = useState<NestedTOCItem[]>([]);
 
-export const TableOfContents = ({ items }: TableOfContentsProps) => {
-  const tocItems = buildTOCItems(items);
+  useEffect(() => {
+    const markdown = document.getElementById(MARKDOWN_ID);
+    if (!markdown) return;
+
+    const elements = markdown.querySelectorAll("h1,h2,h3");
+    setTOCItems(
+      buildTOC(
+        Array.from(elements).map(({ id, tagName, textContent }) => ({
+          id,
+          level: Number(tagName.charAt(1)),
+          text: textContent ?? "",
+        }))
+      )
+    );
+  }, []);
 
   return (
     <nav className={styles.TableOfContents}>
@@ -47,7 +63,7 @@ export const TableOfContents = ({ items }: TableOfContentsProps) => {
   );
 };
 
-const TOCItems = ({ tocItems }: { tocItems: NestedTOCItem[] }) => {
+export const TOCItems = ({ tocItems }: { tocItems: NestedTOCItem[] }) => {
   return tocItems.map(({ id, level, text, childItems }, i) =>
     childItems.length > 0 ? (
       <ol key={i} className={styles.list}>
