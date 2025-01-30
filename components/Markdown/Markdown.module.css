@@ -58,19 +58,17 @@
     }
   }
 
-  & pre {
-    margin: 0;
-    padding: 12px 16px;
-    background-color: var(--bg-gray-subtle);
-    border-radius: var(--radius-medium);
-    line-height: 1.45;
-    white-space: pre-wrap;
+  & figure[data-rehype-pretty-code-figure] {
+    margin: 16px 0 16px 0;
   }
 
-  & code {
-    padding: 2px 4px;
+  & pre {
+    padding: 16px;
     background-color: var(--bg-gray-subtle);
-    border-radius: var(--radius-small);
+    border-radius: var(--radius-medium);
+    font-size: 14px;
+    line-height: 1.45;
+    white-space: pre-wrap;
   }
 
   & hr {

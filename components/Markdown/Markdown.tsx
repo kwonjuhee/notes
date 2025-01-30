@@ -1,4 +1,5 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
@@ -44,7 +45,16 @@ export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
                 },
               ],
             ],
-            rehypePlugins: [rehypeSlug],
+            rehypePlugins: [
+              rehypeSlug,
+              [
+                rehypePrettyCode,
+                {
+                  theme: "github-light",
+                  keepBackground: false,
+                },
+              ],
+            ],
           },
         }}
         {...props}
