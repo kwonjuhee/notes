@@ -1,7 +1,8 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { githubApi } from "@/api/github";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
+import { Markdown } from "@/components/Markdown";
+import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
 
 const markdownExtRegex = /.md$/;
@@ -44,12 +45,15 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const title = decodeURIComponent(params.slug.at(-1)?.replace(markdownExtRegex, "") ?? "");
 
   return (
-    <Flex direction="column" gap={30}>
-      <Text as="h1" variant="heading24">
-        {title}
-      </Text>
-      <Box>
-        <MDXRemote source={source} />
+    <Flex direction="row" justify="center" gap={24} paddingX="24px" paddingTop="90px">
+      <Box maxWidth="870px">
+        <Text as="h1" variant="heading30">
+          {title}
+        </Text>
+        <Markdown source={source} />
+      </Box>
+      <Box position="sticky" top="100px">
+        <TableOfContents />
       </Box>
     </Flex>
   );
