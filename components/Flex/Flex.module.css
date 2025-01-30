@@ -20,6 +20,9 @@
   --height: auto;
   --min-height: auto;
   --max-height: auto;
+  --overflow: visible;
+  --overflow-x: visible;
+  --overflow-y: visible;
   --position: static;
   --top: auto;
   --right: auto;
@@ -38,6 +41,9 @@
   height: var(--height);
   min-height: var(--min-height);
   max-height: var(--max-height);
+  overflow: var(--overflow);
+  overflow-x: var(--overflow-x);
+  overflow-y: var(--overflow-y);
   position: var(--position);
   top: var(--top);
   right: var(--right);
