@@ -17,7 +17,7 @@ const getMarkdownSlugs = async () => {
   );
 
   return blobList.map((blob) => ({
-    slug: blob.path?.replace(markdownExtRegex, "").split("/"),
+    slug: blob.path?.split("/"),
   }));
 };
 
