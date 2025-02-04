@@ -1,10 +1,12 @@
+import remarkWikiLink from "@portaljs/remark-wiki-link";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
-import remarkWikiLink from "remark-wiki-link";
+import { githubApi } from "@/api/github";
 import { MARKDOWN_ID } from "@/constants/markdown";
+import { isImageFile, isMarkdownFile } from "@/utils/markdown";
 import { Text } from "../Text";
 import styles from "./Markdown.module.css";
 
@@ -26,6 +28,17 @@ const components: MDXRemoteProps["components"] = {
   ),
 };
 
+const getPermalinks = async () => {
+  const { ref } = await githubApi.gitDatabase.getRef();
+  const { tree: gitTree } = await githubApi.gitDatabase.getGitTree(ref);
+
+  const blobList = gitTree.filter(
+    (node) => node.type === "blob" && node.path && isMarkdownFile(node.path)
+  );
+
+  return blobList.map(({ path }) => path && path.replace(/\.md$/g, ""));
+};
+
 export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
   return (
     <div id={MARKDOWN_ID} className={styles.Markdown}>
@@ -34,13 +47,15 @@ export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
         options={{
           mdxOptions: {
             remarkPlugins: [
-              remarkGfm,
               remarkBreaks,
+              remarkGfm,
               [
                 remarkWikiLink,
                 {
-                  pageResolver: (name: string) => [name],
-                  hrefTemplate: (permalink: string) => `/wiki/${permalink}`,
+                  pathFormat: "obsidian-short",
+                  permalinks: await getPermalinks(),
+                  hrefTemplate: (permalink: string) =>
+                    !isImageFile(permalink) ? `/wiki/${permalink}.md` : permalink,
                   aliasDivider: "|",
                 },
               ],

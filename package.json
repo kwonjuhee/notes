@@ -11,9 +11,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky install",
-    "plop": "plop"
+    "plop": "plop",
+    "postinstall": "patch-package"
   },
   "dependencies": {
+    "@portaljs/remark-wiki-link": "^1.2.0",
     "@typescript-eslint/eslint-plugin": "^6.13.1",
     "@typescript-eslint/parser": "^6.13.1",
     "clsx": "^2.1.1",
@@ -29,8 +31,7 @@
     "rehype-pretty-code": "^0.14.0",
     "rehype-slug": "^6.0.0",
     "remark-breaks": "^4.0.0",
-    "remark-gfm": "^4.0.0",
-    "remark-wiki-link": "^2.0.1"
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^8.0.0",
@@ -47,6 +48,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
+    "patch-package": "^8.0.0",
     "plop": "^4.0.1",
     "storybook": "^8.0.0",
     "typescript": "^5"
