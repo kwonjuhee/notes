@@ -1,5 +1,5 @@
 diff --git a/node_modules/@portaljs/remark-wiki-link/dist/index.cjs b/node_modules/@portaljs/remark-wiki-link/dist/index.cjs
-index 80d21bb..c836920 100644
+index 80d21bb..f3489e2 100644
 --- a/node_modules/@portaljs/remark-wiki-link/dist/index.cjs
 +++ b/node_modules/@portaljs/remark-wiki-link/dist/index.cjs
 @@ -366,11 +366,13 @@ function fromMarkdown() {
@@ -17,8 +17,17 @@ index 80d21bb..c836920 100644
      // eslint-disable-next-line no-useless-escape
      var wikiLinkWithHeadingPattern = /^((?:[\0-\t\x0B\f\x0E-\u2027\u202A-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*?)(#(?:[\0-\t\x0B\f\x0E-\u2027\u202A-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?$/;
      var _target$match = target.match(wikiLinkWithHeadingPattern),
+@@ -403,7 +405,7 @@ function fromMarkdown() {
+     wikiLink.data.permalink = link;
+     // remove leading # if the target is a heading on the same page
+     var displayName = alias || target.replace(/^#/, '');
+-    var headingId = heading.replace(/\s+/g, '-').toLowerCase();
++    var headingId = heading.toLowerCase().replace(/\s+/g, '-').replace(/[^ㄱ-ㅎ가-힣a-z0-9-_#]/g, '');
+     var classNames = wikiLinkClassName;
+     if (!matchingPermalink) {
+       classNames += ' ' + newClassName;
 diff --git a/node_modules/@portaljs/remark-wiki-link/dist/index.js b/node_modules/@portaljs/remark-wiki-link/dist/index.js
-index 8cee892..8627df6 100644
+index 8cee892..2620d49 100644
 --- a/node_modules/@portaljs/remark-wiki-link/dist/index.js
 +++ b/node_modules/@portaljs/remark-wiki-link/dist/index.js
 @@ -357,11 +357,13 @@ function fromMarkdown() {
@@ -36,3 +45,12 @@ index 8cee892..8627df6 100644
      // eslint-disable-next-line no-useless-escape
      var wikiLinkWithHeadingPattern = /^((?:[\0-\t\x0B\f\x0E-\u2027\u202A-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*?)(#(?:[\0-\t\x0B\f\x0E-\u2027\u202A-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])*)?$/;
      var _target$match = target.match(wikiLinkWithHeadingPattern),
+@@ -394,7 +396,7 @@ function fromMarkdown() {
+     wikiLink.data.permalink = link;
+     // remove leading # if the target is a heading on the same page
+     var displayName = alias || target.replace(/^#/, '');
+-    var headingId = heading.replace(/\s+/g, '-').toLowerCase();
++    var headingId = heading.toLowerCase().replace(/\s+/g, '-').replace(/[^ㄱ-ㅎ가-힣a-z0-9-_#]/g, '');
+     var classNames = wikiLinkClassName;
+     if (!matchingPermalink) {
+       classNames += ' ' + newClassName;
