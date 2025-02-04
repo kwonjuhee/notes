@@ -6,7 +6,7 @@ import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 import { githubApi } from "@/api/github";
 import { MARKDOWN_ID } from "@/constants/markdown";
-import { isImageFile, isMarkdownFile } from "@/utils/markdown";
+import { getImageUrl, isImageFile, isMarkdownFile } from "@/utils/markdown";
 import { Text } from "../Text";
 import styles from "./Markdown.module.css";
 
@@ -33,7 +33,8 @@ const getPermalinks = async () => {
   const { tree: gitTree } = await githubApi.gitDatabase.getGitTree(ref);
 
   const blobList = gitTree.filter(
-    (node) => node.type === "blob" && node.path && isMarkdownFile(node.path)
+    (node) =>
+      node.type === "blob" && node.path && (isMarkdownFile(node.path) || isImageFile(node.path))
   );
 
   return blobList.map(({ path }) => path && path.replace(/\.md$/g, ""));
@@ -55,7 +56,7 @@ export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
                   pathFormat: "obsidian-short",
                   permalinks: await getPermalinks(),
                   hrefTemplate: (permalink: string) =>
-                    !isImageFile(permalink) ? `/wiki/${permalink}.md` : permalink,
+                    !isImageFile(permalink) ? `/wiki/${permalink}.md` : getImageUrl(permalink),
                   aliasDivider: "|",
                 },
               ],
