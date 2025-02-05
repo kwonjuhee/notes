@@ -14,7 +14,7 @@ export const SearchItem = ({ title, category, highlightKeyword }: SearchItemProp
     <div className={styles.SearchItem}>
       <Text variant="body16" className={styles.title}>
         {parts.map((part, i) =>
-          part === highlightKeyword ? (
+          part.toLowerCase() === highlightKeyword?.toLowerCase() ? (
             <em key={i} className={styles.highlight}>
               {part}
             </em>
