@@ -1,9 +1,4 @@
 .button {
-  /** reset */
-  border: none;
-  padding: 0;
-  text-decoration: none;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
