@@ -1,0 +1,11 @@
+.SearchInput {
+  padding-right: 8px;
+
+  .clearButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    cursor: pointer;
+  }
+}
