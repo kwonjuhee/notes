@@ -1,0 +1,24 @@
+.SearchItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: var(--radius-medium);
+  color: var(--text-default);
+
+  .highlight {
+    color: var(--text-brand-subtle);
+    font-style: normal;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .category {
+    color: var(--text-subtle);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--bg-brand-subtle);
+    }
+  }
+}
