@@ -4,6 +4,7 @@ import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
+import { WikiBreadcrumb } from "./components/WikiBreadcrumb";
 
 const markdownExtRegex = /.md$/;
 const isMarkdownFile = (path: string) => markdownExtRegex.test(path);
@@ -42,11 +43,14 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const path = decodeURIComponent(params.slug.join("/"));
   const source = await getMarkdownBySlug(path);
 
+  const breadcrumbItems = params.slug.map((s) => ({ label: s }));
+
   const title = decodeURIComponent(params.slug.at(-1)?.replace(markdownExtRegex, "") ?? "");
 
   return (
     <Flex direction="row" justify="center" gap={24} paddingX="24px" paddingTop="90px">
       <Box maxWidth="870px">
+        <WikiBreadcrumb items={breadcrumbItems} />
         <Text as="h1" variant="heading30">
           {title}
         </Text>
