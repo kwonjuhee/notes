@@ -1,9 +1,11 @@
 import remarkWikiLink from "@portaljs/remark-wiki-link";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
+import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
 import { githubApi } from "@/api/github";
 import { MARKDOWN_ID } from "@/constants/markdown";
 import { getImageUrl, isImageFile, isMarkdownFile } from "@/utils/markdown";
@@ -50,6 +52,7 @@ export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
             remarkPlugins: [
               remarkBreaks,
               remarkGfm,
+              remarkMath,
               [
                 remarkWikiLink,
                 {
@@ -62,6 +65,7 @@ export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
               ],
             ],
             rehypePlugins: [
+              rehypeKatex,
               rehypeSlug,
               [
                 rehypePrettyCode,
