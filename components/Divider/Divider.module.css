@@ -1,0 +1,14 @@
+.Divider {
+  background-color: var(--border-gray);
+  border-radius: var(--radius-small);
+
+  &.horizontal {
+    width: 100%;
+    height: 1px;
+  }
+
+  &.vertical {
+    width: 1px;
+    height: 100%;
+  }
+}
