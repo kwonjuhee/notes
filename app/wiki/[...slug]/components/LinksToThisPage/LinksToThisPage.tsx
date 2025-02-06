@@ -26,9 +26,9 @@ export const LinksToThisPage = async ({ currentPage }: LinksToThisPageProps) => 
 
     if (
       data.path &&
-      new RegExp(`(?<!!)\\[\\[[^\\]]*${currentPage}[^\\]]*\\]\\]`).test(
-        Buffer.from(data.content, "base64").toString()
-      )
+      new RegExp(
+        `(?<!!)\\[\\[[^\\]]*${currentPage.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[^\\]]*\\]\\]`
+      ).test(Buffer.from(data.content, "base64").toString())
     ) {
       return [...acc, data.path];
     }
