@@ -1,0 +1,52 @@
+.Chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+
+  &.variant-solid {
+    background: var(--bg-accent);
+    color: var(--white);
+
+    &.color-brand {
+      --bg-accent: var(--bg-brand);
+    }
+
+    &.color-gray {
+      --bg-accent: var(--bg-gray-default);
+    }
+  }
+
+  &.variant-subtle {
+    background: var(--bg-accent-subtle);
+    color: var(--text-accent-subtle);
+
+    &.color-brand {
+      --text-accent-subtle: var(--text-brand-subtle);
+      --bg-accent-subtle: var(--bg-brand-subtle);
+    }
+
+    &.color-gray {
+      --text-accent-subtle: var(--text-gray-subtle);
+      --bg-accent-subtle: var(--bg-gray-subtle);
+    }
+  }
+
+  &.variant-outline {
+    background: transparent;
+    border: 1px solid var(--border-accent);
+    color: var(--text-accent-subtle);
+
+    &.color-brand {
+      --border-accent: var(--border-brand);
+      --text-accent-subtle: var(--text-brand-subtle);
+    }
+
+    &.color-gray {
+      --border-accent: var(--border-gray);
+      --text-accent-subtle: var(--text-gray-subtle);
+    }
+  }
+}
