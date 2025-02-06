@@ -4,6 +4,7 @@ import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
+import { LinksToThisPage } from "./components/LinksToThisPage";
 import { WikiBreadcrumb } from "./components/WikiBreadcrumb";
 
 const markdownExtRegex = /.md$/;
@@ -58,6 +59,8 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       </Box>
       <Box position="sticky" top="100px">
         <TableOfContents />
+        <Box height="34px" />
+        <LinksToThisPage currentPage={title} />
       </Box>
     </Flex>
   );

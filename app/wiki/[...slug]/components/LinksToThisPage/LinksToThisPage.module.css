@@ -1,0 +1,7 @@
+.LinksToThisPage {
+  .text {
+    display: flex;
+    align-items: center;
+    color: var(--text-brand-subtle);
+  }
+}
