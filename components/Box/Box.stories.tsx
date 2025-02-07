@@ -17,3 +17,16 @@ export const Primary: StoryObj<typeof Box> = {
     margin: "50px",
   },
 };
+
+export const Responsive: StoryObj<typeof Box> = {
+  args: {
+    display: { base: "none", sm: "block" },
+    width: { base: "100px", sm: "200px", md: "300px", lg: "400px" },
+    height: "100px",
+    backgroundColor: "gray",
+    borderWidth: "1px",
+    borderColor: "gray",
+    borderRadius: "medium",
+    margin: "50px",
+  },
+};
