@@ -8,7 +8,7 @@ export const isResponsiveObject = <T>(
   return (
     typeof prop === "object" &&
     prop !== null &&
-    Object.keys(prop).some((key) => breakpoints.includes(key as Breakpoint))
+    Object.keys(prop).some((key) => breakpoints[key as Breakpoint])
   );
 };
 
