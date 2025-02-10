@@ -1,11 +1,9 @@
 import { ApiErrorResponse, ApiSuccessResponse } from "@/api/api.types";
-import { githubApi } from "@/api/github";
+import { wikiApi } from "@/api/wiki";
 import { Wiki } from "@/types/wiki";
-import { isMarkdownFile, isPrivatePath } from "@/utils/markdown";
 
 export async function GET(request: Request) {
-  const { ref } = await githubApi.gitDatabase.getRef();
-  const { tree: gitTree } = await githubApi.gitDatabase.getGitTree(ref);
+  const wikiList = await wikiApi.getWikiList();
 
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q");
@@ -17,14 +15,8 @@ export async function GET(request: Request) {
 
   const successResponse: ApiSuccessResponse<Wiki[]> = {
     status: 200,
-    data: gitTree
-      .filter(
-        ({ path }) =>
-          path &&
-          !isPrivatePath(path) &&
-          isMarkdownFile(path) &&
-          path.toLowerCase().includes(q.toLowerCase())
-      )
+    data: wikiList
+      .filter(({ path }) => path && path.toLowerCase().includes(q.toLowerCase()))
       .map(({ path }) => ({
         path: path as string,
       })),

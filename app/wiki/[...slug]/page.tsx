@@ -1,48 +1,24 @@
-import { githubApi } from "@/api/github";
+import { wikiApi } from "@/api/wiki";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
+import { markdownExtRegex } from "@/utils/markdown";
 import { LinksToThisPage } from "./components/LinksToThisPage";
 import { WikiBreadcrumb } from "./components/WikiBreadcrumb";
 
-const markdownExtRegex = /.md$/;
-const isMarkdownFile = (path: string) => markdownExtRegex.test(path);
-
-const getMarkdownSlugs = async () => {
-  const { ref } = await githubApi.gitDatabase.getRef();
-  const { tree: gitTree } = await githubApi.gitDatabase.getGitTree(ref);
-
-  const blobList = gitTree.filter(
-    (node) => node.type === "blob" && isMarkdownFile(node.path ?? "")
-  );
-
-  return blobList.map((blob) => ({
-    slug: blob.path?.split("/"),
-  }));
-};
-
-const getMarkdownBySlug = async (path: string) => {
-  const data = await githubApi.repository.getContent(path);
-
-  const isDir = Array.isArray(data);
-  if (isDir || data.type !== "file" || !isMarkdownFile(data.name)) {
-    throw new Error("INVALID PATH");
-  }
-
-  return Buffer.from(data.content, "base64").toString();
-};
-
 export async function generateStaticParams() {
-  const slugs = await getMarkdownSlugs();
+  const markdownList = await wikiApi.getWikiList();
 
-  return slugs;
+  return markdownList.map((md) => ({
+    slug: md.path?.split("/"),
+  }));
 }
 
 export default async function Page({ params }: { params: { slug: string[] } }) {
   const path = decodeURIComponent(params.slug.join("/"));
-  const source = await getMarkdownBySlug(path);
+  const source = await wikiApi.getWikiByPath(path);
 
   const breadcrumbItems = params.slug.map((s) => ({ label: s }));
 
