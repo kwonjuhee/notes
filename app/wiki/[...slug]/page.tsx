@@ -49,15 +49,22 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const title = decodeURIComponent(params.slug.at(-1)?.replace(markdownExtRegex, "") ?? "");
 
   return (
-    <Flex direction="row" justify="center" gap={24} paddingX="24px" paddingTop="90px">
-      <Box maxWidth="870px">
+    <Flex gap={24} maxWidth="calc(870px + 260px + 24px)" marginX="auto" paddingTop="90px">
+      <Box flexGrow={1} paddingX="24px">
         <WikiBreadcrumb items={breadcrumbItems} />
         <Text as="h1" variant="heading30">
           {title}
         </Text>
         <Markdown source={source} />
       </Box>
-      <Box position="sticky" top="100px">
+      <Box
+        flexShrink={0}
+        display={{ base: "none", lg: "block" }}
+        position="sticky"
+        top="100px"
+        width="260px"
+        paddingX="24px"
+      >
         <TableOfContents />
         <Box height="34px" />
         <LinksToThisPage currentPage={title} />

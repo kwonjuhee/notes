@@ -7,6 +7,8 @@ import { BreadcrumbProps } from "@/components/Breadcrumb/Breadcrumb";
 import { Button } from "@/components/Button";
 import { Divider } from "@/components/Divider";
 import { Flex } from "@/components/Flex";
+import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
 import styles from "./WikiBreadcrumb.module.css";
 
@@ -15,11 +17,24 @@ export interface WikiBreadcrumbProps {
 }
 
 export const WikiBreadcrumb = ({ items }: WikiBreadcrumbProps) => {
+  const isMobile = !useMediaQuery(SIDEBAR_BREAKPOINT);
+  const toggleMobileSidebar = useRootStore((state) => state.toggleMobileSidebar);
   const toggleSidebar = useRootStore((state) => state.toggleSidebar);
 
   return (
     <Flex direction="row" align="center" gap={4} className={styles.WikiBreadcrumb}>
-      <Button variant="ghost" color="gray" size="large" onClick={() => toggleSidebar()}>
+      <Button
+        variant="ghost"
+        color="gray"
+        size="large"
+        onClick={() => {
+          if (isMobile) {
+            toggleMobileSidebar();
+          } else {
+            toggleSidebar();
+          }
+        }}
+      >
         <SidebarSimple />
       </Button>
       <Box height="20px" paddingRight="12px">

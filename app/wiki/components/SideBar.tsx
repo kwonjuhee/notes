@@ -3,9 +3,13 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { searchWikisByTitle } from "@/api/search";
+import { X } from "@/assets/icon";
 import { Box } from "@/components/Box";
+import { Button } from "@/components/Button";
 import { Flex } from "@/components/Flex";
 import { Text } from "@/components/Text";
+import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
 import { Wiki } from "@/types/wiki";
 import { SearchInput } from "./SearchInput";
@@ -18,7 +22,6 @@ export interface SideBarProps {
 }
 
 export const SideBar = ({ navItems }: SideBarProps) => {
-  const isSidebarOpen = useRootStore((state) => state.isSidebarOpen);
   const [q, setQ] = useState("");
   const [searchedWikis, setSearchedWikis] = useState<Wiki[]>([]);
 
@@ -32,29 +35,92 @@ export const SideBar = ({ navItems }: SideBarProps) => {
   }, [q]);
 
   return (
-    isSidebarOpen && (
-      <Box width="280px" height="100dvh" paddingX="12px" borderRightWidth="1px" borderColor="gray">
-        <Flex align="center" justify="center" paddingTop="40px">
-          <Text variant="heading24">🐭 wiki</Text>
+    <SidebarContainer>
+      <SidebarHeader />
+      <Box paddingY="34px">
+        <SearchInput value={q} onChange={(e) => setQ(e.target.value)} onClear={() => setQ("")} />
+      </Box>
+      {!q ? (
+        <SideNavBar navItems={navItems} />
+      ) : (
+        <Flex direction="column" gap={4}>
+          {searchedWikis.map(({ path }) => {
+            const slug = path.split("/").at(-1) as string;
+            return (
+              <Link key={path} href={`/wiki/${path}`} prefetch={false}>
+                <SearchItem title={slug} category={path} highlightKeyword={q} />
+              </Link>
+            );
+          })}
         </Flex>
-        <Box paddingY="34px">
-          <SearchInput value={q} onChange={(e) => setQ(e.target.value)} onClear={() => setQ("")} />
+      )}
+    </SidebarContainer>
+  );
+};
+
+const SidebarContainer = ({ children }: React.PropsWithChildren) => {
+  const isMobile = !useMediaQuery(SIDEBAR_BREAKPOINT);
+  const isMobileSidebarOpen = useRootStore((state) => state.isMobileSidebarOpen);
+  const isSidebarOpen = useRootStore((state) => state.isSidebarOpen);
+
+  if (isMobile) {
+    return (
+      isMobileSidebarOpen && (
+        <Box
+          display={{ base: "block", [SIDEBAR_BREAKPOINT]: "none" }}
+          position="fixed"
+          top="0px"
+          left="0px"
+          width="100%"
+          height="100dvh"
+          paddingX="12px"
+          overflowY="scroll"
+          style={{ backgroundColor: "white" }}
+        >
+          {children}
         </Box>
-        {!q ? (
-          <SideNavBar navItems={navItems} />
-        ) : (
-          <Flex direction="column" gap={4}>
-            {searchedWikis.map(({ path }) => {
-              const slug = path.split("/").at(-1) as string;
-              return (
-                <Link key={path} href={`/wiki/${path}`} prefetch={false}>
-                  <SearchItem title={slug} category={path} highlightKeyword={q} />
-                </Link>
-              );
-            })}
-          </Flex>
-        )}
+      )
+    );
+  }
+
+  return (
+    isSidebarOpen && (
+      <Box
+        display={{ base: "none", [SIDEBAR_BREAKPOINT]: "block" }}
+        width="280px"
+        height="100dvh"
+        paddingX="12px"
+        borderRightWidth="1px"
+        borderColor="gray"
+      >
+        {children}
       </Box>
     )
+  );
+};
+
+const SidebarHeader = () => {
+  const isMobile = !useMediaQuery(SIDEBAR_BREAKPOINT);
+  const closeMobileSidebar = useRootStore((state) => state.closeMobileSidebar);
+
+  if (isMobile) {
+    return (
+      <>
+        <Flex align="center" justify="end">
+          <Button variant="ghost" color="gray" size="large" onClick={closeMobileSidebar}>
+            <X />
+          </Button>
+        </Flex>
+        <Flex align="center" justify="center">
+          <Text variant="heading24">🐭 wiki</Text>
+        </Flex>
+      </>
+    );
+  }
+
+  return (
+    <Flex align="center" justify="center" paddingTop="40px">
+      <Text variant="heading24">🐭 wiki</Text>
+    </Flex>
   );
 };
