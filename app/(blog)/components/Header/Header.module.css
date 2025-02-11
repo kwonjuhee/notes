@@ -1,0 +1,10 @@
+.Header {
+  background-color: white;
+  border-bottom: 1px solid var(--border-gray);
+  transition: transform 0.3s;
+  z-index: var(--fixed);
+
+  &.hide {
+    transform: translateY(calc(var(--header-height) * -1));
+  }
+}

@@ -61,6 +61,10 @@
     url(/fonts/woff-subset/Pretendard-ExtraBold.subset.woff) format("woff");
 }
 
+:root {
+  --header-height: 50px;
+}
+
 *,
 ::before,
 ::after {
