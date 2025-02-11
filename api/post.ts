@@ -20,6 +20,13 @@ const getPostList = async () => {
   return postList;
 };
 
+export const getPostBySlug = async (slug: string) => {
+  const postList = await getPostList();
+
+  return postList.find((post) => post.name === slug);
+};
+
 export const postApi = {
   getPostList,
+  getPostBySlug,
 };
