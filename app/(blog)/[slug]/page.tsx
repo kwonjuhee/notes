@@ -5,6 +5,7 @@ import { Box } from "@/components/Box";
 import { Divider } from "@/components/Divider";
 import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
+import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
 import { toYYYYMMDD } from "@/utils/date";
 import { decodeBase64 } from "@/utils/endecoder";
@@ -30,16 +31,28 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <Flex direction="column" marginBottom="44px">
-        <Box marginBottom="18px">
-          <Text variant="heading24">{title}</Text>
+      <Box maxWidth="820px" marginX="auto" paddingX="16px" paddingY="70px">
+        <Flex direction="column" marginBottom="44px">
+          <Box marginBottom="18px">
+            <Text variant="heading24">{title}</Text>
+          </Box>
+          <Box marginBottom="6px">
+            <Text variant="caption14">{toYYYYMMDD(created)}</Text>
+          </Box>
+          <Divider />
+        </Flex>
+        <Markdown source={content} />
+        <Box
+          display={{ base: "none", lg: "block" }}
+          position="fixed"
+          top="230px"
+          left="calc(50% + 410px)"
+          width="230px"
+          paddingX="24px"
+        >
+          <TableOfContents />
         </Box>
-        <Box marginBottom="6px">
-          <Text variant="caption14">{toYYYYMMDD(created)}</Text>
-        </Box>
-        <Divider />
-      </Flex>
-      <Markdown source={content} />
+      </Box>
     </>
   );
 }
