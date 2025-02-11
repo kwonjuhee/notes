@@ -1,0 +1,31 @@
+.PostItem {
+  cursor: pointer;
+
+  .title {
+    margin-bottom: 6px;
+    line-height: 160%;
+    transition: color 0.3s;
+  }
+
+  &:hover,
+  &:active {
+    .title {
+      color: var(--text-brand-subtle);
+    }
+  }
+
+  .description {
+    margin-bottom: 16px;
+    color: var(--text-subtlest);
+    line-height: 150%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .date {
+    color: var(--text-subtlest);
+    align-self: flex-end;
+  }
+}
