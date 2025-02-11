@@ -9,3 +9,5 @@ export type GetGitTreeResponseData = Awaited<
 export type GetContentResponseData = Awaited<
   ReturnType<GithubClient["rest"]["repos"]["getContent"]>
 >["data"];
+
+export type GetFileContentResponseData = Extract<GetContentResponseData, { type: "file" }>;
