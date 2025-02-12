@@ -6,7 +6,7 @@ export const useLocalStorage = <T extends string>(key: string, initialValue?: T)
     return value ? JSON.parse(value) : initialValue;
   };
 
-  const store = useSyncExternalStore(
+  const store = useSyncExternalStore<T | undefined>(
     (callback) => {
       window.addEventListener("storage", callback);
       return () => {

@@ -3,7 +3,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { getValidTheme, Theme, ThemeStorageKey, updateDOMTheme } from "./shared";
 
 export type ThemeContextValue = {
-  theme: Theme;
+  theme?: Theme;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
 };
@@ -17,9 +17,9 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 export const useThemeContextValue = () => {
-  const { value: _theme, set: _setTheme } = useLocalStorage(ThemeStorageKey);
+  const { value: _theme, set: _setTheme } = useLocalStorage<Theme>(ThemeStorageKey);
 
-  const theme = getValidTheme(_theme);
+  const theme = _theme ? getValidTheme(_theme) : undefined;
 
   const setTheme = (theme: Theme) => {
     updateDOMTheme(theme);
@@ -32,11 +32,11 @@ export const useThemeContextValue = () => {
   };
 
   useEffect(() => {
-    if (_theme) {
-      setTheme(_theme);
+    if (theme) {
+      setTheme(theme);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [_theme]);
+  }, [theme]);
 
   return { theme, setTheme, toggleTheme };
 };
