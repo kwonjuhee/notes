@@ -2,14 +2,16 @@
 
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { MagnifyingGlass } from "@/assets/icon";
+import { MoonStars, Sun } from "@/assets/icon";
 import { Box } from "@/components/Box";
 import { Button } from "@/components/Button";
 import { Flex, FlexProps } from "@/components/Flex";
 import { Text } from "@/components/Text";
+import { useTheme } from "@/theme";
 import styles from "./Header.module.css";
 
 export const Header = () => {
+  const { theme, toggleTheme } = useTheme();
   const [lastScrollY, setLastScrollY] = useState(0);
   const [hideHeader, setHideHeader] = useState(false);
 
@@ -34,8 +36,8 @@ export const Header = () => {
     <>
       <Flex {...headerStyle} className={clsx(styles.Header, hideHeader && styles.hide)}>
         <Text variant="heading24">🐭 blog</Text>
-        <Button href="/search" variant="ghost" color="gray">
-          <MagnifyingGlass />
+        <Button variant="ghost" color="gray" size="large" onClick={toggleTheme}>
+          {theme === "light" ? <Sun /> : <MoonStars />}
         </Button>
       </Flex>
       <Box height="var(--header-height)" />
