@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fontSize, fontWeight } from "@/types/token";
+import { fontSize, fontWeight, textColor } from "@/types/token";
 import { Text } from "./Text";
 
 const meta: Meta<typeof Text> = {
@@ -15,6 +15,10 @@ const meta: Meta<typeof Text> = {
     weight: {
       control: "select",
       options: fontWeight,
+    },
+    color: {
+      control: "select",
+      options: textColor,
     },
   },
 };

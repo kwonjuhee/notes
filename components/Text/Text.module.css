@@ -1,46 +1,55 @@
 .heading20 {
   font-size: var(--font-size-20);
   font-weight: var(--font-weight-semibold);
+  color: var(--text-bold);
 }
 
 .heading24 {
   font-size: var(--font-size-24);
   font-weight: var(--font-weight-bold);
+  color: var(--text-bold);
 }
 
 .heading30 {
   font-size: var(--font-size-30);
   font-weight: var(--font-weight-bold);
+  color: var(--text-bold);
 }
 
 .label14 {
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-medium);
+  color: var(--text-default);
 }
 
 .label16 {
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-medium);
+  color: var(--text-default);
 }
 
 .body14 {
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-regular);
+  color: var(--text-default);
 }
 
 .body16 {
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-regular);
+  color: var(--text-default);
 }
 
 .caption12 {
   font-size: var(--font-size-12);
   font-weight: var(--font-weight-regular);
+  color: var(--text-subtlest);
 }
 
 .caption14 {
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-regular);
+  color: var(--text-subtlest);
 }
 
 .size {
@@ -49,4 +58,8 @@
 
 .weight {
   font-weight: var(--font-weight);
+}
+
+.color {
+  color: var(--color);
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import remarkWikiLink from "@portaljs/remark-wiki-link";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import rehypeKatex from "rehype-katex";
@@ -13,17 +14,17 @@ import { Text } from "../Text";
 import styles from "./Markdown.module.css";
 
 const components: MDXRemoteProps["components"] = {
-  h1: (props) => (
+  h1: ({ color, ...props }) => (
     <Text as="h1" variant="heading30" {...props}>
       {props.children}
     </Text>
   ),
-  h2: (props) => (
+  h2: ({ color, ...props }) => (
     <Text as="h2" variant="heading24" {...props}>
       {props.children}
     </Text>
   ),
-  h3: (props) => (
+  h3: ({ color, ...props }) => (
     <Text as="h3" variant="heading20" {...props}>
       {props.children}
     </Text>
