@@ -2,6 +2,7 @@
 
 import "@/styles/global.css";
 import { ThemeProvider } from "@/theme";
+import { themeScript } from "@/theme/themeScript";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head></head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
+        <script dangerouslySetInnerHTML={{ __html: `(${themeScript})()` }} />
       </body>
     </html>
   );
