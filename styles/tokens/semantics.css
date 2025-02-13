@@ -1,8 +1,9 @@
 :root {
   /** background */
-  --bg-surface-white: var(--white);
-  --bg-surface: var(--gray-50);
-  --bg-surface-subtle: var(--gray-25);
+  --bg-page: var(--white);
+
+  --bg-surface: var(--gray-a50);
+  --bg-surface-subtle: var(--gray-a25);
 
   --bg-gray-subtle: var(--gray-100);
   --bg-gray-subtle-hovered: var(--gray-200);
@@ -67,4 +68,68 @@
   --radius-large: var(--radius-8);
   --radius-xlarge: var(--radius-12);
   --radius-full: 9999px;
+
+  [data-theme="dark"] {
+    /** background */
+    --bg-page: var(--gray-950);
+
+    --bg-surface: var(--gray-a900);
+    --bg-surface-subtle: var(--gray-a950);
+
+    --bg-gray-subtle: var(--gray-800);
+    --bg-gray-subtle-hovered: var(--gray-700);
+    --bg-gray-subtle-pressed: var(--gray-600);
+    --bg-gray-default: var(--gray-300);
+    --bg-gray-default-hovered: var(--gray-200);
+    --bg-gray-default-pressed: var(--gray-100);
+
+    --bg-brand-subtle: var(--brand-800);
+    --bg-brand-subtle-hovered: var(--brand-700);
+    --bg-brand-subtle-pressed: var(--brand-600);
+    --bg-brand: var(--brand-300);
+    --bg-brand-hovered: var(--brand-200);
+    --bg-brand-pressed: var(--brand-100);
+
+    --bg-transparent: var(--transparent);
+    --bg-transparent-hovered: var(--gray-800);
+    --bg-transparent-gray-hovered: var(--gray-800);
+    --bg-transparent-gray-pressed: var(--gray-700);
+    --bg-transparent-brand-hovered: var(--brand-800);
+    --bg-transparent-brand-pressed: var(--brand-700);
+
+    /** border */
+    --border-gray: var(--gray-700);
+    --border-gray-hovered: var(--gray-600);
+    --border-gray-focused: var(--gray-600);
+    --border-gray-bold: var(--gray-500);
+
+    --border-brand: var(--brand-600);
+    --border-brand-hovered: var(--brand-500);
+    --border-brand-focused: var(--brand-500);
+    --border-brand-bold: var(--brand-500);
+
+    /** text */
+    --text-bold: var(--gray-50);
+    --text-default: var(--gray-100);
+    --text-subtle: var(--gray-200);
+    --text-subtlest: var(--gray-400);
+
+    --text-gray-bold: var(--gray-50);
+    --text-gray-default: var(--gray-100);
+    --text-gray-subtle: var(--gray-200);
+
+    --text-brand-bold: var(--brand-50);
+    --text-brand-default: var(--brand-100);
+    --text-brand-subtle: var(--brand-200);
+
+    /** state */
+    --bg-selected: var(--brand-800);
+    --bg-selected-bold: var(--brand-300);
+    --text-selected: var(--brand-200);
+    --border-selected: var(--brand-200);
+
+    --bg-disabled: var(--gray-a800);
+    --text-disabled: var(--gray-a300);
+    --border-disabled: var(--gray-a300);
+  }
 }

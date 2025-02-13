@@ -1,5 +1,5 @@
 .Header {
-  background-color: white;
+  background-color: var(--bg-page);
   border-bottom: 1px solid var(--border-gray);
   transition: transform 0.3s;
   z-index: var(--fixed);

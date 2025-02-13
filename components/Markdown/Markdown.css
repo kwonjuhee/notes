@@ -1,19 +1,23 @@
-.Markdown {
+#md {
   color: var(--text-default);
 
-  & p,
-  & blockquote,
-  & ul,
-  & ol,
-  & table,
-  & pre {
+  img {
+    max-width: 100%;
+  }
+
+  p,
+  blockquote,
+  ul,
+  ol,
+  table,
+  pre {
     margin: 0;
     margin-bottom: 16px;
   }
 
-  & h1,
-  & h2,
-  & h3 {
+  h1,
+  h2,
+  h3 {
     margin-top: 24px;
     margin-bottom: 16px;
   }
@@ -22,20 +26,20 @@
     margin-top: 0;
   }
 
-  & p {
+  p {
     margin-bottom: 12px;
     line-height: 145%;
   }
 
-  & blockquote {
+  blockquote {
     margin: 0;
     padding: 0 16px;
     color: var(--text-subtlest);
     border-left: 3px solid var(--border-gray);
   }
 
-  & ul,
-  & ol {
+  ul,
+  ol {
     padding-left: 24px;
 
     & ul {
@@ -46,7 +50,7 @@
     }
   }
 
-  & li {
+  li {
     list-style: initial;
 
     &::marker {
@@ -58,26 +62,32 @@
     }
   }
 
-  & figure[data-rehype-pretty-code-figure] {
+  figure[data-rehype-pretty-code-figure] {
     margin: 16px 0 16px 0;
   }
 
-  & pre {
+  pre {
     padding: 16px;
-    background-color: var(--bg-gray-subtle);
     border-radius: var(--radius-medium);
     font-size: 14px;
     line-height: 1.45;
     white-space: pre-wrap;
   }
 
-  & hr {
+  pre,
+  code,
+  code span {
+    background-color: var(--shiki-light-bg);
+    color: var(--shiki-light);
+  }
+
+  hr {
     border-width: 2px 0 0 0;
     border-style: solid;
     border-color: var(--border-gray);
   }
 
-  & a {
+  a {
     color: var(--text-selected);
     text-decoration: none;
 
@@ -88,11 +98,11 @@
     }
   }
 
-  & strong {
+  strong {
     font-weight: var(--font-weight-semibold);
   }
 
-  & table {
+  table {
     border-spacing: 0;
     border-collapse: collapse;
 
@@ -105,5 +115,14 @@
     & th {
       background-color: var(--bg-gray-subtle);
     }
+  }
+}
+
+body[data-theme="dark"] #md {
+  pre,
+  code,
+  code span {
+    background-color: var(--shiki-dark-bg);
+    color: var(--shiki-dark);
   }
 }

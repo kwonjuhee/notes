@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import "./Markdown.css";
 import remarkWikiLink from "@portaljs/remark-wiki-link";
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
 import rehypeKatex from "rehype-katex";
@@ -11,7 +12,6 @@ import { githubApi } from "@/api/github";
 import { MARKDOWN_ID } from "@/constants/markdown";
 import { getImageUrl, isImageFile, isMarkdownFile } from "@/utils/markdown";
 import { Text } from "../Text";
-import styles from "./Markdown.module.css";
 
 const components: MDXRemoteProps["components"] = {
   h1: ({ color, ...props }) => (
@@ -45,7 +45,7 @@ const getPermalinks = async () => {
 
 export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
   return (
-    <div id={MARKDOWN_ID} className={styles.Markdown}>
+    <div id={MARKDOWN_ID}>
       <MDXRemote
         source={source}
         options={{
@@ -71,8 +71,7 @@ export const Markdown = async ({ source, ...props }: MDXRemoteProps) => {
               [
                 rehypePrettyCode,
                 {
-                  theme: "github-light",
-                  keepBackground: false,
+                  theme: { light: "github-light", dark: "github-dark-dimmed" },
                 },
               ],
             ],
