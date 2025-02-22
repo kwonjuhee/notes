@@ -1,14 +1,14 @@
 import clsx from "clsx";
 import { getLayoutCustomProperties, LayoutProps } from "@/types/layout";
 import { Responsive } from "@/types/responsive";
-import { Color, Radius } from "@/types/token";
+import { BgColor, bgColor, Color, Radius } from "@/types/token";
 import { formatValue, getResponsiveCustomProperties } from "@/utils/responsive";
 import styles from "./Box.module.css";
 
 type Display = "none" | "inline" | "block";
 
 type StyleProps = {
-  backgroundColor?: Responsive<Color>;
+  backgroundColor?: Responsive<BgColor>;
   borderWidth?: Responsive<string>;
   borderTopWidth?: Responsive<string>;
   borderRightWidth?: Responsive<string>;
@@ -57,7 +57,7 @@ const getBoxCustomProperties = (props: BoxProps) => {
   const responsiveCustomProperties = getResponsiveCustomProperties({
     "--display": display,
     "--background-color": backgroundColor
-      ? formatValue(backgroundColor, (v: string) => `var(--bg-${v}-subtle)`)
+      ? formatValue(backgroundColor, (v: BgColor) => `var(${bgColor[v]})`)
       : undefined,
     "--border-width": borderWidth,
     "--border-top-width": borderTopWidth,

@@ -13,7 +13,7 @@ const BoxList = () =>
       key={i}
       width="60px"
       height="60px"
-      backgroundColor="gray"
+      backgroundColor="gray-subtle"
       borderWidth="1px"
       borderColor="gray"
       borderRadius="medium"

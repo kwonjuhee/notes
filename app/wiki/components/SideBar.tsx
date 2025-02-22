@@ -74,8 +74,8 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
           width="100%"
           height="100dvh"
           paddingX="12px"
+          backgroundColor="surface-subtle"
           overflowY="scroll"
-          style={{ backgroundColor: "white" }}
         >
           {children}
         </Box>
@@ -90,6 +90,7 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
         width="280px"
         height="100dvh"
         paddingX="12px"
+        backgroundColor="surface-subtle"
         borderRightWidth="1px"
         borderColor="gray"
       >
