@@ -1,0 +1,33 @@
+.TocHeader {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  color: var(--text-subtle);
+  z-index: var(--sticky);
+  background-color: var(--bg-surface-subtle);
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border-gray);
+  cursor: pointer;
+
+  & svg {
+    flex-shrink: 0;
+  }
+
+  .listIcon {
+    padding-right: 4px;
+  }
+}
+
+.content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-surface-subtle);
+}

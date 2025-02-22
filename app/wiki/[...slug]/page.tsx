@@ -4,6 +4,7 @@ import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
+import { TocHeader } from "@/components/TocHeader";
 import { markdownExtRegex } from "@/utils/markdown";
 import { LinksToThisPage } from "./components/LinksToThisPage";
 import { WikiBreadcrumb } from "./components/WikiBreadcrumb";
@@ -25,26 +26,31 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const title = decodeURIComponent(params.slug.at(-1)?.replace(markdownExtRegex, "") ?? "");
 
   return (
-    <Flex gap={24} maxWidth="calc(870px + 260px + 24px)" marginX="auto" paddingTop="90px">
-      <Box flexGrow={1} paddingX="24px">
-        <WikiBreadcrumb items={breadcrumbItems} />
-        <Text as="h1" variant="heading30">
-          {title}
-        </Text>
-        <Markdown source={source} />
+    <>
+      <Box display={{ base: "block", lg: "none" }}>
+        <TocHeader />
       </Box>
-      <Box
-        flexShrink={0}
-        display={{ base: "none", lg: "block" }}
-        position="sticky"
-        top="100px"
-        width="260px"
-        paddingX="24px"
-      >
-        <TableOfContents />
-        <Box height="34px" />
-        <LinksToThisPage currentPage={title} />
-      </Box>
-    </Flex>
+      <Flex gap={24} maxWidth="calc(870px + 260px + 24px)" marginX="auto" paddingTop="90px">
+        <Box flexGrow={1} paddingX="24px">
+          <WikiBreadcrumb items={breadcrumbItems} />
+          <Text as="h1" variant="heading30">
+            {title}
+          </Text>
+          <Markdown source={source} />
+        </Box>
+        <Box
+          flexShrink={0}
+          display={{ base: "none", lg: "block" }}
+          position="sticky"
+          top="100px"
+          width="260px"
+          paddingX="24px"
+        >
+          <TableOfContents />
+          <Box height="34px" />
+          <LinksToThisPage currentPage={title} />
+        </Box>
+      </Flex>
+    </>
   );
 }
