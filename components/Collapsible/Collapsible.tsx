@@ -1,16 +1,26 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { CollapsibleProvider, useCollapsibleContext } from "./Collapsible.context";
+import styles from "./Collapsible.module.css";
 
 export interface CollapsibleProps extends React.ComponentPropsWithoutRef<"div"> {
   open: boolean;
   onOpenChange: () => void;
+  unmountOnExit?: boolean;
   children: React.ReactNode;
 }
 
-export const CollapsibleRoot = ({ open, onOpenChange, children, ...props }: CollapsibleProps) => {
+export const CollapsibleRoot = ({
+  open,
+  onOpenChange,
+  unmountOnExit = false,
+  children,
+  ...props
+}: CollapsibleProps) => {
   return (
-    <CollapsibleProvider open={open} onOpenChange={onOpenChange}>
-      <div {...props}>{children}</div>
+    <CollapsibleProvider open={open} onOpenChange={onOpenChange} unmountOnExit={unmountOnExit}>
+      <div className={styles.Collapsible} {...props}>
+        {children}
+      </div>
     </CollapsibleProvider>
   );
 };
@@ -57,15 +67,24 @@ export const CollapsibleContent = ({ children, ...props }: CollapsibleContentPro
     }
   };
 
+  const getChildren = () => {
+    if (context.unmountOnExit) {
+      return isOpen && children;
+    }
+
+    return children;
+  };
+
   return (
     <div
       ref={ref}
       data-state={context.open ? "open" : "closed"}
+      className={styles.content}
       style={{ ["--collapsible-content-height"]: `${height}px` } as React.CSSProperties}
       onTransitionEnd={handleTransitionEnd}
       {...props}
     >
-      {isOpen && children}
+      {getChildren()}
     </div>
   );
 };

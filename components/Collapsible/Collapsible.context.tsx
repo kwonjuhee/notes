@@ -3,6 +3,7 @@ import { createContext, useContext, useMemo } from "react";
 export type CollapsibleContextValue = {
   open: boolean;
   onOpenChange: () => void;
+  unmountOnExit?: boolean;
 };
 
 export const CollapsibleContext = createContext<CollapsibleContextValue | undefined>(undefined);
