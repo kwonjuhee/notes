@@ -24,6 +24,7 @@ export type TextProps = {
   size?: FontSize;
   weight?: FontWeight;
   color?: TextColor;
+  truncate?: boolean;
 } & (H1Props | H2Props | H3Props | SpanProps | DivProps | ParagraphProps | LabelProps);
 
 export const Text = ({
@@ -31,6 +32,7 @@ export const Text = ({
   size,
   weight,
   color,
+  truncate,
   children,
   className,
   style,
@@ -42,6 +44,7 @@ export const Text = ({
       size && styles.size,
       weight && styles.weight,
       color && styles.color,
+      truncate && styles.truncate,
       className
     ),
     style: {
