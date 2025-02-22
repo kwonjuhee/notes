@@ -45,9 +45,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
 
   return (
     <Flex width="100%">
-      <Box flexShrink={0} overflowY="auto" position="sticky" top="0">
-        <SideBar navItems={navItems} />
-      </Box>
+      <SideBar navItems={navItems} />
       <Box flexGrow={1}>{children}</Box>
     </Flex>
   );

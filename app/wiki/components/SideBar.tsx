@@ -75,7 +75,8 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
           height="100dvh"
           paddingX="12px"
           backgroundColor="surface-subtle"
-          overflowY="scroll"
+          overflowY="auto"
+          style={{ zIndex: "var(--fixed)" }}
         >
           {children}
         </Box>
@@ -86,13 +87,17 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
   return (
     isSidebarOpen && (
       <Box
+        flexShrink={0}
         display={{ base: "none", [SIDEBAR_BREAKPOINT]: "block" }}
+        position="sticky"
+        top="0"
         width="280px"
         height="100dvh"
         paddingX="12px"
         backgroundColor="surface-subtle"
         borderRightWidth="1px"
         borderColor="gray"
+        overflowY="auto"
       >
         {children}
       </Box>
