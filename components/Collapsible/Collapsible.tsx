@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useLayoutEffect, useRef, useState } from "react";
 import { CollapsibleProvider, useCollapsibleContext } from "./Collapsible.context";
 import styles from "./Collapsible.module.css";
@@ -13,12 +14,13 @@ export const CollapsibleRoot = ({
   open,
   onOpenChange,
   unmountOnExit = false,
+  className,
   children,
   ...props
 }: CollapsibleProps) => {
   return (
     <CollapsibleProvider open={open} onOpenChange={onOpenChange} unmountOnExit={unmountOnExit}>
-      <div className={styles.Collapsible} {...props}>
+      <div className={clsx(styles.Collapsible, className)} {...props}>
         {children}
       </div>
     </CollapsibleProvider>
@@ -44,7 +46,7 @@ export const CollapsibleTrigger = ({ children, onClick, ...props }: CollapsibleT
 
 export interface CollapsibleContentProps extends React.ComponentPropsWithoutRef<"div"> {}
 
-export const CollapsibleContent = ({ children, ...props }: CollapsibleContentProps) => {
+export const CollapsibleContent = ({ className, children, ...props }: CollapsibleContentProps) => {
   const context = useCollapsibleContext();
   const ref = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -79,7 +81,7 @@ export const CollapsibleContent = ({ children, ...props }: CollapsibleContentPro
     <div
       ref={ref}
       data-state={context.open ? "open" : "closed"}
-      className={styles.content}
+      className={clsx(styles.content, className)}
       style={{ ["--collapsible-content-height"]: `${height}px` } as React.CSSProperties}
       onTransitionEnd={handleTransitionEnd}
       {...props}
