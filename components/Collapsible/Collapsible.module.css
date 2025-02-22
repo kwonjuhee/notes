@@ -1,0 +1,16 @@
+.Collapsible {
+  --collapsible-content-height: 0;
+}
+
+.content {
+  overflow: hidden;
+  transition: max-height 200ms ease-out;
+
+  &[data-state="open"] {
+    max-height: var(--collapsible-content-height);
+  }
+
+  &[data-state="closed"] {
+    max-height: 0;
+  }
+}
