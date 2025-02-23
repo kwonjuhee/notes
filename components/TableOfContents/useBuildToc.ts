@@ -2,6 +2,44 @@ import { useEffect, useState } from "react";
 import { MARKDOWN_ID } from "@/constants/markdown";
 import { TocItem, TocNode } from "./TableOfContets.types";
 
+export const useBuildToc = () => {
+  const [tocNodes, setTocNodes] = useState<TocNode[]>([]);
+  const [currentItem, setCurrentItem] = useState<TocItem>();
+
+  useEffect(() => {
+    const markdown = document.getElementById(MARKDOWN_ID);
+    if (!markdown) return;
+
+    const elements = markdown.querySelectorAll("h1,h2,h3");
+    const tocItems = Array.from(elements).map(elementToTocItem);
+    setTocNodes(buildTocNodes(tocItems));
+
+    if (elements.length > 0) {
+      setCurrentItem(tocItems[0]);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setCurrentItem(elementToTocItem(entry.target));
+          }
+        });
+      },
+      {
+        rootMargin: "0px 0px -80% 0px",
+      }
+    );
+    elements.forEach((element) => observer.observe(element));
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  return { tocNodes, currentItem };
+};
+
 export const buildTocNodes = (items: TocItem[]) => {
   const root: TocNode[] = [];
   const stack: TocNode[] = [];
@@ -25,47 +63,12 @@ export const buildTocNodes = (items: TocItem[]) => {
   return root;
 };
 
-export const useBuildToc = () => {
-  const [tocNodes, setTocNodes] = useState<TocNode[]>([]);
-  const [currentId, setCurrentId] = useState("");
+const elementToTocItem = (element: Element) => {
+  const { id, tagName, textContent } = element;
 
-  useEffect(() => {
-    const markdown = document.getElementById(MARKDOWN_ID);
-    if (!markdown) return;
-
-    const elements = markdown.querySelectorAll("h1,h2,h3");
-    setTocNodes(
-      buildTocNodes(
-        Array.from(elements).map(({ id, tagName, textContent }) => ({
-          id,
-          level: Number(tagName.charAt(1)),
-          text: textContent ?? "",
-        }))
-      )
-    );
-
-    if (elements.length > 0) {
-      setCurrentId(elements[0].id);
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setCurrentId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "0px 0px -80% 0px",
-      }
-    );
-    elements.forEach((element) => observer.observe(element));
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
-
-  return { tocNodes, currentId };
+  return {
+    id,
+    level: Number(tagName.charAt(1)),
+    text: textContent ?? "",
+  };
 };

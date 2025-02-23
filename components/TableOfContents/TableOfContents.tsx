@@ -6,24 +6,30 @@ import { TocItem, TocNode } from "./TableOfContets.types";
 import { useBuildToc } from "./useBuildToc";
 
 export const TableOfContents = () => {
-  const { tocNodes, currentId } = useBuildToc();
+  const { tocNodes, currentItem } = useBuildToc();
 
   return (
     <nav className={styles.TableOfContents}>
-      <TOCList tocNodes={tocNodes} currentId={currentId} />
+      <TOCList tocNodes={tocNodes} currentItem={currentItem} />
     </nav>
   );
 };
 
-export const TOCList = ({ tocNodes, currentId }: { tocNodes: TocNode[]; currentId: string }) => {
+export const TOCList = ({
+  tocNodes,
+  currentItem,
+}: {
+  tocNodes: TocNode[];
+  currentItem?: TocItem;
+}) => {
   return tocNodes.map(({ childNodes, ...itemProps }, i) =>
     childNodes.length > 0 ? (
       <ol key={i} className={styles.list}>
-        <TOCItem {...itemProps} current={itemProps.id === currentId} />
-        {childNodes.length > 0 && <TOCList tocNodes={childNodes} currentId={currentId} />}
+        <TOCItem {...itemProps} current={itemProps.id === currentItem?.id} />
+        {childNodes.length > 0 && <TOCList tocNodes={childNodes} currentItem={currentItem} />}
       </ol>
     ) : (
-      <TOCItem key={i} {...itemProps} current={itemProps.id === currentId} />
+      <TOCItem key={i} {...itemProps} current={itemProps.id === currentItem?.id} />
     )
   );
 };

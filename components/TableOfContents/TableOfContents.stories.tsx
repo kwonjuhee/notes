@@ -31,7 +31,10 @@ export const Primary: StoryObj<typeof TableOfContents> = {
 
     return (
       <nav className={styles.TableOfContents}>
-        <TOCList tocNodes={tocNodes} currentId="heading1" />
+        <TOCList
+          tocNodes={tocNodes}
+          currentItem={{ id: "heading1", level: 1, text: "Heading1", current: true }}
+        />
       </nav>
     );
   },
