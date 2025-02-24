@@ -2,13 +2,10 @@
 
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import { MoonStars, Sun } from "@/assets/icon";
 import { Box } from "@/components/Box";
-import { Button } from "@/components/Button";
 import { Flex, FlexProps } from "@/components/Flex";
 import { Text } from "@/components/Text";
-import { useIsMounted } from "@/hooks/useIsMounted";
-import { useTheme } from "@/theme";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import styles from "./Header.module.css";
 
 export const Header = () => {
@@ -40,19 +37,6 @@ export const Header = () => {
       </Flex>
       <Box height="var(--header-height)" />
     </>
-  );
-};
-
-const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
-  const isMounted = useIsMounted();
-
-  return (
-    isMounted && (
-      <Button variant="ghost" color="gray" size="large" onClick={toggleTheme}>
-        {theme === "light" ? <Sun /> : <MoonStars />}
-      </Button>
-    )
   );
 };
 
