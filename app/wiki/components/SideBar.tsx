@@ -8,6 +8,7 @@ import { IconButton } from "@/components/Button";
 import { Flex } from "@/components/Flex";
 import { ScrollArea } from "@/components/ScrollArea";
 import { Text } from "@/components/Text";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
@@ -58,6 +59,7 @@ export const SideBar = ({ navItems }: SideBarProps) => {
             </Flex>
           )}
         </ScrollArea>
+        <SidebarFooter />
       </Flex>
     </SidebarContainer>
   );
@@ -132,6 +134,14 @@ const SidebarHeader = () => {
   return (
     <Flex align="center" justify="center" paddingTop="40px">
       <Text variant="heading24">🐭 wiki</Text>
+    </Flex>
+  );
+};
+
+const SidebarFooter = () => {
+  return (
+    <Flex justify="end" paddingX="12px" paddingY="8px" borderTopWidth="1px" borderColor="gray">
+      <ThemeToggle size="medium" />
     </Flex>
   );
 };
