@@ -1,0 +1,36 @@
+.wrapper {
+  --scrollarea-width: 100%;
+  --scrollarea-height: 100%;
+
+  position: relative;
+  width: var(--scrollarea-width);
+  height: var(--scrollarea-height);
+  overflow: hidden;
+}
+
+.viewport {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.scrollbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background-color: var(--transparent);
+}
+
+.thumb {
+  position: absolute;
+  transform: translate(0, var(--thumb-position));
+  width: 100%;
+  height: var(--thumb-height);
+  background-color: var(--bg-gray-subtle);
+  border-radius: var(--radius-small);
+}
