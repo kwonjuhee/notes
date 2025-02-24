@@ -7,6 +7,7 @@ import { X } from "@/assets/icon";
 import { Box } from "@/components/Box";
 import { Button } from "@/components/Button";
 import { Flex } from "@/components/Flex";
+import { ScrollArea } from "@/components/ScrollArea";
 import { Text } from "@/components/Text";
 import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -14,6 +15,7 @@ import { useRootStore } from "@/store/useRootStore";
 import { Wiki } from "@/types/wiki";
 import { SearchInput } from "./SearchInput";
 import { SearchItem } from "./SearchItem";
+import styles from "./SideBar.module.css";
 import { SideNavBar } from "./SideNavBar";
 import { SideNavBarProps } from "./SideNavBar/SideNavBar";
 
@@ -36,24 +38,28 @@ export const SideBar = ({ navItems }: SideBarProps) => {
 
   return (
     <SidebarContainer>
-      <SidebarHeader />
-      <Box paddingY="34px">
-        <SearchInput value={q} onChange={(e) => setQ(e.target.value)} onClear={() => setQ("")} />
-      </Box>
-      {!q ? (
-        <SideNavBar navItems={navItems} />
-      ) : (
-        <Flex direction="column" gap={4}>
-          {searchedWikis.map(({ path }) => {
-            const slug = path.split("/").at(-1) as string;
-            return (
-              <Link key={path} href={`/wiki/${path}`} prefetch={false}>
-                <SearchItem title={slug} category={path} highlightKeyword={q} />
-              </Link>
-            );
-          })}
-        </Flex>
-      )}
+      <Flex direction="column" align="stretch" height="100%">
+        <SidebarHeader />
+        <Box paddingTop="32px" paddingX="12px">
+          <SearchInput value={q} onChange={(e) => setQ(e.target.value)} onClear={() => setQ("")} />
+        </Box>
+        <ScrollArea className={styles.scrollarea}>
+          {!q ? (
+            <SideNavBar navItems={navItems} />
+          ) : (
+            <Flex direction="column" gap={4}>
+              {searchedWikis.map(({ path }) => {
+                const slug = path.split("/").at(-1) as string;
+                return (
+                  <Link key={path} href={`/wiki/${path}`} prefetch={false}>
+                    <SearchItem title={slug} category={path} highlightKeyword={q} />
+                  </Link>
+                );
+              })}
+            </Flex>
+          )}
+        </ScrollArea>
+      </Flex>
     </SidebarContainer>
   );
 };
@@ -73,9 +79,7 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
           left="0px"
           width="100%"
           height="100dvh"
-          paddingX="12px"
           backgroundColor="surface-subtle"
-          overflowY="auto"
           style={{ zIndex: "var(--fixed)" }}
         >
           {children}
@@ -93,11 +97,9 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
         top="0"
         width="280px"
         height="100dvh"
-        paddingX="12px"
         backgroundColor="surface-subtle"
         borderRightWidth="1px"
         borderColor="gray"
-        overflowY="auto"
       >
         {children}
       </Box>
