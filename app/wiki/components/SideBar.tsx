@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { searchWikisByTitle } from "@/api/search";
-import { X } from "@/assets/icon";
 import { Box } from "@/components/Box";
-import { Button } from "@/components/Button";
+import { IconButton } from "@/components/Button";
 import { Flex } from "@/components/Flex";
 import { ScrollArea } from "@/components/ScrollArea";
 import { Text } from "@/components/Text";
@@ -115,9 +114,13 @@ const SidebarHeader = () => {
     return (
       <>
         <Flex align="center" justify="end">
-          <Button variant="ghost" color="gray" size="large" onClick={closeMobileSidebar}>
-            <X />
-          </Button>
+          <IconButton
+            icon="X"
+            variant="ghost"
+            color="gray"
+            size="medium"
+            onClick={closeMobileSidebar}
+          />
         </Flex>
         <Flex align="center" justify="center">
           <Text variant="heading24">🐭 wiki</Text>

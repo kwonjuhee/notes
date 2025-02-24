@@ -1,10 +1,9 @@
 "use client";
 
-import { SidebarSimple } from "@/assets/icon";
 import { Box } from "@/components/Box";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { BreadcrumbProps } from "@/components/Breadcrumb/Breadcrumb";
-import { Button } from "@/components/Button";
+import { IconButton } from "@/components/Button";
 import { Divider } from "@/components/Divider";
 import { Flex } from "@/components/Flex";
 import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
@@ -23,10 +22,11 @@ export const WikiBreadcrumb = ({ items }: WikiBreadcrumbProps) => {
 
   return (
     <Flex direction="row" align="center" gap={4} className={styles.WikiBreadcrumb}>
-      <Button
+      <IconButton
+        icon="SidebarSimple"
         variant="ghost"
         color="gray"
-        size="large"
+        size="medium"
         onClick={() => {
           if (isMobile) {
             toggleMobileSidebar();
@@ -34,9 +34,7 @@ export const WikiBreadcrumb = ({ items }: WikiBreadcrumbProps) => {
             toggleSidebar();
           }
         }}
-      >
-        <SidebarSimple />
-      </Button>
+      />
       <Box height="20px" paddingRight="12px">
         <Divider orientation="vertical" />
       </Box>

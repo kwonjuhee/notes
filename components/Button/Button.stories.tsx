@@ -1,10 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import * as iconSVGs from "@/assets/icon";
 import { color, radius } from "@/types/token";
 import { Button } from "./Button";
+import { IconButton } from "./IconButton";
 
 const meta: Meta<typeof Button> = {
   component: Button,
   argTypes: {
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+    },
+    variant: {
+      control: "select",
+      options: ["solid", "subtle", "outline", "ghost"],
+    },
     color: {
       control: "radio",
       options: color,
@@ -29,31 +39,64 @@ export const Playground: StoryObj<typeof Button> = {
 };
 
 export const Sizes: StoryObj<typeof Button> = {
-  render: () => (
+  render: (args) => (
     <>
-      <Button size="small">Button</Button>
-      <Button size="medium">Button</Button>
-      <Button size="large">Button</Button>
+      <Button {...args} size="small">
+        Button
+      </Button>
+      <Button {...args} size="medium">
+        Button
+      </Button>
+      <Button {...args} size="large">
+        Button
+      </Button>
     </>
   ),
 };
 
 export const Variants: StoryObj<typeof Button> = {
-  render: () => (
+  render: (args) => (
     <>
-      <Button variant="solid">Button</Button>
-      <Button variant="subtle">Button</Button>
-      <Button variant="outline">Button</Button>
-      <Button variant="ghost">Button</Button>
+      <Button {...args} variant="solid">
+        Button
+      </Button>
+      <Button {...args} variant="subtle">
+        Button
+      </Button>
+      <Button {...args} variant="outline">
+        Button
+      </Button>
+      <Button {...args} variant="ghost">
+        Button
+      </Button>
     </>
   ),
 };
 
 export const Colors: StoryObj<typeof Button> = {
-  render: () => (
+  render: (args) => (
     <>
-      <Button color="brand">Button</Button>
-      <Button color="gray">Button</Button>
+      <Button {...args} color="brand">
+        Button
+      </Button>
+      <Button {...args} color="gray">
+        Button
+      </Button>
     </>
   ),
+};
+
+export const IconOnly: StoryObj<typeof IconButton> = {
+  args: {
+    icon: "MagnifyingGlass",
+    size: "medium",
+    variant: "ghost",
+  },
+  argTypes: {
+    icon: {
+      control: "select",
+      options: Object.keys(iconSVGs),
+    },
+  },
+  render: (args) => <IconButton {...args} />,
 };

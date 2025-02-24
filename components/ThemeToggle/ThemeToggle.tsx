@@ -1,10 +1,9 @@
-import { MoonStars, Sun } from "@/assets/icon";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { useTheme } from "@/theme";
-import { Button, ButtonProps } from "../Button";
+import { IconButton, IconButtonProps } from "../Button/IconButton";
 
 export interface ThemeToggleProps {
-  size?: ButtonProps["size"];
+  size?: IconButtonProps["size"];
 }
 
 export const ThemeToggle = ({ size = "large" }: ThemeToggleProps) => {
@@ -13,9 +12,13 @@ export const ThemeToggle = ({ size = "large" }: ThemeToggleProps) => {
 
   return (
     isMounted && (
-      <Button variant="ghost" color="gray" size={size} onClick={toggleTheme}>
-        {theme === "light" ? <Sun /> : <MoonStars />}
-      </Button>
+      <IconButton
+        icon={theme === "light" ? "Sun" : "MoonStars"}
+        variant="ghost"
+        color="gray"
+        size={size}
+        onClick={toggleTheme}
+      ></IconButton>
     )
   );
 };

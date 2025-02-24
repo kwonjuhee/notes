@@ -1,0 +1,19 @@
+.IconButton {
+  &.size-small {
+    padding: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  &.size-medium {
+    padding: 0;
+    height: 36px;
+    width: 36px;
+  }
+
+  &.size-large {
+    padding: 0;
+    width: 44px;
+    height: 44px;
+  }
+}
