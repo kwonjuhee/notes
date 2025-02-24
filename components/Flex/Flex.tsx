@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { getLayoutCustomProperties, LayoutProps } from "@/types/layout";
 import { Responsive } from "@/types/responsive";
+import { getStyleCustomProperties, StyleProps } from "@/types/styleProps";
 import { formatValue, getResponsiveCustomProperties } from "@/utils/responsive";
 import styles from "./Flex.module.css";
 
@@ -10,7 +11,7 @@ type Align = "start" | "center" | "end" | "baseline" | "stretch";
 type Justify = "start" | "center" | "end" | "space-between";
 type Wrap = "nowrap" | "wrap" | "wrap-reverse";
 
-export interface FlexProps extends LayoutProps, React.ComponentPropsWithoutRef<"div"> {
+export interface FlexProps extends LayoutProps, StyleProps, React.ComponentPropsWithoutRef<"div"> {
   display?: Responsive<Display>;
   direction?: Responsive<Direction>;
   align?: Responsive<Align>;
@@ -21,12 +22,14 @@ export interface FlexProps extends LayoutProps, React.ComponentPropsWithoutRef<"
 
 export const Flex = ({ className, style, children, ...props }: FlexProps) => {
   const { layoutCustomProperties, restProps } = getLayoutCustomProperties(props);
-  const { flexCustomProperties, flexProps } = getFlexCustomProperties(restProps);
+  const { styleCustomProperties, restProps: restProps_ } = getStyleCustomProperties(restProps);
+  const { flexCustomProperties, flexProps } = getFlexCustomProperties(restProps_);
 
   return (
     <div
       style={{
         ...layoutCustomProperties,
+        ...styleCustomProperties,
         ...flexCustomProperties,
         ...style,
       }}

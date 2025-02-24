@@ -1,22 +1,11 @@
 import clsx from "clsx";
 import { getLayoutCustomProperties, LayoutProps } from "@/types/layout";
 import { Responsive } from "@/types/responsive";
-import { BgColor, bgColor, Color, Radius } from "@/types/token";
-import { formatValue, getResponsiveCustomProperties } from "@/utils/responsive";
+import { getStyleCustomProperties, StyleProps } from "@/types/styleProps";
+import { getResponsiveCustomProperties } from "@/utils/responsive";
 import styles from "./Box.module.css";
 
 type Display = "none" | "inline" | "block";
-
-type StyleProps = {
-  backgroundColor?: Responsive<BgColor>;
-  borderWidth?: Responsive<string>;
-  borderTopWidth?: Responsive<string>;
-  borderRightWidth?: Responsive<string>;
-  borderBottomWidth?: Responsive<string>;
-  borderLeftWidth?: Responsive<string>;
-  borderColor?: Responsive<Color>;
-  borderRadius?: Responsive<Radius>;
-};
 
 export interface BoxProps extends React.ComponentPropsWithoutRef<"div">, LayoutProps, StyleProps {
   display?: Responsive<Display>;
@@ -24,12 +13,14 @@ export interface BoxProps extends React.ComponentPropsWithoutRef<"div">, LayoutP
 
 export const Box = ({ style, className, children, ...props }: BoxProps) => {
   const { layoutCustomProperties, restProps } = getLayoutCustomProperties(props);
-  const { boxCustomProperties, boxProps } = getBoxCustomProperties(restProps);
+  const { styleCustomProperties, restProps: restProps_ } = getStyleCustomProperties(restProps);
+  const { boxCustomProperties, boxProps } = getBoxCustomProperties(restProps_);
 
   return (
     <div
       style={{
         ...layoutCustomProperties,
+        ...styleCustomProperties,
         ...boxCustomProperties,
         ...style,
       }}
@@ -42,34 +33,9 @@ export const Box = ({ style, className, children, ...props }: BoxProps) => {
 };
 
 const getBoxCustomProperties = (props: BoxProps) => {
-  const {
-    display,
-    backgroundColor,
-    borderWidth,
-    borderTopWidth,
-    borderRightWidth,
-    borderBottomWidth,
-    borderLeftWidth,
-    borderColor,
-    borderRadius,
-    ...rest
-  } = props;
+  const { display, ...rest } = props;
   const responsiveCustomProperties = getResponsiveCustomProperties({
     "--display": display,
-    "--background-color": backgroundColor
-      ? formatValue(backgroundColor, (v: BgColor) => `var(${bgColor[v]})`)
-      : undefined,
-    "--border-width": borderWidth,
-    "--border-top-width": borderTopWidth,
-    "--border-right-width": borderRightWidth,
-    "--border-bottom-width": borderBottomWidth,
-    "--border-left-width": borderLeftWidth,
-    "--border-color": borderColor
-      ? formatValue(borderColor, (v: string) => `var(--border-${v})`)
-      : undefined,
-    "--border-radius": borderRadius
-      ? formatValue(borderRadius, (v: string) => `var(--radius-${v})`)
-      : undefined,
   });
 
   return {
