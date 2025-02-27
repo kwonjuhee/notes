@@ -22,22 +22,25 @@ export const TOCList = ({
   tocNodes: TocNode[];
   currentItem?: TocItem;
 }) => {
-  return tocNodes.map(({ childNodes, ...itemProps }, i) =>
-    childNodes.length > 0 ? (
-      <ol key={i} className={styles.list}>
-        <TOCItem {...itemProps} current={itemProps.id === currentItem?.id} />
-        {childNodes.length > 0 && <TOCList tocNodes={childNodes} currentItem={currentItem} />}
-      </ol>
-    ) : (
-      <TOCItem key={i} {...itemProps} current={itemProps.id === currentItem?.id} />
-    )
-  );
+  return tocNodes.map(({ childNodes, ...itemProps }, i) => (
+    <li key={i}>
+      <TOCItem {...itemProps} current={itemProps.id === currentItem?.id} />
+      {childNodes.length > 0 && (
+        <ol key={i}>
+          {childNodes.length > 0 && <TOCList tocNodes={childNodes} currentItem={currentItem} />}
+        </ol>
+      )}
+    </li>
+  ));
 };
 
 const TOCItem = ({ id, level, text, current }: TocItem) => {
   return (
-    <li id={id} className={clsx(styles.item, styles[`heading${level}`], current && styles.active)}>
-      <a href={`#${id}`}>{text}</a>
-    </li>
+    <a
+      href={`#${id}`}
+      className={clsx(styles.tocitem, styles[`heading${level}`], current && styles.active)}
+    >
+      {text}
+    </a>
   );
 };
