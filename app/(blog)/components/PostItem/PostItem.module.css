@@ -5,18 +5,19 @@
     margin-bottom: 6px;
     line-height: 160%;
     transition: color 0.3s;
+    color: var(--fg-neutral);
   }
 
   &:hover,
   &:active {
     .title {
-      color: var(--text-brand-subtle);
+      color: var(--fg-brand);
     }
   }
 
   .description {
     margin-bottom: 16px;
-    color: var(--text-subtlest);
+    color: var(--fg-neutral-subtle);
     line-height: 150%;
     overflow: hidden;
     display: -webkit-box;
@@ -25,7 +26,7 @@
   }
 
   .date {
-    color: var(--text-subtlest);
+    color: var(--fg-neutral-subtle);
     align-self: flex-end;
   }
 }

@@ -1,5 +1,5 @@
 #md {
-  color: var(--text-default);
+  color: var(--fg-neutral);
 
   img {
     max-width: 100%;
@@ -34,8 +34,8 @@
   blockquote {
     margin: 0;
     padding: 0 16px;
-    color: var(--text-subtlest);
-    border-left: 3px solid var(--border-gray);
+    color: var(--fg-neutral-subtle);
+    border-left: 3px solid var(--border);
   }
 
   ul,
@@ -54,7 +54,7 @@
     list-style: initial;
 
     &::marker {
-      color: var(--text-subtlest);
+      color: var(--fg-neutral-subtle);
     }
 
     & + li {
@@ -88,7 +88,7 @@
   }
 
   a {
-    color: var(--text-selected);
+    color: var(--fg-selected);
     text-decoration: none;
 
     @media (hover: hover) {

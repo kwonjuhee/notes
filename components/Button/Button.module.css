@@ -5,157 +5,157 @@
   border-radius: var(--radius);
   transition: background-color 0.2s ease 0s;
 
-  /** ==================== sizes ====================*/
-
-  &.size-small {
-    height: 24px;
-    padding: 0 6px;
-    font-size: var(--font-size-12);
-    font-weight: var(--font-weight-medium);
-    gap: 2px;
-  }
-
-  &.size-medium {
-    height: 36px;
-    padding: 0 12px;
-    font-size: var(--font-size-14);
-    font-weight: var(--font-weight-medium);
-    gap: 4px;
-  }
-
-  &.size-large {
-    height: 44px;
-    padding: 0 16px;
-    font-size: var(--font-size-16);
-    font-weight: var(--font-weight-medium);
-    gap: 8px;
-  }
-
-  /** ==================== variants ====================*/
-
-  &.variant-solid {
-    background: var(--bg-accent);
-    color: var(--white);
-
-    @media (hover: hover) {
-      &:hover:not(:disabled) {
-        background: var(--bg-accent-hovered);
-      }
-    }
-
-    &:active:not(:disabled) {
-      background: var(--bg-accent-pressed);
-    }
-
-    &.color-brand {
-      --bg-accent: var(--bg-brand);
-      --bg-accent-hovered: var(--bg-brand-hovered);
-      --bg-accent-pressed: var(--bg-brand-pressed);
-    }
-
-    &.color-gray {
-      --bg-accent: var(--bg-gray-default);
-      --bg-accent-hovered: var(--bg-gray-default-hovered);
-      --bg-accent-pressed: var(--bg-gray-default-pressed);
-    }
-  }
-
-  &.variant-subtle {
-    background: var(--bg-accent-subtle);
-    color: var(--text-accent-subtle);
-
-    @media (hover: hover) {
-      &:hover:not(:disabled) {
-        background: var(--bg-accent-subtle-hovered);
-      }
-      &:active:not(:disabled) {
-        background: var(--bg-accent-subtle-pressed);
-      }
-    }
-
-    &.color-brand {
-      --text-accent-subtle: var(--text-brand-subtle);
-      --bg-accent-subtle: var(--bg-brand-subtle);
-      --bg-accent-subtle-hovered: var(--bg-brand-subtle-hovered);
-      --bg-accent-subtle-pressed: var(--bg-brand-subtle-pressed);
-    }
-
-    &.color-gray {
-      --text-accent-subtle: var(--text-gray-subtle);
-      --bg-accent-subtle: var(--bg-gray-subtle);
-      --bg-accent-subtle-hovered: var(--bg-gray-subtle-hovered);
-      --bg-accent-subtle-pressed: var(--bg-gray-subtle-pressed);
-    }
-  }
-
-  &.variant-outline {
-    background: transparent;
-    border: 1px solid var(--border-accent);
-    color: var(--text-accent-subtle);
-
-    @media (hover: hover) {
-      &:hover:not(:disabled) {
-        border: 1px solid var(--border-accent-hovered);
-        background: var(--bg-transparent-accent-hovered);
-      }
-    }
-    &:active:not(:disabled) {
-      background: var(--bg-transparent-accent-pressed);
-    }
-
-    &.color-brand {
-      --border-accent: var(--border-brand);
-      --text-accent-subtle: var(--text-brand-subtle);
-      --border-accent-hovered: var(--border-brand-hovered);
-      --bg-transparent-accent-hovered: var(--bg-transparent-brand-hovered);
-      --bg-transparent-accent-pressed: var(--bg-transparent-brand-pressed);
-    }
-
-    &.color-gray {
-      --border-accent: var(--border-gray);
-      --text-accent-subtle: var(--text-gray-subtle);
-      --border-accent-hovered: var(--border-gray-hovered);
-      --bg-transparent-accent-hovered: var(--bg-transparent-gray-hovered);
-      --bg-transparent-accent-pressed: var(--bg-transparent-gray-pressed);
-    }
-  }
-
-  &.variant-ghost {
-    background: var(--bg-transparent);
-    color: var(--text-accent-subtle);
-
-    @media (hover: hover) {
-      &:hover:not(:disabled) {
-        background: var(--bg-transparent-accent-hovered);
-      }
-    }
-    &:active:not(:disabled) {
-      background: var(--bg-transparent-accent-pressed);
-    }
-
-    &.color-brand {
-      --text-accent-subtle: var(--text-brand-subtle);
-      --bg-transparent-accent-hovered: var(--bg-transparent-brand-hovered);
-      --bg-transparent-accent-pressed: var(--bg-transparent-brand-pressed);
-    }
-
-    &.color-gray {
-      --text-accent-subtle: var(--text-gray-subtle);
-      --bg-transparent-accent-hovered: var(--bg-transparent-gray-hovered);
-      --bg-transparent-accent-pressed: var(--bg-transparent-gray-pressed);
-    }
-  }
-
   &:disabled {
     background: var(--bg-disabled);
     border: none;
-    color: var(--text-disabled);
+    color: var(--fg-disabled);
     cursor: not-allowed;
   }
+}
 
-  /** ==================== full width ====================*/
+/** ==================== sizes ====================*/
 
-  &.fullWidth {
-    width: 100%;
+.size-small {
+  height: 24px;
+  padding: 0 6px;
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  gap: 2px;
+}
+
+.size-medium {
+  height: 36px;
+  padding: 0 12px;
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  gap: 4px;
+}
+
+.size-large {
+  height: 44px;
+  padding: 0 16px;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+  gap: 8px;
+}
+
+/** ==================== variants ====================*/
+
+.variant-solid {
+  background: var(--bg-accent);
+  color: var(--white);
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background: var(--bg-accent-hovered);
+    }
   }
+
+  &:active:not(:disabled) {
+    background: var(--bg-accent-pressed);
+  }
+
+  &.color-brand {
+    --bg-accent: var(--bg-brand-solid);
+    --bg-accent-hovered: var(--bg-brand-solid-hovered);
+    --bg-accent-pressed: var(--bg-brand-solid-pressed);
+  }
+
+  &.color-gray {
+    --bg-accent: var(--bg-gray-solid);
+    --bg-accent-hovered: var(--bg-gray-solid-hovered);
+    --bg-accent-pressed: var(--bg-gray-solid-pressed);
+  }
+}
+
+.variant-subtle {
+  background: var(--bg-accent-subtle);
+  color: var(--fg-accent-contrast);
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background: var(--bg-accent-subtle-hovered);
+    }
+    &:active:not(:disabled) {
+      background: var(--bg-accent-subtle-pressed);
+    }
+  }
+
+  &.color-brand {
+    --fg-accent-contrast: var(--fg-brand-contrast);
+    --bg-accent-subtle: var(--bg-brand-subtle);
+    --bg-accent-subtle-hovered: var(--bg-brand-subtle-hovered);
+    --bg-accent-subtle-pressed: var(--bg-brand-subtle-pressed);
+  }
+
+  &.color-gray {
+    --fg-accent-contrast: var(--fg-gray-contrast);
+    --bg-accent-subtle: var(--bg-gray-subtle);
+    --bg-accent-subtle-hovered: var(--bg-gray-subtle-hovered);
+    --bg-accent-subtle-pressed: var(--bg-gray-subtle-pressed);
+  }
+}
+
+.variant-outline {
+  background: transparent;
+  border: 1px solid var(--border-accent);
+  color: var(--fg-accent-contrast);
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      border: 1px solid var(--border-accent-hovered);
+      background: var(--bg-transparent-accent-hovered);
+    }
+  }
+  &:active:not(:disabled) {
+    background: var(--bg-transparent-accent-pressed);
+  }
+
+  &.color-brand {
+    --border-accent: var(--border-brand);
+    --fg-accent-contrast: var(--fg-brand-contrast);
+    --border-accent-hovered: var(--border-brand-hovered);
+    --bg-transparent-accent-hovered: var(--bg-transparent-brand-hovered);
+    --bg-transparent-accent-pressed: var(--bg-transparent-brand-pressed);
+  }
+
+  &.color-gray {
+    --border-accent: var(--border-gray);
+    --fg-accent-contrast: var(--fg-gray-contrast);
+    --border-accent-hovered: var(--border-gray-hovered);
+    --bg-transparent-accent-hovered: var(--bg-transparent-hovered);
+    --bg-transparent-accent-pressed: var(--bg-transparent-pressed);
+  }
+}
+
+.variant-ghost {
+  background: var(--bg-transparent);
+  color: var(--fg-accent-contrast);
+
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background: var(--bg-transparent-accent-hovered);
+    }
+  }
+  &:active:not(:disabled) {
+    background: var(--bg-transparent-accent-pressed);
+  }
+
+  &.color-brand {
+    --fg-accent-contrast: var(--fg-brand-contrast);
+    --bg-transparent-accent-hovered: var(--bg-transparent-brand-hovered);
+    --bg-transparent-accent-pressed: var(--bg-transparent-brand-pressed);
+  }
+
+  &.color-gray {
+    --fg-accent-contrast: var(--fg-gray-contrast);
+    --bg-transparent-accent-hovered: var(--bg-transparent-hovered);
+    --bg-transparent-accent-pressed: var(--bg-transparent-pressed);
+  }
+}
+
+/** ==================== full width ====================*/
+
+.fullWidth {
+  width: 100%;
 }

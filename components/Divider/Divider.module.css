@@ -1,5 +1,5 @@
 .Divider {
-  background-color: var(--border-gray);
+  background-color: var(--border);
   border-radius: var(--radius-small);
 
   &.horizontal {

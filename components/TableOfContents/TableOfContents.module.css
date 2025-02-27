@@ -1,7 +1,7 @@
 .TableOfContents {
   display: flex;
   flex-direction: column;
-  border-left: 2px solid var(--border-gray);
+  border-left: 2px solid var(--border);
   padding-left: 12px;
 
   .list {
@@ -11,12 +11,12 @@
   }
 
   .item {
-    color: var(--text-subtlest);
+    color: var(--fg-neutral-subtle);
     font-size: var(--font-size-14);
     font-weight: var(--font-weight-regular);
 
     &.active {
-      color: var(--text-default);
+      color: var(--fg-neutral);
       font-weight: var(--font-weight-medium);
     }
 

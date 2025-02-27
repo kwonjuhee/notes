@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   width: 100%;
-  color: var(--text-subtle);
+  color: var(--fg-neutral-subtle);
   z-index: var(--sticky);
-  background-color: var(--bg-surface-subtle);
+  background-color: var(--bg-surface);
 }
 
 .trigger {
@@ -13,7 +13,7 @@
   gap: 4px;
   width: 100%;
   padding: 8px 16px;
-  border-bottom: 1px solid var(--border-gray);
+  border-bottom: 1px solid var(--border);
   white-space: nowrap;
   cursor: pointer;
 
@@ -30,5 +30,5 @@
   position: absolute;
   left: 0;
   right: 0;
-  background-color: var(--bg-surface-subtle);
+  background-color: var(--bg-surface);
 }

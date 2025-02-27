@@ -4,9 +4,9 @@
   gap: 8px;
   height: 40px;
   padding: 0 12px;
-  border: 1px solid var(--border-gray);
+  border: 1px solid var(--border);
   border-radius: var(--radius-large);
-  color: var(--text-subtlest);
+  color: var(--fg-neutral);
 
   &:focus-within {
     border-color: var(--border-selected);
@@ -19,8 +19,7 @@
 
   &:has(.input:disabled) {
     background-color: var(--bg-disabled);
-    border-color: var(--border-disabled);
-    color: var(--text-disabled);
+    opacity: 0.5;
     cursor: not-allowed;
   }
 
@@ -29,12 +28,14 @@
     background-color: transparent;
     border: none;
     outline: none;
-
-    color: var(--text-default);
     font-size: var(--font-size-14);
 
     &::placeholder {
-      color: var(--text-subtlest);
+      color: var(--fg-neutral-subtle);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
     }
   }
 }

@@ -6,7 +6,7 @@
   }
 
   .item {
-    color: var(--text-subtlest);
+    color: var(--fg-neutral-subtle);
     text-decoration: none;
 
     &:last-child {
@@ -18,6 +18,6 @@
     display: inline-flex;
     align-items: center;
     justify-items: center;
-    color: var(--text-subtlest);
+    color: var(--fg-neutral-subtle);
   }
 }

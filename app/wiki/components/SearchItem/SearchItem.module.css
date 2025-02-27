@@ -4,16 +4,16 @@
   gap: 4px;
   padding: 8px 12px;
   border-radius: var(--radius-medium);
-  color: var(--text-default);
+  color: var(--fg-neutral);
 
   .highlight {
-    color: var(--text-brand-subtle);
+    color: var(--fg-brand);
     font-style: normal;
     font-weight: var(--font-weight-semibold);
   }
 
   .category {
-    color: var(--text-subtle);
+    color: var(--fg-neutral-muted);
   }
 
   @media (hover: hover) {

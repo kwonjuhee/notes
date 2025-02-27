@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { FontSize, FontWeight, TextColor } from "@/types/token";
+import { FgColor, FontSize, FontWeight } from "@/types/token";
 import styles from "./Text.module.css";
 
 type H1Props = { as?: "h1" } & React.ComponentPropsWithoutRef<"h1">;
@@ -23,7 +23,7 @@ export type TextProps = {
     | "caption14";
   size?: FontSize;
   weight?: FontWeight;
-  color?: TextColor;
+  color?: FgColor;
   truncate?: boolean;
 } & (H1Props | H2Props | H3Props | SpanProps | DivProps | ParagraphProps | LabelProps);
 
@@ -50,7 +50,7 @@ export const Text = ({
     style: {
       "--font-size": size && `var(--font-size-${size})`,
       "--font-weight": weight && `var(--font-weight-${weight})`,
-      "--color": color && `var(--text-${color})`,
+      "--color": color && `var(--${color})`,
       ...style,
     } as React.CSSProperties,
   };

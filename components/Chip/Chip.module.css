@@ -11,25 +11,25 @@
     color: var(--white);
 
     &.color-brand {
-      --bg-accent: var(--bg-brand);
+      --bg-accent: var(--bg-brand-solid);
     }
 
     &.color-gray {
-      --bg-accent: var(--bg-gray-default);
+      --bg-accent: var(--bg-gray-solid);
     }
   }
 
   &.variant-subtle {
     background: var(--bg-accent-subtle);
-    color: var(--text-accent-subtle);
+    color: var(--fg-accent-contrast);
 
     &.color-brand {
-      --text-accent-subtle: var(--text-brand-subtle);
+      --fg-accent-contrast: var(--fg-brand-contrast);
       --bg-accent-subtle: var(--bg-brand-subtle);
     }
 
     &.color-gray {
-      --text-accent-subtle: var(--text-gray-subtle);
+      --fg-accent-contrast: var(--fg-gray-contrast);
       --bg-accent-subtle: var(--bg-gray-subtle);
     }
   }
@@ -37,16 +37,16 @@
   &.variant-outline {
     background: transparent;
     border: 1px solid var(--border-accent);
-    color: var(--text-accent-subtle);
+    color: var(--fg-accent-contrast);
 
     &.color-brand {
       --border-accent: var(--border-brand);
-      --text-accent-subtle: var(--text-brand-subtle);
+      --fg-accent-contrast: var(--fg-brand-contrast);
     }
 
     &.color-gray {
       --border-accent: var(--border-gray);
-      --text-accent-subtle: var(--text-gray-subtle);
+      --fg-accent-contrast: var(--fg-gray-contrast);
     }
   }
 }
