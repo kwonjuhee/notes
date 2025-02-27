@@ -1,45 +1,54 @@
 #md {
+  --gap-xs: 8px;
+  --gap-s: 12px;
+  --gap-m: 16px;
+  --gap-l: 24px;
+  --section-gap: 48px;
+
   color: var(--fg-neutral);
 
-  img {
-    max-width: 100%;
-  }
-
+  h1,
+  h2,
+  h3,
   p,
   blockquote,
   ul,
   ol,
   table,
-  pre {
-    margin: 0;
-    margin-bottom: 16px;
+  pre,
+  figure {
+    margin: 0; /* reset margin */
   }
 
   h1,
   h2,
   h3 {
-    margin-top: 24px;
-    margin-bottom: 16px;
-  }
-
-  & > :first-child {
-    margin-top: 0;
+    margin-top: var(--section-gap);
+    margin-bottom: var(--gap-l);
   }
 
   p {
-    margin-bottom: 12px;
-    line-height: 145%;
+    margin-bottom: var(--gap-s);
+    line-height: 160%;
   }
 
   blockquote {
-    margin: 0;
+    margin: var(--gap-l) 0;
     padding: 0 16px;
-    color: var(--fg-neutral-subtle);
+    color: var(--fg-neutral-muted);
     border-left: 3px solid var(--border);
+
+    & h1,
+    & h2,
+    & h3 {
+      margin-top: 0;
+      margin-bottom: var(--gap-xs);
+    }
   }
 
   ul,
   ol {
+    margin-bottom: var(--gap-m);
     padding-left: 24px;
 
     & ul {
@@ -58,27 +67,30 @@
     }
 
     & + li {
-      margin-top: 4px;
+      margin-top: var(--gap-xs);
     }
   }
 
-  figure[data-rehype-pretty-code-figure] {
-    margin: 16px 0 16px 0;
-  }
-
   pre {
+    margin: var(--gap-l) 0;
     padding: 16px;
+    border: 1px solid var(--border);
     border-radius: var(--radius-medium);
-    font-size: 14px;
-    line-height: 1.45;
+    line-height: 145%;
     white-space: pre-wrap;
   }
 
   pre,
-  code,
-  code span {
-    background-color: var(--shiki-light-bg);
+  pre code,
+  pre code span {
+    background-color: var(--bg-surface);
     color: var(--shiki-light);
+  }
+
+  p code {
+    padding: 2px 4px;
+    background-color: var(--gray-50);
+    border-radius: var(--radius-small);
   }
 
   hr {
@@ -102,6 +114,10 @@
     font-weight: var(--font-weight-semibold);
   }
 
+  img {
+    max-width: 100%;
+  }
+
   table {
     border-spacing: 0;
     border-collapse: collapse;
@@ -122,7 +138,11 @@ body[data-theme="dark"] #md {
   pre,
   code,
   code span {
-    background-color: var(--shiki-dark-bg);
+    background-color: var(--bg-surface);
     color: var(--shiki-dark);
+  }
+
+  p code {
+    background-color: var(--gray-800);
   }
 }
