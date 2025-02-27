@@ -10,7 +10,9 @@ export const useBuildToc = () => {
     const markdown = document.getElementById(MARKDOWN_ID);
     if (!markdown) return;
 
-    const elements = markdown.querySelectorAll("h1,h2,h3");
+    const elements = markdown.querySelectorAll(
+      "h1:not(blockquote h1), h2:not(blockquote h2), h3:not(blockquote h3)"
+    );
     const tocItems = Array.from(elements).map(elementToTocItem);
     setTocNodes(buildTocNodes(tocItems));
 
