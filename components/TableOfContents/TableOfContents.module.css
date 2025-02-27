@@ -1,40 +1,22 @@
 .TableOfContents {
-  display: flex;
-  flex-direction: column;
   border-left: 2px solid var(--border);
-  padding-left: 12px;
+  padding-left: 4px;
+}
 
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+.tocitem {
+  --indent-size: 12px;
+  --indent-count: 1;
 
-  .item {
-    color: var(--fg-neutral-subtle);
-    font-size: var(--font-size-14);
-    font-weight: var(--font-weight-regular);
+  display: inline-block;
+  padding: 4px;
+  padding-left: calc(var(--indent-size) * var(--indent-count));
 
-    &.active {
-      color: var(--fg-neutral);
-      font-weight: var(--font-weight-medium);
-    }
+  color: var(--fg-neutral-subtle);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-regular);
 
-    & > a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    &.heading1 {
-      padding-left: 0;
-    }
-
-    &.heading2 {
-      padding-left: 10px;
-    }
-
-    &.heading3 {
-      padding-left: 20px;
-    }
+  &.active {
+    color: var(--fg-neutral);
+    font-weight: var(--font-weight-medium);
   }
 }

@@ -29,11 +29,14 @@ export const Primary: StoryObj<typeof TableOfContents> = {
       );
     }, []);
 
+    const topLevel = Math.max(...tocNodes.map(({ level }) => level));
+
     return (
       <nav className={styles.TableOfContents}>
         <TOCList
           tocNodes={tocNodes}
           currentItem={{ id: "heading1", level: 1, text: "Heading1", current: true }}
+          topLevel={topLevel}
         />
       </nav>
     );

@@ -8,39 +8,52 @@ import { useBuildToc } from "./useBuildToc";
 export const TableOfContents = () => {
   const { tocNodes, currentItem } = useBuildToc();
 
+  const topLevel = Math.max(...tocNodes.map(({ level }) => level));
+
   return (
     <nav className={styles.TableOfContents}>
-      <TOCList tocNodes={tocNodes} currentItem={currentItem} />
+      <TOCList tocNodes={tocNodes} currentItem={currentItem} topLevel={topLevel} />
     </nav>
   );
 };
 
-export const TOCList = ({
-  tocNodes,
-  currentItem,
-}: {
+export interface TOCListProps {
   tocNodes: TocNode[];
   currentItem?: TocItem;
-}) => {
+  topLevel: number;
+}
+
+export const TOCList = ({ tocNodes, currentItem, topLevel }: TOCListProps) => {
   return tocNodes.map(({ childNodes, ...itemProps }, i) => (
     <li key={i}>
-      <TOCItem {...itemProps} current={itemProps.id === currentItem?.id} />
+      <TOCItem {...itemProps} current={itemProps.id === currentItem?.id} topLevel={topLevel} />
       {childNodes.length > 0 && (
         <ol key={i}>
-          {childNodes.length > 0 && <TOCList tocNodes={childNodes} currentItem={currentItem} />}
+          {childNodes.length > 0 && (
+            <TOCList tocNodes={childNodes} currentItem={currentItem} topLevel={topLevel} />
+          )}
         </ol>
       )}
     </li>
   ));
 };
 
-const TOCItem = ({ id, level, text, current }: TocItem) => {
+interface TOCItemProps extends TocItem {
+  topLevel: number;
+}
+
+const TOCItem = ({ id, level, text, current, topLevel }: TOCItemProps) => {
   return (
     <a
       href={`#${id}`}
-      className={clsx(styles.tocitem, styles[`heading${level}`], current && styles.active)}
+      style={{ "--indent-count": getIndentCount({ level, topLevel }) } as React.CSSProperties}
+      className={clsx(styles.tocitem, current && styles.active)}
     >
       {text}
     </a>
   );
+};
+
+const getIndentCount = ({ level, topLevel }: Pick<TOCItemProps, "level" | "topLevel">) => {
+  return level - topLevel + 1;
 };
