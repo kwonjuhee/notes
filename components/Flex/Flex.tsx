@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { forwardRef } from "react";
 import { getLayoutCustomProperties, LayoutProps } from "@/types/layout";
 import { Responsive } from "@/types/responsive";
 import { getStyleCustomProperties, StyleProps } from "@/types/styleProps";
@@ -20,26 +21,31 @@ export interface FlexProps extends LayoutProps, StyleProps, React.ComponentProps
   gap?: Responsive<number>;
 }
 
-export const Flex = ({ className, style, children, ...props }: FlexProps) => {
-  const { layoutCustomProperties, restProps } = getLayoutCustomProperties(props);
-  const { styleCustomProperties, restProps: restProps_ } = getStyleCustomProperties(restProps);
-  const { flexCustomProperties, flexProps } = getFlexCustomProperties(restProps_);
+export const Flex = forwardRef<HTMLDivElement, FlexProps>(
+  ({ className, style, children, ...props }, ref) => {
+    const { layoutCustomProperties, restProps } = getLayoutCustomProperties(props);
+    const { styleCustomProperties, restProps: restProps_ } = getStyleCustomProperties(restProps);
+    const { flexCustomProperties, flexProps } = getFlexCustomProperties(restProps_);
 
-  return (
-    <div
-      style={{
-        ...layoutCustomProperties,
-        ...styleCustomProperties,
-        ...flexCustomProperties,
-        ...style,
-      }}
-      className={clsx(styles.flex, className)}
-      {...flexProps}
-    >
-      {children}
-    </div>
-  );
-};
+    return (
+      <div
+        ref={ref}
+        style={{
+          ...layoutCustomProperties,
+          ...styleCustomProperties,
+          ...flexCustomProperties,
+          ...style,
+        }}
+        className={clsx(styles.flex, className)}
+        {...flexProps}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+Flex.displayName = "Flex";
 
 const getFlexCustomProperties = (props: FlexProps) => {
   const { display, direction, align, justify, wrap, gap = 0, ...rest } = props;
