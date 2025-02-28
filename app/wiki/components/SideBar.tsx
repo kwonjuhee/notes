@@ -13,6 +13,7 @@ import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
 import { Wiki } from "@/types/wiki";
+import { CategorySelector } from "./CategorySelector";
 import { SearchInput } from "./SearchInput";
 import { SearchItem } from "./SearchItem";
 import styles from "./SideBar.module.css";
@@ -141,6 +142,7 @@ const SidebarHeader = () => {
 const SidebarFooter = () => {
   return (
     <Flex justify="end" paddingX="12px" paddingY="8px" borderTopWidth="1px" borderColor="gray">
+      <CategorySelector options={["option1", "option2", "option3", "option4"]} />
       <ThemeToggle size="medium" />
     </Flex>
   );
