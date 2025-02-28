@@ -13,7 +13,7 @@ export const useBuildToc = () => {
     const elements = markdown.querySelectorAll(
       "h1:not(blockquote h1), h2:not(blockquote h2), h3:not(blockquote h3)"
     );
-    const tocItems = Array.from(elements).map(elementToTocItem);
+    const tocItems = Array.from(elements).map((el, index) => ({ ...elementToTocItem(el), index }));
     setTocNodes(buildTocNodes(tocItems));
 
     if (elements.length > 0) {
@@ -24,7 +24,7 @@ export const useBuildToc = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setCurrentItem(elementToTocItem(entry.target));
+            setCurrentItem(tocItems.find((item) => item.id === entry.target.id));
           }
         });
       },

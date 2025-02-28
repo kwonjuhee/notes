@@ -11,7 +11,10 @@ export const TableOfContents = () => {
   const topLevel = Math.max(...tocNodes.map(({ level }) => level));
 
   return (
-    <nav className={styles.TableOfContents}>
+    <nav
+      className={styles.TableOfContents}
+      style={{ "--current-tocitem-index": currentItem?.index } as React.CSSProperties}
+    >
       <TOCList tocNodes={tocNodes} currentItem={currentItem} topLevel={topLevel} />
     </nav>
   );
@@ -28,10 +31,8 @@ export const TOCList = ({ tocNodes, currentItem, topLevel }: TOCListProps) => {
     <li key={i}>
       <TOCItem {...itemProps} current={itemProps.id === currentItem?.id} topLevel={topLevel} />
       {childNodes.length > 0 && (
-        <ol key={i}>
-          {childNodes.length > 0 && (
-            <TOCList tocNodes={childNodes} currentItem={currentItem} topLevel={topLevel} />
-          )}
+        <ol>
+          <TOCList tocNodes={childNodes} currentItem={currentItem} topLevel={topLevel} />
         </ol>
       )}
     </li>

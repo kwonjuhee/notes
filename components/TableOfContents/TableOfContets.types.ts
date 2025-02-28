@@ -3,6 +3,7 @@ export type TocItem = {
   level: number;
   text: string;
   current?: boolean;
+  index: number;
 };
 
 export type TocNode = TocItem & { childNodes: TocNode[] };

@@ -1,6 +1,21 @@
 .TableOfContents {
-  border-left: 2px solid var(--border);
+  position: relative;
+  border-left: 1px solid var(--border);
   padding-left: 4px;
+
+  --tocitem-height: 25px;
+  --current-tocitem-index: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -1px;
+    height: var(--tocitem-height);
+    border-left: 1px solid var(--black);
+    transform: translateY(calc(var(--tocitem-height) * var(--current-tocitem-index)));
+    transition: transform 0.3s;
+  }
 }
 
 .tocitem {
@@ -15,8 +30,10 @@
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-regular);
 
-  &.active {
+  &.active,
+  &:hover {
     color: var(--fg-neutral);
     font-weight: var(--font-weight-medium);
+    cursor: pointer;
   }
 }
