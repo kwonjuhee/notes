@@ -1,19 +1,25 @@
 .TreeView {
-  .TreeItem {
-    --depth: 0;
+  --indent-size: 16px;
+  --depth: 0;
+  --gap-between-items: 2px;
+}
 
-    .button {
-      justify-content: start;
-
-      .icon {
-        width: 14px;
-        height: 14px;
-        color: var(--gray-400);
-      }
-
-      .indent {
-        width: calc(16px * var(--depth));
-      }
-    }
+.TreeItem {
+  .button {
+    justify-content: start;
+    min-height: fit-content;
+    padding: 4px 12px;
+    margin-bottom: var(--gap-between-items);
   }
+
+  .icon {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: var(--fg-neutral-subtlest);
+  }
+}
+
+.SubTree {
+  padding-left: var(--indent-size);
 }

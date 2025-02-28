@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CaretDown, CaretRight } from "@/assets/icon";
 import { Button } from "../Button";
+import { Text } from "../Text";
 import styles from "./TreeView.module.css";
 
 export const TreeView = ({ children }: { children: React.ReactNode }) => {
@@ -62,11 +63,10 @@ export const TreeItem = ({
         onClick={toggle}
         href={hasSubTree ? undefined : href}
       >
-        <span className={styles.indent} style={{ "--depth": depth } as React.CSSProperties} />
         <span className={styles.icon}>
           {hasSubTree && (isExpanded ? <CaretDown /> : <CaretRight />)}
         </span>
-        {TreeItemChild}
+        <Text truncate>{TreeItemChild}</Text>
       </Button>
       {isExpanded &&
         React.isValidElement(SubTreeChild) &&
@@ -82,7 +82,7 @@ interface SubTree {
 
 export const SubTree = ({ depth, children }: SubTree) => {
   return (
-    <ul role="group">
+    <ul role="group" className={styles.SubTree}>
       {React.Children.map(children, (child) =>
         React.isValidElement(child) && child.type === TreeItem
           ? React.cloneElement(child, { ...child.props, depth })
