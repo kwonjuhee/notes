@@ -1,5 +1,8 @@
+import { Category } from "@/types/category";
+import { decodeBase64 } from "@/utils/endecoder";
 import { isMarkdownFile, isPrivatePath } from "@/utils/markdown";
 import { githubApi } from "./github";
+import { GetFileContentResponseData } from "./github.types";
 
 const getWikiList = async () => {
   const { ref } = await githubApi.gitDatabase.getRef();
@@ -24,7 +27,22 @@ const getWikiByPath = async (path: string) => {
   return Buffer.from(data.content, "base64").toString();
 };
 
+export const getCategoryList = async (): Promise<Category[]> => {
+  try {
+    const data = (await githubApi.repository.getContent(
+      "/category.json"
+    )) as GetFileContentResponseData;
+
+    const content = JSON.parse(decodeBase64(data.content));
+
+    return content;
+  } catch (e) {
+    return [];
+  }
+};
+
 export const wikiApi = {
   getWikiList,
   getWikiByPath,
+  getCategoryList,
 };

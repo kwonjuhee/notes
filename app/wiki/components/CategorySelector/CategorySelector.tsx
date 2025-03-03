@@ -6,10 +6,11 @@ import { Button } from "@/components/Button";
 import { Flex } from "@/components/Flex";
 import { Text } from "@/components/Text";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { Category } from "@/types/category";
 import styles from "./CategorySelector.module.css";
 
 export interface CategorySelectorProps {
-  options: string[];
+  options: Category[];
 }
 
 export const CategorySelector = ({ options }: CategorySelectorProps) => {
@@ -53,15 +54,15 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
           borderRadius="medium"
           style={{ zIndex: "var(--dropdown)" }}
         >
-          {options.map((option) => (
+          {options.map(({ slug, label }) => (
             <Button
-              key={option}
-              href={`/${option}`}
-              className={clsx(styles.option, option === selectedCategory && styles.selected)}
+              key={slug}
+              href={`/${slug}`}
+              className={clsx(styles.option, slug === selectedCategory && styles.selected)}
               variant="ghost"
               color="gray"
             >
-              <Text variant="caption14">{option}</Text>
+              <Text variant="caption14">{label}</Text>
             </Button>
           ))}
         </Flex>

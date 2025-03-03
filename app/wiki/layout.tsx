@@ -42,10 +42,11 @@ const wikiListToNavItems = ({
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const wikiList = await wikiApi.getWikiList();
   const navItems = wikiListToNavItems({ wikiList });
+  const categoryList = await wikiApi.getCategoryList();
 
   return (
     <Flex width="100%">
-      <SideBar navItems={navItems} />
+      <SideBar navItems={navItems} categoryList={categoryList} />
       <Box flexGrow={1} minWidth="0">
         {children}
       </Box>

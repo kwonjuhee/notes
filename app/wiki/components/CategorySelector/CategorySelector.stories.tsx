@@ -16,10 +16,17 @@ const meta: Meta<typeof CategorySelector> = {
 };
 export default meta;
 
+const CATEGORY_OPTIONS = [
+  { label: "option1", slug: "option1", isPrivate: false },
+  { label: "option2", slug: "option2", isPrivate: false },
+  { label: "option3", slug: "option3", isPrivate: true },
+  { label: "option4", slug: "option4", isPrivate: true },
+];
+
 export const Primary: StoryObj<typeof CategorySelector> = {
   render: () => (
     <Box paddingY="200px">
-      <CategorySelector options={["option1", "option2", "option3", "option4"]} />
+      <CategorySelector options={CATEGORY_OPTIONS} />
     </Box>
   ),
 };

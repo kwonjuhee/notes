@@ -12,6 +12,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
+import { Category } from "@/types/category";
 import { Wiki } from "@/types/wiki";
 import { CategorySelector } from "./CategorySelector";
 import { SearchInput } from "./SearchInput";
@@ -22,9 +23,10 @@ import { SideNavBarProps } from "./SideNavBar/SideNavBar";
 
 export interface SideBarProps {
   navItems: SideNavBarProps["navItems"];
+  categoryList: Category[];
 }
 
-export const SideBar = ({ navItems }: SideBarProps) => {
+export const SideBar = ({ navItems, categoryList }: SideBarProps) => {
   const [q, setQ] = useState("");
   const [searchedWikis, setSearchedWikis] = useState<Wiki[]>([]);
 
@@ -60,7 +62,7 @@ export const SideBar = ({ navItems }: SideBarProps) => {
             </Flex>
           )}
         </ScrollArea>
-        <SidebarFooter />
+        <SidebarFooter categoryList={categoryList} />
       </Flex>
     </SidebarContainer>
   );
@@ -139,10 +141,10 @@ const SidebarHeader = () => {
   );
 };
 
-const SidebarFooter = () => {
+const SidebarFooter = ({ categoryList }: { categoryList: Category[] }) => {
   return (
     <Flex justify="end" paddingX="12px" paddingY="8px" borderTopWidth="1px" borderColor="gray">
-      <CategorySelector options={["option1", "option2", "option3", "option4"]} />
+      {categoryList.length > 0 && <CategorySelector options={categoryList} />}
       <ThemeToggle size="medium" />
     </Flex>
   );
