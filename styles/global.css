@@ -91,9 +91,16 @@ li {
 }
 
 button {
-  all: unset;
+  appearance: none;
+  border: none;
+  box-shadow: none;
+  background: inherit;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
 a {
-  all: unset;
+  text-decoration: none;
+  color: inherit;
 }
