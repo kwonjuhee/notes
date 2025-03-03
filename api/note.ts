@@ -4,19 +4,23 @@ import { isMarkdownFile, isPrivatePath } from "@/utils/markdown";
 import { githubApi } from "./github";
 import { GetFileContentResponseData } from "./github.types";
 
-const getWikiList = async () => {
+const getNoteList = async (prefix: string = "") => {
   const { ref } = await githubApi.gitDatabase.getRef();
   const { tree: gitTree } = await githubApi.gitDatabase.getGitTree(ref);
 
   const mdList = gitTree.filter(
     (node) =>
-      node.type === "blob" && node.path && !isPrivatePath(node.path) && isMarkdownFile(node.path)
+      node.type === "blob" &&
+      node.path &&
+      !isPrivatePath(node.path) &&
+      isMarkdownFile(node.path) &&
+      node.path.startsWith(prefix)
   );
 
   return mdList;
 };
 
-const getWikiByPath = async (path: string) => {
+const getNoteByPath = async (path: string) => {
   if (!isMarkdownFile(path)) throw new Error("Invalid path");
 
   const data = await githubApi.repository.getContent(path);
@@ -41,8 +45,8 @@ export const getCategoryList = async (): Promise<Category[]> => {
   }
 };
 
-export const wikiApi = {
-  getWikiList,
-  getWikiByPath,
+export const noteApi = {
+  getNoteList,
+  getNoteByPath,
   getCategoryList,
 };

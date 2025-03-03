@@ -15,7 +15,7 @@ export const SideNavBar = ({ navItems }: SideNavBarProps) => {
 
 const renderNavItems = (navItems: SideNavBarProps["navItems"]) => {
   return navItems.map(({ id, path, childNodes }) => (
-    <TreeItem key={id} href={`/wiki/${path}`}>
+    <TreeItem key={id} href={`/notes/${path}`}>
       {id}
       {childNodes && <SubTree>{renderNavItems(childNodes)}</SubTree>}
     </TreeItem>

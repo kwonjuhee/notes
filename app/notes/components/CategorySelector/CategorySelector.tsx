@@ -57,7 +57,7 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
           {options.map(({ slug, label }) => (
             <Button
               key={slug}
-              href={`/${slug}`}
+              href={`/notes/${slug}`}
               className={clsx(styles.option, slug === selectedCategory && styles.selected)}
               variant="ghost"
               color="gray"

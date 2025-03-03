@@ -49,7 +49,7 @@ export const LinksToThisPage = async ({ currentPage }: LinksToThisPageProps) => 
       <Box height="8px" />
       <Flex gap={4} wrap="wrap">
         {links.map((link, i) => (
-          <Link key={i} href={`/wiki/${link}`}>
+          <Link key={i} href={`/notes/${link}`}>
             <Chip label={(link.split("/").at(-1) as string).replace(markdownExtRegex, "")} />
           </Link>
         ))}

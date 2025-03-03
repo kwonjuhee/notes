@@ -1,4 +1,4 @@
-import { wikiApi } from "@/api/wiki";
+import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
@@ -9,17 +9,22 @@ import { markdownExtRegex } from "@/utils/markdown";
 import { LinksToThisPage } from "./components/LinksToThisPage";
 import { WikiBreadcrumb } from "./components/WikiBreadcrumb";
 
-export async function generateStaticParams() {
-  const markdownList = await wikiApi.getWikiList();
+export async function generateStaticParams({ params }: { params: { category: string } }) {
+  const category = params.category;
+  const markdownList = await noteApi.getNoteList(`${category}`);
 
   return markdownList.map((md) => ({
     slug: md.path?.split("/"),
   }));
 }
 
-export default async function Page({ params }: { params: { slug: string[] } }) {
-  const path = decodeURIComponent(params.slug.join("/"));
-  const source = await wikiApi.getWikiByPath(path);
+export default async function Page({ params }: { params: { category: string; slug?: string[] } }) {
+  if (!params.slug) {
+    return <></>;
+  }
+
+  const path = decodeURIComponent(`${params.category}/${params.slug.join("/")}`);
+  const source = await noteApi.getNoteByPath(path);
 
   const breadcrumbItems = params.slug.map((s) => ({ label: s }));
 

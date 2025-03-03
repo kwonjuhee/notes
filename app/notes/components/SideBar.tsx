@@ -54,7 +54,7 @@ export const SideBar = ({ navItems, categoryList }: SideBarProps) => {
               {searchedWikis.map(({ path }) => {
                 const slug = path.split("/").at(-1) as string;
                 return (
-                  <Link key={path} href={`/wiki/${path}`} prefetch={false}>
+                  <Link key={path} href={`/notes/${path}`} prefetch={false}>
                     <SearchItem title={slug} category={path} highlightKeyword={q} />
                   </Link>
                 );
@@ -128,7 +128,7 @@ const SidebarHeader = () => {
           />
         </Flex>
         <Flex align="center" justify="center">
-          <Text variant="heading24">🐭 wiki</Text>
+          <Text variant="heading24">🐭 notes</Text>
         </Flex>
       </>
     );
@@ -136,7 +136,7 @@ const SidebarHeader = () => {
 
   return (
     <Flex align="center" justify="center" paddingTop="40px">
-      <Text variant="heading24">🐭 wiki</Text>
+      <Text variant="heading24">🐭 notes</Text>
     </Flex>
   );
 };

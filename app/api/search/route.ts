@@ -1,9 +1,9 @@
 import { ApiErrorResponse, ApiSuccessResponse } from "@/api/api.types";
-import { wikiApi } from "@/api/wiki";
+import { noteApi } from "@/api/note";
 import { Wiki } from "@/types/wiki";
 
 export async function GET(request: Request) {
-  const wikiList = await wikiApi.getWikiList();
+  const noteList = await noteApi.getNoteList();
 
   const { searchParams } = new URL(request.url);
   const q = searchParams.get("q");
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
   const successResponse: ApiSuccessResponse<Wiki[]> = {
     status: 200,
-    data: wikiList
+    data: noteList
       .filter(({ path }) => path && path.toLowerCase().includes(q.toLowerCase()))
       .map(({ path }) => ({
         path: path as string,

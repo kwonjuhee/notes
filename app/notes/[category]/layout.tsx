@@ -1,19 +1,29 @@
-import { wikiApi } from "@/api/wiki";
+import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
-import { SideBar } from "./components/SideBar";
-import { TreeNode } from "./components/SideNavBar";
+import { SideBar } from "../components/SideBar";
+import { TreeNode } from "../components/SideNavBar";
 
-const wikiListToNavItems = ({
-  wikiList,
+export async function generateStaticParams() {
+  const categoryList = await noteApi.getCategoryList();
+
+  return categoryList
+    .filter((category) => !category.isPrivate)
+    .map((category) => ({
+      category: category.slug,
+    }));
+}
+
+const noteListToNavItems = ({
+  noteList,
   predicate = () => true,
 }: {
-  wikiList: Awaited<ReturnType<typeof wikiApi.getWikiList>>;
+  noteList: Awaited<ReturnType<typeof noteApi.getNoteList>>;
   predicate?: (path: string) => boolean;
 }) => {
   const tree: TreeNode = { id: "ROOT", path: "/", childNodes: [] };
 
-  wikiList.forEach(({ path, type }) => {
+  noteList.forEach(({ path, type }) => {
     if (path && type === "blob" && predicate(path)) {
       const slugs = path.split("/");
 
@@ -39,10 +49,18 @@ const wikiListToNavItems = ({
   return tree.childNodes as TreeNode[];
 };
 
-export default async function Layout({ children }: { children: React.ReactNode }) {
-  const wikiList = await wikiApi.getWikiList();
-  const navItems = wikiListToNavItems({ wikiList });
-  const categoryList = await wikiApi.getCategoryList();
+export default async function Layout({
+  params,
+  children,
+}: {
+  params: { category: string };
+  children: React.ReactNode;
+}) {
+  const category = params.category;
+  const noteList = await noteApi.getNoteList(`${category}`);
+  const navItems = noteListToNavItems({ noteList });
+
+  const categoryList = await noteApi.getCategoryList();
 
   return (
     <Flex width="100%">
