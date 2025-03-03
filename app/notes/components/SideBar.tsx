@@ -83,7 +83,7 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
           left="0px"
           width="100%"
           height="100dvh"
-          backgroundColor="surface-subtle"
+          backgroundColor="surface"
           style={{ zIndex: "var(--fixed)" }}
         >
           {children}
@@ -101,7 +101,7 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
         top="0"
         width="280px"
         height="100dvh"
-        backgroundColor="surface-subtle"
+        backgroundColor="surface"
         borderRightWidth="1px"
         borderColor="gray"
       >

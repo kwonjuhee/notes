@@ -13,7 +13,7 @@
   }
 
   .category {
-    color: var(--fg-neutral-muted);
+    color: var(--fg-neutral-subtle);
   }
 
   @media (hover: hover) {
