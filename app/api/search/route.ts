@@ -1,6 +1,6 @@
 import { ApiErrorResponse, ApiSuccessResponse } from "@/api/api.types";
 import { noteApi } from "@/api/note";
-import { Wiki } from "@/types/wiki";
+import { Note } from "@/types/note";
 
 export async function GET(request: Request) {
   const noteList = await noteApi.getNoteList();
@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     return Response.json(errorResponse, { status: 400 });
   }
 
-  const successResponse: ApiSuccessResponse<Wiki[]> = {
+  const successResponse: ApiSuccessResponse<Note[]> = {
     status: 200,
     data: noteList
       .filter(({ path }) => path && path.toLowerCase().includes(q.toLowerCase()))

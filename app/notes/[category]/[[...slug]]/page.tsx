@@ -7,7 +7,7 @@ import { Text } from "@/components/Text";
 import { TocHeader } from "@/components/TocHeader";
 import { markdownExtRegex } from "@/utils/markdown";
 import { LinksToThisPage } from "./components/LinksToThisPage";
-import { WikiBreadcrumb } from "./components/WikiBreadcrumb";
+import { NoteBreadcrumb } from "./components/NoteBreadcrumb";
 
 export async function generateStaticParams({ params }: { params: { category: string } }) {
   const category = params.category;
@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: { category: string; slu
       </Box>
       <Flex gap={24} maxWidth="calc(870px + 260px + 24px)" marginX="auto" paddingTop="90px">
         <Box flexGrow={1} paddingX="24px">
-          <WikiBreadcrumb items={breadcrumbItems} />
+          <NoteBreadcrumb items={breadcrumbItems} />
           <Text as="h1" variant="heading30">
             {title}
           </Text>

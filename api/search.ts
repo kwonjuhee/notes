@@ -1,7 +1,7 @@
-import { Wiki } from "@/types/wiki";
+import { Note } from "@/types/note";
 import { ApiErrorResponse, ApiSuccessResponse } from "./api.types";
 
-export const searchWikisByTitle = async (q: string) => {
+export const searchNotesByTitle = async (q: string) => {
   const response = await fetch(`/api/search?q=${q}`);
 
   if (!response.ok) {
@@ -9,6 +9,6 @@ export const searchWikisByTitle = async (q: string) => {
     throw errorResponse;
   }
 
-  const successResponse: ApiSuccessResponse<Wiki[]> = await response.json();
+  const successResponse: ApiSuccessResponse<Note[]> = await response.json();
   return successResponse;
 };

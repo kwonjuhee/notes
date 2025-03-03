@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SideNavBar } from "./SideNavBar";
 
 const meta: Meta<typeof SideNavBar> = {
-  title: "wiki/SideNavBar",
+  title: "notes/SideNavBar",
   component: SideNavBar,
 };
 export default meta;

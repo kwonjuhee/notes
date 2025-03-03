@@ -9,19 +9,19 @@ import { Flex } from "@/components/Flex";
 import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
-import styles from "./WikiBreadcrumb.module.css";
+import styles from "./NoteBreadcrumb.module.css";
 
-export interface WikiBreadcrumbProps {
+export interface NoteBreadcrumbProps {
   items: BreadcrumbProps["items"];
 }
 
-export const WikiBreadcrumb = ({ items }: WikiBreadcrumbProps) => {
+export const NoteBreadcrumb = ({ items }: NoteBreadcrumbProps) => {
   const isMobile = !useMediaQuery(SIDEBAR_BREAKPOINT);
   const toggleMobileSidebar = useRootStore((state) => state.toggleMobileSidebar);
   const toggleSidebar = useRootStore((state) => state.toggleSidebar);
 
   return (
-    <Flex direction="row" align="center" gap={4} className={styles.WikiBreadcrumb}>
+    <Flex direction="row" align="center" gap={4} className={styles.NoteBreadcrumb}>
       <IconButton
         icon="SidebarSimple"
         variant="ghost"

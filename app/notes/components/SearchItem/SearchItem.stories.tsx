@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SearchItem } from "./SearchItem";
 
 const meta: Meta<typeof SearchItem> = {
-  title: "wiki/SearchItem",
+  title: "notes/SearchItem",
   component: SearchItem,
 };
 export default meta;

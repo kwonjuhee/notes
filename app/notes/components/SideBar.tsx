@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { searchWikisByTitle } from "@/api/search";
+import { searchNotesByTitle } from "@/api/search";
 import { Box } from "@/components/Box";
 import { IconButton } from "@/components/Button";
 import { Flex } from "@/components/Flex";
@@ -13,7 +13,7 @@ import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
 import { Category } from "@/types/category";
-import { Wiki } from "@/types/wiki";
+import { Note } from "@/types/note";
 import { CategorySelector } from "./CategorySelector";
 import { SearchInput } from "./SearchInput";
 import { SearchItem } from "./SearchItem";
@@ -28,14 +28,14 @@ export interface SideBarProps {
 
 export const SideBar = ({ navItems, categoryList }: SideBarProps) => {
   const [q, setQ] = useState("");
-  const [searchedWikis, setSearchedWikis] = useState<Wiki[]>([]);
+  const [searchedNotes, setSearchedNotes] = useState<Note[]>([]);
 
   useEffect(() => {
     if (!q) return;
 
     (async () => {
-      const { data: wikis } = await searchWikisByTitle(q);
-      setSearchedWikis(wikis);
+      const { data: notes } = await searchNotesByTitle(q);
+      setSearchedNotes(notes);
     })();
   }, [q]);
 
@@ -51,7 +51,7 @@ export const SideBar = ({ navItems, categoryList }: SideBarProps) => {
             <SideNavBar navItems={navItems} />
           ) : (
             <Flex direction="column" gap={4}>
-              {searchedWikis.map(({ path }) => {
+              {searchedNotes.map(({ path }) => {
                 const slug = path.split("/").at(-1) as string;
                 return (
                   <Link key={path} href={`/notes/${path}`} prefetch={false}>

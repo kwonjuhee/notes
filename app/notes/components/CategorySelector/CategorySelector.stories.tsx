@@ -3,7 +3,7 @@ import { Box } from "@/components/Box";
 import { CategorySelector } from "./CategorySelector";
 
 const meta: Meta<typeof CategorySelector> = {
-  title: "wiki/CategorySelector",
+  title: "notes/CategorySelector",
   component: CategorySelector,
   parameters: {
     nextjs: {

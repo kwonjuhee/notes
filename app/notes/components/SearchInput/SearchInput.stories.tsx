@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from "react";
 import { SearchInput } from "./SearchInput";
 
 const meta: Meta<typeof SearchInput> = {
-  title: "wiki/SearchInput",
+  title: "notes/SearchInput",
   component: SearchInput,
 };
 export default meta;
