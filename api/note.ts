@@ -1,23 +1,31 @@
 import { Category } from "@/types/category";
+import { Note } from "@/types/note";
 import { decodeBase64 } from "@/utils/endecoder";
 import { isMarkdownFile, isPrivatePath } from "@/utils/markdown";
 import { githubApi } from "./github";
-import { GetFileContentResponseData } from "./github.types";
+import { Blob, GetFileContentResponseData } from "./github.types";
 
-const getNoteList = async (prefix: string = "") => {
+const getNoteList = async (prefix = ""): Promise<Note[]> => {
   const { ref } = await githubApi.gitDatabase.getRef();
-  const { tree: gitTree } = await githubApi.gitDatabase.getGitTree(ref);
+  const { tree } = await githubApi.gitDatabase.getGitTree(ref);
 
-  const mdList = gitTree.filter(
-    (node) =>
-      node.type === "blob" &&
-      node.path &&
-      !isPrivatePath(node.path) &&
-      isMarkdownFile(node.path) &&
-      node.path.startsWith(prefix)
+  const blobs = tree.filter((node) => node.type === "blob") as Blob[];
+
+  const notes = blobs.map(transformBlobToNote);
+
+  const filteredNotes = notes.filter(
+    (note) => !isPrivatePath(note.path) && isMarkdownFile(note.path) && note.path.startsWith(prefix)
   );
 
-  return mdList;
+  return filteredNotes;
+};
+
+const transformBlobToNote = (blob: Blob): Note => {
+  const slugs = blob.path.split("/");
+  return {
+    path: blob.path,
+    name: slugs.at(-1) as string,
+  };
 };
 
 const getNoteByPath = async (path: string) => {

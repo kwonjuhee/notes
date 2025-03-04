@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
@@ -23,8 +24,8 @@ const noteListToNavItems = ({
 }) => {
   const tree: TreeNode = { id: "ROOT", path: "/", childNodes: [] };
 
-  noteList.forEach(({ path, type }) => {
-    if (path && type === "blob" && predicate(path)) {
+  noteList.forEach(({ path }) => {
+    if (predicate(path)) {
       const slugs = path.split("/");
 
       let subTree = tree.childNodes as TreeNode[];

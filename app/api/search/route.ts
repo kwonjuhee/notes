@@ -13,13 +13,11 @@ export async function GET(request: Request) {
     return Response.json(errorResponse, { status: 400 });
   }
 
+  const searchedNotes = noteList.filter(({ path }) => path.toLowerCase().includes(q.toLowerCase()));
+
   const successResponse: ApiSuccessResponse<Note[]> = {
     status: 200,
-    data: noteList
-      .filter(({ path }) => path && path.toLowerCase().includes(q.toLowerCase()))
-      .map(({ path }) => ({
-        path: path as string,
-      })),
+    data: searchedNotes,
   };
 
   return Response.json(successResponse);
