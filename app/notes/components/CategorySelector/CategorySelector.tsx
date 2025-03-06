@@ -54,7 +54,7 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
           borderRadius="medium"
           style={{ zIndex: "var(--dropdown)" }}
         >
-          {options.map(({ slug, label }) => (
+          {options.map(({ slug, label, isPrivate }) => (
             <Button
               key={slug}
               href={`/notes/${slug}`}
@@ -62,6 +62,7 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
               variant="ghost"
               color="gray"
             >
+              {isPrivate && <>🔒</>}
               <Text variant="caption14">{label}</Text>
             </Button>
           ))}
