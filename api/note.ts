@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Category } from "@/types/category";
 import { Note } from "@/types/note";
 import { decodeBase64 } from "@/utils/endecoder";
@@ -5,7 +6,7 @@ import { isMarkdownFile, isPrivatePath } from "@/utils/markdown";
 import { githubApi } from "./github";
 import { Blob, GetFileContentResponseData } from "./github.types";
 
-const getNoteList = async (prefix = ""): Promise<Note[]> => {
+const getNoteList = async (): Promise<Note[]> => {
   const { ref } = await githubApi.gitDatabase.getRef();
   const { tree } = await githubApi.gitDatabase.getGitTree(ref);
 
@@ -14,7 +15,7 @@ const getNoteList = async (prefix = ""): Promise<Note[]> => {
   const notes = blobs.map(transformBlobToNote);
 
   const filteredNotes = notes.filter(
-    (note) => !isPrivatePath(note.path) && isMarkdownFile(note.path) && note.path.startsWith(prefix)
+    (note) => !isPrivatePath(note.path) && isMarkdownFile(note.path)
   );
 
   return filteredNotes;
@@ -26,6 +27,21 @@ const transformBlobToNote = (blob: Blob): Note => {
     path: blob.path,
     name: slugs.at(-1) as string,
   };
+};
+
+const getNotesByCategory = async (categorySlug: string) => {
+  const [notes, categoryList] = await Promise.all([getNoteList(), getCategoryList()]);
+  const category = categoryList.find(({ slug }) => slug === categorySlug);
+  if (!category) {
+    return notFound();
+  }
+
+  if (category?.isPrivate) {
+    // @TODO check authentication
+    return [];
+  }
+
+  return notes.filter((note) => note.path.startsWith(categorySlug));
 };
 
 const getNoteByPath = async (path: string) => {
@@ -55,6 +71,7 @@ export const getCategoryList = async (): Promise<Category[]> => {
 
 export const noteApi = {
   getNoteList,
+  getNotesByCategory,
   getNoteByPath,
   getCategoryList,
 };

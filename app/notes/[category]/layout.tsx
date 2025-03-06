@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
@@ -19,7 +18,7 @@ const noteListToNavItems = ({
   noteList,
   predicate = () => true,
 }: {
-  noteList: Awaited<ReturnType<typeof noteApi.getNoteList>>;
+  noteList: Awaited<ReturnType<typeof noteApi.getNotesByCategory>>;
   predicate?: (path: string) => boolean;
 }) => {
   const tree: TreeNode = { id: "ROOT", path: "/", childNodes: [] };
@@ -57,11 +56,17 @@ export default async function Layout({
   params: { category: string };
   children: React.ReactNode;
 }) {
-  const category = params.category;
-  const noteList = await noteApi.getNoteList(`${category}`);
-  const navItems = noteListToNavItems({ noteList });
-
+  const categorySlug = params.category;
   const categoryList = await noteApi.getCategoryList();
+  const category = categoryList.find(({ slug }) => slug === categorySlug);
+
+  // @TODO check authentication
+  if (category?.isPrivate) {
+    return <>private</>;
+  }
+
+  const noteList = await noteApi.getNotesByCategory(categorySlug);
+  const navItems = noteListToNavItems({ noteList });
 
   return (
     <Flex width="100%">
