@@ -29,12 +29,15 @@
   --fg-neutral-bold: var(--gray-900);
   --fg-neutral-muted: var(--gray-600);
   --fg-neutral-subtle: var(--gray-500);
+  --fg-neutral-subtlest: var(--gray-400);
 
   --fg-gray: var(--gray-500);
   --fg-gray-contrast: var(--gray-700);
 
   --fg-brand: var(--brand-600);
   --fg-brand-contrast: var(--brand-700);
+
+  --fg-error: red;
 
   /* border */
   --border: var(--gray-200);
@@ -48,6 +51,8 @@
   --border-brand-hovered: var(--brand-300);
   --border-brand-focused: var(--brand-300);
   --border-brand-bold: var(--brand-300);
+
+  --border-error: red;
 
   /* state */
   --bg-selected: var(--brand-100);
@@ -95,12 +100,15 @@
     --fg-neutral-bold: var(--gray-50);
     --fg-neutral-muted: var(--gray-300);
     --fg-neutral-subtle: var(--gray-400);
+    --fg-neutral-subtlest: var(--gray-500);
 
     --fg-gray: var(--gray-400);
     --fg-gray-contrast: var(--gray-200);
 
     --fg-brand: var(--brand-500);
     --fg-brand-contrast: var(--brand-200);
+
+    --fg-error: red;
 
     /* border */
     --border: var(--gray-800);
@@ -114,6 +122,8 @@
     --border-brand-hovered: var(--brand-800);
     --border-brand-focused: var(--brand-800);
     --border-brand-bold: var(--brand-800);
+
+    --border-error: red;
 
     /* state */
     --bg-selected: var(--brand-900);
