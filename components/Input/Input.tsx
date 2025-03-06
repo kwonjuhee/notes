@@ -3,8 +3,8 @@ import { forwardRef } from "react";
 import styles from "./Input.module.css";
 
 export interface InputProps extends React.ComponentPropsWithRef<"input"> {
-  leftContent: React.ReactNode;
-  rightContent: React.ReactNode;
+  leftContent?: React.ReactNode;
+  rightContent?: React.ReactNode;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
