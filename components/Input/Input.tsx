@@ -5,12 +5,13 @@ import styles from "./Input.module.css";
 export interface InputProps extends React.ComponentPropsWithRef<"input"> {
   leftContent?: React.ReactNode;
   rightContent?: React.ReactNode;
+  hasError?: boolean;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ leftContent, rightContent, className, ...props }, ref) => {
+  ({ leftContent, rightContent, hasError, className, ...props }, ref) => {
     return (
-      <div className={clsx(styles.Input, className)}>
+      <div className={clsx(styles.Input, hasError && styles.error, className)}>
         {leftContent}
         <input ref={ref} className={styles.input} {...props} />
         {rightContent}

@@ -31,3 +31,9 @@ export const Disabled: StoryObj<typeof Input> = {
     disabled: true,
   },
 };
+
+export const Error: StoryObj<typeof Input> = {
+  args: {
+    hasError: true,
+  },
+};
