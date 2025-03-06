@@ -1,9 +1,12 @@
 import clsx from "clsx";
 import { useParams } from "next/navigation";
+import { overlay } from "overlay-kit";
 import { useCallback, useRef, useState } from "react";
 import { CaretUpDown } from "@/assets/icon";
 import { Button } from "@/components/Button";
 import { Flex } from "@/components/Flex";
+import { LoginForm } from "@/components/LoginForm";
+import { Modal } from "@/components/Modal";
 import { Text } from "@/components/Text";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { Category } from "@/types/category";
@@ -31,6 +34,20 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
       }
     }, [isOpenDropdown])
   );
+
+  const handleClickPrivateCategory = (e: React.MouseEvent) => {
+    // @TODO check authentication
+    const authenticated = false;
+
+    if (!authenticated) {
+      e.preventDefault();
+      overlay.open(({ isOpen, close }) => (
+        <Modal isOpen={isOpen} onClose={close}>
+          <LoginForm />
+        </Modal>
+      ));
+    }
+  };
 
   return (
     <div className={styles.CategorySelector}>
@@ -61,6 +78,7 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
               className={clsx(styles.option, slug === selectedCategory && styles.selected)}
               variant="ghost"
               color="gray"
+              onClick={isPrivate ? handleClickPrivateCategory : () => {}}
             >
               {isPrivate && <>🔒</>}
               <Text variant="caption14">{label}</Text>

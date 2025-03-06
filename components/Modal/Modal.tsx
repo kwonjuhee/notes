@@ -4,15 +4,15 @@ import { Flex } from "../Flex";
 import styles from "./Modal.module.css";
 
 export interface ModalProps {
-  open: boolean;
+  isOpen: boolean;
   onClose: () => void;
 }
 
-export const Modal = ({ open, onClose, children }: React.PropsWithChildren<ModalProps>) => {
+export const Modal = ({ isOpen, onClose, children }: React.PropsWithChildren<ModalProps>) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
-    open && (
+    isOpen && (
       <>
         <div className={styles.backdrop} onClick={onClose} />
         <div ref={ref} className={styles.modal} role="dialog">

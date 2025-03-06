@@ -16,7 +16,7 @@ export const Primary: StoryObj<typeof Modal> = {
 
     return (
       <>
-        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <Flex align="center" justify="center" width="500px" height="300px">
             Modal Contents
           </Flex>
