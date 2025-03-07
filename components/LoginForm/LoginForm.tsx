@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import { login } from "@/actions/auth";
 import { Box } from "../Box";
 import { Button } from "../Button";
 import { Flex } from "../Flex";
@@ -6,13 +9,28 @@ import { Input } from "../Input";
 import { Text } from "../Text";
 import styles from "./LoginForm.module.css";
 
-export interface LoginFormProps {}
+export interface LoginFormProps {
+  onLoginSuccess?: () => void;
+}
 
-export const LoginForm = () => {
+export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const login = () => {
-    // @TODO
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (errorMessage) {
+      setErrorMessage("");
+    }
+    setPassword(e.target.value);
+  };
+
+  const handleLogin = async () => {
+    try {
+      await login(password);
+      onLoginSuccess?.();
+    } catch (error) {
+      setErrorMessage((error as Error).message);
+    }
   };
 
   return (
@@ -26,14 +44,18 @@ export const LoginForm = () => {
         placeholder="암호를 입력해주세요"
         type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        hasError={Boolean(errorMessage)}
+        onChange={handleChangePassword}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            login();
+            handleLogin();
           }
         }}
       />
-      <Button fullWidth disabled={password.length === 0} onClick={login}>
+      <Text className={styles.message} variant="caption12">
+        &nbsp;{errorMessage}
+      </Text>
+      <Button fullWidth disabled={password.length === 0} onClick={handleLogin}>
         잠금 해제
       </Button>
     </Box>

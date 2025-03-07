@@ -1,4 +1,4 @@
-type EnvVarKey = "GITHUB_AUTH" | "GITHUB_OWNER" | "GITHUB_REPO";
+type EnvVarKey = "GITHUB_AUTH" | "GITHUB_OWNER" | "GITHUB_REPO" | "MY_PASSWORD" | "JWT_SECRET_KEY";
 
 export const getEnvVar = (key: EnvVarKey) => {
   const value = process.env[key];

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { overlay } from "overlay-kit";
 import { useCallback, useRef, useState } from "react";
 import { CaretUpDown } from "@/assets/icon";
@@ -21,6 +21,7 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
   const selectedCategory = params.category;
   const [isOpenDropdown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const toggleDropdown = () => {
     setIsOpenDropdown((prev) => !prev);
@@ -35,17 +36,20 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
     }, [isOpenDropdown])
   );
 
-  const handleClickPrivateCategory = (e: React.MouseEvent) => {
+  const handleClickPrivateCategory = async (categoryPath: string) => {
     // @TODO check authentication
     const authenticated = false;
 
     if (!authenticated) {
-      e.preventDefault();
-      overlay.open(({ isOpen, close }) => (
-        <Modal isOpen={isOpen} onClose={close}>
-          <LoginForm />
+      const loginSuccess = await overlay.openAsync(({ isOpen, close }) => (
+        <Modal isOpen={isOpen} onClose={() => close(false)}>
+          <LoginForm onLoginSuccess={() => close(true)} />
         </Modal>
       ));
+
+      if (loginSuccess) {
+        router.push(categoryPath);
+      }
     }
   };
 
@@ -74,11 +78,10 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
           {options.map(({ slug, label, isPrivate }) => (
             <Button
               key={slug}
-              href={`/notes/${slug}`}
               className={clsx(styles.option, slug === selectedCategory && styles.selected)}
               variant="ghost"
               color="gray"
-              onClick={isPrivate ? handleClickPrivateCategory : () => {}}
+              onClick={isPrivate ? () => handleClickPrivateCategory(`/notes/${slug}`) : () => {}}
             >
               {isPrivate && <>🔒</>}
               <Text variant="caption14">{label}</Text>

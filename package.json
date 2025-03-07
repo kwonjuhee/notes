@@ -22,6 +22,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "jose": "^6.0.8",
     "next": "14.2.23",
     "next-mdx-remote": "^5.0.0",
     "octokit": "^4.1.0",
