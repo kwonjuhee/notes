@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { cache } from "react";
 import { checkAuthentication } from "@/lib/auth";
 import { Category } from "@/types/category";
@@ -45,11 +44,7 @@ const transformBlobToNote = (blob: Blob): Note => {
 };
 
 const getNotesByCategory = async (categorySlug: string) => {
-  const [notes, categoryList] = await Promise.all([getNoteList(), getCategoryList()]);
-  const category = categoryList.find(({ slug }) => slug === categorySlug);
-  if (!category) {
-    return notFound();
-  }
+  const notes = await getNoteList();
 
   return notes.filter((note) => note.path.startsWith(categorySlug));
 };

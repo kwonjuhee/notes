@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
@@ -62,8 +63,12 @@ export default async function Layout({
   const categoryList = await noteApi.getCategoryList();
   const category = categoryList.find(({ slug }) => slug === categorySlug);
 
+  if (!category) {
+    notFound();
+  }
+
   const { isLoggedIn } = await checkAuthentication();
-  if (category?.isPrivate && !isLoggedIn) {
+  if (category.isPrivate && !isLoggedIn) {
     return (
       <Flex width="100%">
         <SideBar navItems={[]} categoryList={categoryList} />
