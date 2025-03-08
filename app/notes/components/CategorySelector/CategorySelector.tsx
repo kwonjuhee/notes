@@ -81,6 +81,7 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
               className={clsx(styles.option, slug === selectedCategory && styles.selected)}
               variant="ghost"
               color="gray"
+              href={isPrivate ? undefined : `/notes/${slug}`}
               onClick={isPrivate ? () => handleClickPrivateCategory(`/notes/${slug}`) : () => {}}
             >
               {isPrivate && <>🔒</>}
