@@ -9,6 +9,7 @@ import { LoginForm } from "@/components/LoginForm";
 import { Modal } from "@/components/Modal";
 import { Text } from "@/components/Text";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { checkAuthentication } from "@/lib/auth";
 import { Category } from "@/types/category";
 import styles from "./CategorySelector.module.css";
 
@@ -37,19 +38,21 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
   );
 
   const handleClickPrivateCategory = async (categoryPath: string) => {
-    // @TODO check authentication
-    const authenticated = false;
+    const { isLoggedIn } = await checkAuthentication();
 
-    if (!authenticated) {
-      const loginSuccess = await overlay.openAsync(({ isOpen, close }) => (
-        <Modal isOpen={isOpen} onClose={() => close(false)}>
-          <LoginForm onLoginSuccess={() => close(true)} />
-        </Modal>
-      ));
+    if (isLoggedIn) {
+      router.push(categoryPath);
+      return;
+    }
 
-      if (loginSuccess) {
-        router.push(categoryPath);
-      }
+    const loginSuccess = await overlay.openAsync(({ isOpen, close }) => (
+      <Modal isOpen={isOpen} onClose={() => close(false)}>
+        <LoginForm onLoginSuccess={() => close(true)} />
+      </Modal>
+    ));
+
+    if (loginSuccess) {
+      router.push(categoryPath);
     }
   };
 

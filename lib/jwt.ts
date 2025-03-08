@@ -1,6 +1,7 @@
 import "server-only";
-import { jwtVerify, SignJWT } from "jose";
+import { errors, jwtVerify, SignJWT } from "jose";
 import { cookies } from "next/headers";
+import { cache } from "react";
 import { getEnvVar } from "@/utils/env";
 
 const secretKey = getEnvVar("JWT_SECRET_KEY");
@@ -52,3 +53,20 @@ export const createAccessToken = async () => {
 
   return accessToken;
 };
+
+export const verifyAccessToken = cache(async () => {
+  const accessToken = getAccessToken();
+
+  if (!accessToken) {
+    throw new Error("Unauthorized");
+  }
+
+  try {
+    return await decrypt(accessToken);
+  } catch (e) {
+    if (e instanceof errors.JOSEError) {
+      console.error(e);
+      throw e;
+    }
+  }
+});

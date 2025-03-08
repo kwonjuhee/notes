@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { login } from "@/actions/auth";
 import { Box } from "../Box";
@@ -11,11 +12,13 @@ import styles from "./LoginForm.module.css";
 
 export interface LoginFormProps {
   onLoginSuccess?: () => void;
+  refreshOnLoginSuccess?: boolean;
 }
 
-export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
+export const LoginForm = ({ onLoginSuccess, refreshOnLoginSuccess = false }: LoginFormProps) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
 
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (errorMessage) {
@@ -28,6 +31,10 @@ export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
     try {
       await login(password);
       onLoginSuccess?.();
+
+      if (refreshOnLoginSuccess) {
+        router.refresh();
+      }
     } catch (error) {
       setErrorMessage((error as Error).message);
     }

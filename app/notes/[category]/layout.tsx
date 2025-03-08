@@ -1,6 +1,8 @@
 import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
+import { LoginForm } from "@/components/LoginForm";
+import { checkAuthentication } from "@/lib/auth";
 import { SideBar } from "../components/SideBar";
 import { TreeNode } from "../components/SideNavBar";
 
@@ -60,9 +62,16 @@ export default async function Layout({
   const categoryList = await noteApi.getCategoryList();
   const category = categoryList.find(({ slug }) => slug === categorySlug);
 
-  // @TODO check authentication
-  if (category?.isPrivate) {
-    return <>private</>;
+  const { isLoggedIn } = await checkAuthentication();
+  if (category?.isPrivate && !isLoggedIn) {
+    return (
+      <Flex width="100%">
+        <SideBar navItems={[]} categoryList={categoryList} />
+        <Box flexGrow={1} minWidth="0" marginTop="150px">
+          <LoginForm refreshOnLoginSuccess />
+        </Box>
+      </Flex>
+    );
   }
 
   const noteList = await noteApi.getNotesByCategory(categorySlug);
