@@ -13,3 +13,7 @@ export const isResponsiveObject = <T>(
 };
 
 export type CustomProperty = `--${string}`;
+
+export type ResponsiveProps<T extends object> = {
+  [K in Breakpoint]?: Omit<T, Breakpoint>;
+};
