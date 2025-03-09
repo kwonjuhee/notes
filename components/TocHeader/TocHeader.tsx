@@ -14,24 +14,22 @@ export const TocHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Collapsible.Root
-      className={styles.TocHeader}
-      open={isOpen}
-      onOpenChange={() => setIsOpen((prev) => !prev)}
-    >
-      <Collapsible.Trigger className={styles.trigger}>
-        <List className={styles.listIcon} width={20} height={20} />
-        <Text variant="caption14">On this page</Text>
-        <CaretRight width={13} height={13} />
-        <Text variant="caption14" truncate>
-          {currentItem?.text}
-        </Text>
-      </Collapsible.Trigger>
-      <Collapsible.Content className={styles.content}>
-        <Box maxHeight="300px" padding="16px" overflowY="auto">
-          <TableOfContents />
-        </Box>
-      </Collapsible.Content>
-    </Collapsible.Root>
+    <Box className={styles.TocHeader} display={{ base: "block", lg: "none" }}>
+      <Collapsible.Root open={isOpen} onOpenChange={() => setIsOpen((prev) => !prev)}>
+        <Collapsible.Trigger className={styles.trigger}>
+          <List className={styles.listIcon} width={20} height={20} />
+          <Text variant="caption14">On this page</Text>
+          <CaretRight width={13} height={13} />
+          <Text variant="caption14" truncate>
+            {currentItem?.text}
+          </Text>
+        </Collapsible.Trigger>
+        <Collapsible.Content className={styles.content}>
+          <Box maxHeight="300px" padding="16px" overflowY="auto">
+            <TableOfContents />
+          </Box>
+        </Collapsible.Content>
+      </Collapsible.Root>
+    </Box>
   );
 };

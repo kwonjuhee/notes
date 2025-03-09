@@ -32,9 +32,7 @@ export default async function Page({ params }: { params: { category: string; slu
 
   return (
     <>
-      <Box display={{ base: "block", lg: "none" }}>
-        <TocHeader />
-      </Box>
+      <TocHeader />
       <Flex gap={24} maxWidth="calc(870px + 260px + 24px)" marginX="auto" paddingTop="90px">
         <Box flexGrow={1} paddingX="24px">
           <Breadcrumb items={breadcrumbItems} />
