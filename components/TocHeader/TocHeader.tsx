@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { CaretRight, List } from "@/assets/icon";
+import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
 import { Box } from "../Box";
 import { Collapsible } from "../Collapsible";
 import { TableOfContents } from "../TableOfContents";
@@ -14,7 +15,11 @@ export const TocHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Box className={styles.TocHeader} display={{ base: "block", lg: "none" }}>
+    <Box
+      className={styles.TocHeader}
+      display={{ base: "block", lg: "none" }}
+      top={{ base: "var(--header-height)", [SIDEBAR_BREAKPOINT]: "0" }}
+    >
       <Collapsible.Root open={isOpen} onOpenChange={() => setIsOpen((prev) => !prev)}>
         <Collapsible.Trigger className={styles.trigger}>
           <List className={styles.listIcon} width={20} height={20} />

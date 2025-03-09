@@ -10,7 +10,6 @@ import { ScrollArea } from "@/components/ScrollArea";
 import { Text } from "@/components/Text";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { useRootStore } from "@/store/useRootStore";
 import { Category } from "@/types/category";
 import { Note } from "@/types/note";
@@ -28,120 +27,54 @@ export interface SideBarProps {
 }
 
 export const SideBar = ({ navItems, categoryList }: SideBarProps) => {
-  const [q, setQ] = useState("");
-  const [searchedNotes, setSearchedNotes] = useState<Note[]>([]);
-
-  useEffect(() => {
-    if (!q) return;
-
-    (async () => {
-      const { data: notes } = await searchNotesByTitle(q);
-      setSearchedNotes(notes);
-    })();
-  }, [q]);
+  const isSidebarOpen = useRootStore((state) => state.isSidebarOpen);
+  const isMobileSidebarOpen = useRootStore((state) => state.isMobileSidebarOpen);
 
   return (
     <>
-      <SidebarContainer>
-        <Flex direction="column" align="stretch" height="100%">
-          <SidebarHeader />
-          <Box paddingTop="32px" paddingX="12px">
-            <SearchInput
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              onClear={() => setQ("")}
-            />
+      <Box flexShrink={0} display={{ base: "none", [SIDEBAR_BREAKPOINT]: "block" }}>
+        {isSidebarOpen && (
+          <Box
+            position="sticky"
+            top="0"
+            width="280px"
+            height="100dvh"
+            backgroundColor="surface"
+            borderRightWidth="1px"
+            borderColor="gray"
+          >
+            <Flex direction="column" align="stretch" height="100%">
+              <SidebarHeader />
+              <SidebarContent navItems={navItems} />
+              <SidebarFooter categoryList={categoryList} />
+            </Flex>
           </Box>
-          <ScrollArea className={styles.scrollarea}>
-            {!q ? (
-              <SideNavBar navItems={navItems} />
-            ) : (
-              <Flex direction="column" gap={4}>
-                {searchedNotes.map(({ path }) => {
-                  const slug = path.split("/").at(-1) as string;
-                  return (
-                    <Link key={path} href={`/notes/${path}`} prefetch={false}>
-                      <SearchItem title={slug} category={path} highlightKeyword={q} />
-                    </Link>
-                  );
-                })}
-              </Flex>
-            )}
-          </ScrollArea>
-          <SidebarFooter categoryList={categoryList} />
-        </Flex>
-      </SidebarContainer>
-      <SidebarHandle />
+        )}
+        <SidebarHandle />
+      </Box>
+      {isMobileSidebarOpen && (
+        <Box
+          display={{ base: "block", [SIDEBAR_BREAKPOINT]: "none" }}
+          position="fixed"
+          top="var(--header-height)"
+          left="0"
+          width="100%"
+          height="calc(100dvh - var(--header-height))"
+          backgroundColor="surface"
+          style={{ zIndex: "var(--fixed)" }}
+        >
+          <Flex direction="column" align="stretch" height="100%">
+            <SidebarContent navItems={navItems} />
+            <SidebarFooter categoryList={categoryList} />
+          </Flex>
+        </Box>
+      )}
     </>
   );
 };
 
-const SidebarContainer = ({ children }: React.PropsWithChildren) => {
-  const isMobile = !useMediaQuery(SIDEBAR_BREAKPOINT);
-  const isMobileSidebarOpen = useRootStore((state) => state.isMobileSidebarOpen);
-  const isSidebarOpen = useRootStore((state) => state.isSidebarOpen);
-
-  if (isMobile) {
-    return (
-      isMobileSidebarOpen && (
-        <Box
-          display={{ base: "block", [SIDEBAR_BREAKPOINT]: "none" }}
-          position="fixed"
-          top="0px"
-          left="0px"
-          width="100%"
-          height="100dvh"
-          backgroundColor="surface"
-          style={{ zIndex: "var(--fixed)" }}
-        >
-          {children}
-        </Box>
-      )
-    );
-  }
-
-  return (
-    isSidebarOpen && (
-      <Box
-        flexShrink={0}
-        display={{ base: "none", [SIDEBAR_BREAKPOINT]: "block" }}
-        position="sticky"
-        top="0"
-        width="280px"
-        height="100dvh"
-        backgroundColor="surface"
-        borderRightWidth="1px"
-        borderColor="gray"
-      >
-        {children}
-      </Box>
-    )
-  );
-};
-
 const SidebarHeader = () => {
-  const isMobile = !useMediaQuery(SIDEBAR_BREAKPOINT);
-  const closeMobileSidebar = useRootStore((state) => state.closeMobileSidebar);
   const closeSidebar = useRootStore((state) => state.closeSidebar);
-
-  if (isMobile) {
-    return (
-      <>
-        <Flex align="center" justify="end">
-          <IconButton
-            icon="X"
-            variant="ghost"
-            color="gray"
-            size="medium"
-            onClick={closeMobileSidebar}
-          />
-        </Flex>
-        <Flex align="center" justify="center">
-          <Text variant="heading24">🐭 notes</Text>
-        </Flex>
-      </>
-    );
-  }
 
   return (
     <Flex
@@ -169,5 +102,43 @@ const SidebarFooter = ({ categoryList }: { categoryList: Category[] }) => {
       {categoryList.length > 0 && <CategorySelector options={categoryList} />}
       <ThemeToggle size="medium" />
     </Flex>
+  );
+};
+
+const SidebarContent = ({ navItems }: Pick<SideBarProps, "navItems">) => {
+  const [q, setQ] = useState("");
+  const [searchedNotes, setSearchedNotes] = useState<Note[]>([]);
+
+  useEffect(() => {
+    if (!q) return;
+
+    (async () => {
+      const { data: notes } = await searchNotesByTitle(q);
+      setSearchedNotes(notes);
+    })();
+  }, [q]);
+
+  return (
+    <>
+      <Box paddingTop="32px" paddingX="12px">
+        <SearchInput value={q} onChange={(e) => setQ(e.target.value)} onClear={() => setQ("")} />
+      </Box>
+      <ScrollArea className={styles.scrollarea}>
+        {!q ? (
+          <SideNavBar navItems={navItems} />
+        ) : (
+          <Flex direction="column" gap={4}>
+            {searchedNotes.map(({ path }) => {
+              const slug = path.split("/").at(-1) as string;
+              return (
+                <Link key={path} href={`/notes/${path}`} prefetch={false}>
+                  <SearchItem title={slug} category={path} highlightKeyword={q} />
+                </Link>
+              );
+            })}
+          </Flex>
+        )}
+      </ScrollArea>
+    </>
   );
 };

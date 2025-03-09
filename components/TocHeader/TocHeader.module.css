@@ -1,6 +1,5 @@
 .TocHeader {
   position: sticky;
-  top: 0;
   width: 100%;
   height: var(--tocheader-height);
   color: var(--fg-neutral-subtle);

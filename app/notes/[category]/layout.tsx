@@ -4,6 +4,7 @@ import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
 import { LoginForm } from "@/components/LoginForm";
 import { checkAuthentication } from "@/lib/auth";
+import { MobileHeader } from "../components/MobileHeader";
 import { SideBar } from "../components/SideBar";
 import { TreeNode } from "../components/SideNavBar";
 
@@ -86,6 +87,7 @@ export default async function Layout({
     <Flex width="100%">
       <SideBar navItems={navItems} categoryList={categoryList} />
       <Box flexGrow={1} minWidth="0">
+        <MobileHeader />
         {children}
       </Box>
     </Flex>
