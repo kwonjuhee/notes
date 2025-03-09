@@ -18,6 +18,7 @@ import { CategorySelector } from "./CategorySelector";
 import { SearchInput } from "./SearchInput";
 import { SearchItem } from "./SearchItem";
 import styles from "./SideBar.module.css";
+import { SidebarHandle } from "./SidebarHandle";
 import { SideNavBar } from "./SideNavBar";
 import { SideNavBarProps } from "./SideNavBar/SideNavBar";
 
@@ -40,31 +41,38 @@ export const SideBar = ({ navItems, categoryList }: SideBarProps) => {
   }, [q]);
 
   return (
-    <SidebarContainer>
-      <Flex direction="column" align="stretch" height="100%">
-        <SidebarHeader />
-        <Box paddingTop="32px" paddingX="12px">
-          <SearchInput value={q} onChange={(e) => setQ(e.target.value)} onClear={() => setQ("")} />
-        </Box>
-        <ScrollArea className={styles.scrollarea}>
-          {!q ? (
-            <SideNavBar navItems={navItems} />
-          ) : (
-            <Flex direction="column" gap={4}>
-              {searchedNotes.map(({ path }) => {
-                const slug = path.split("/").at(-1) as string;
-                return (
-                  <Link key={path} href={`/notes/${path}`} prefetch={false}>
-                    <SearchItem title={slug} category={path} highlightKeyword={q} />
-                  </Link>
-                );
-              })}
-            </Flex>
-          )}
-        </ScrollArea>
-        <SidebarFooter categoryList={categoryList} />
-      </Flex>
-    </SidebarContainer>
+    <>
+      <SidebarContainer>
+        <Flex direction="column" align="stretch" height="100%">
+          <SidebarHeader />
+          <Box paddingTop="32px" paddingX="12px">
+            <SearchInput
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              onClear={() => setQ("")}
+            />
+          </Box>
+          <ScrollArea className={styles.scrollarea}>
+            {!q ? (
+              <SideNavBar navItems={navItems} />
+            ) : (
+              <Flex direction="column" gap={4}>
+                {searchedNotes.map(({ path }) => {
+                  const slug = path.split("/").at(-1) as string;
+                  return (
+                    <Link key={path} href={`/notes/${path}`} prefetch={false}>
+                      <SearchItem title={slug} category={path} highlightKeyword={q} />
+                    </Link>
+                  );
+                })}
+              </Flex>
+            )}
+          </ScrollArea>
+          <SidebarFooter categoryList={categoryList} />
+        </Flex>
+      </SidebarContainer>
+      <SidebarHandle />
+    </>
   );
 };
 
@@ -114,6 +122,7 @@ const SidebarContainer = ({ children }: React.PropsWithChildren) => {
 const SidebarHeader = () => {
   const isMobile = !useMediaQuery(SIDEBAR_BREAKPOINT);
   const closeMobileSidebar = useRootStore((state) => state.closeMobileSidebar);
+  const closeSidebar = useRootStore((state) => state.closeSidebar);
 
   if (isMobile) {
     return (
@@ -135,8 +144,21 @@ const SidebarHeader = () => {
   }
 
   return (
-    <Flex align="center" justify="center" paddingTop="40px">
-      <Text variant="heading24">🐭 notes</Text>
+    <Flex
+      align="center"
+      justify="space-between"
+      paddingLeft="24px"
+      paddingRight="12px"
+      paddingY="16px"
+    >
+      <Text variant="heading20">🐭 notes</Text>
+      <IconButton
+        icon="CaretLeft"
+        variant="ghost"
+        color="gray"
+        style={{ color: "var(--fg-neutral-subtlest)" }}
+        onClick={closeSidebar}
+      />
     </Flex>
   );
 };

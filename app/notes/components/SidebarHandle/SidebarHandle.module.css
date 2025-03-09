@@ -1,0 +1,10 @@
+.handle {
+  position: fixed;
+  left: 0;
+  top: calc(var(--tocheader-height) + 16px);
+
+  & > button {
+    color: var(--fg-neutral-subtlest);
+    border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+  }
+}

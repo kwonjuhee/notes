@@ -1,4 +1,5 @@
 import CaretDown from "./CaretDown.svg";
+import CaretLeft from "./CaretLeft.svg";
 import CaretRight from "./CaretRight.svg";
 import CaretUpDown from "./CaretUpDown.svg";
 import Graph from "./Graph.svg";
@@ -11,6 +12,7 @@ import X from "./X.svg";
 
 export {
   CaretDown,
+  CaretLeft,
   CaretRight,
   CaretUpDown,
   Graph,

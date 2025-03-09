@@ -63,6 +63,7 @@
 
 :root {
   --header-height: 50px;
+  --tocheader-height: 36px;
 }
 
 *,
