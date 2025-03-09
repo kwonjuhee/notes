@@ -111,7 +111,7 @@
     --sm-border-bottom-width: var(--border-bottom-width);
     --sm-border-left-width: var(--border-left-width);
     --sm-border-color: var(--border-color);
-    --sm-border-radius: var(--border-color);
+    --sm-border-radius: var(--border-radius);
     --sm-display: var(--display);
 
     margin: var(--sm-margin-top) var(--sm-margin-right) var(--sm-margin-bottom)
@@ -186,7 +186,7 @@
     --md-border-bottom-width: var(--sm-border-bottom-width);
     --md-border-left-width: var(--sm-border-left-width);
     --md-border-color: var(--sm-border-color);
-    --md-border-radius: var(--sm-border-color);
+    --md-border-radius: var(--sm-border-radius);
     --md-display: var(--sm-display);
 
     margin: var(--md-margin-top) var(--md-margin-right) var(--md-margin-bottom)
@@ -261,7 +261,7 @@
     --lg-border-bottom-width: var(--md-border-bottom-width);
     --lg-border-left-width: var(--md-border-left-width);
     --lg-border-color: var(--md-border-color);
-    --lg-border-radius: var(--md-border-color);
+    --lg-border-radius: var(--md-border-radius);
     --lg-display: var(--md-display);
 
     margin: var(--lg-margin-top) var(--lg-margin-right) var(--lg-margin-bottom)
