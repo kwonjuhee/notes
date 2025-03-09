@@ -32,43 +32,40 @@ export const SideBar = ({ navItems, categoryList }: SideBarProps) => {
 
   return (
     <>
-      <Box flexShrink={0} display={{ base: "none", [SIDEBAR_BREAKPOINT]: "block" }}>
-        {isSidebarOpen && (
-          <Box
-            position="sticky"
-            top="0"
-            width="280px"
-            height="100dvh"
-            backgroundColor="surface"
-            borderRightWidth="1px"
-            borderColor="gray"
-          >
-            <Flex direction="column" align="stretch" height="100%">
-              <SidebarHeader />
-              <SidebarContent navItems={navItems} />
-              <SidebarFooter categoryList={categoryList} />
-            </Flex>
-          </Box>
-        )}
+      <Box
+        flexShrink={0}
+        base={{
+          display: isMobileSidebarOpen ? "block" : "none",
+          position: "fixed",
+          top: "var(--header-height)",
+          left: "0",
+          width: "100%",
+          height: "calc(100dvh - var(--header-height))",
+          backgroundColor: "surface",
+        }}
+        {...{
+          [SIDEBAR_BREAKPOINT]: {
+            display: isSidebarOpen ? "block" : "none",
+            position: "sticky",
+            top: "0",
+            width: "280px",
+            height: "100dvh",
+            backgroundColor: "surface",
+            borderRightWidth: "1px",
+            borderColor: "gray",
+          },
+        }}
+        style={{ zIndex: "var(--fixed)" }}
+      >
+        <Flex direction="column" align="stretch" height="100%">
+          <SidebarHeader />
+          <SidebarContent navItems={navItems} />
+          <SidebarFooter categoryList={categoryList} />
+        </Flex>
+      </Box>
+      <Box display={{ base: "none", [SIDEBAR_BREAKPOINT]: "block" }}>
         <SidebarHandle />
       </Box>
-      {isMobileSidebarOpen && (
-        <Box
-          display={{ base: "block", [SIDEBAR_BREAKPOINT]: "none" }}
-          position="fixed"
-          top="var(--header-height)"
-          left="0"
-          width="100%"
-          height="calc(100dvh - var(--header-height))"
-          backgroundColor="surface"
-          style={{ zIndex: "var(--fixed)" }}
-        >
-          <Flex direction="column" align="stretch" height="100%">
-            <SidebarContent navItems={navItems} />
-            <SidebarFooter categoryList={categoryList} />
-          </Flex>
-        </Box>
-      )}
     </>
   );
 };
@@ -78,6 +75,7 @@ const SidebarHeader = () => {
 
   return (
     <Flex
+      display={{ base: "none", [SIDEBAR_BREAKPOINT]: "flex" }}
       align="center"
       justify="space-between"
       paddingLeft="24px"
