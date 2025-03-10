@@ -1,14 +1,13 @@
 import clsx from "clsx";
 import { useParams, useRouter } from "next/navigation";
 import { overlay } from "overlay-kit";
-import { useCallback, useRef, useState } from "react";
 import { CaretUpDown } from "@/assets/icon";
 import { Button } from "@/components/Button";
+import { Dropdown } from "@/components/Dropdown/Dropdown";
 import { Flex } from "@/components/Flex";
 import { LoginForm } from "@/components/LoginForm";
 import { Modal } from "@/components/Modal";
 import { Text } from "@/components/Text";
-import { useClickOutside } from "@/hooks/useClickOutside";
 import { checkAuthentication } from "@/lib/auth";
 import { Category } from "@/types/category";
 import styles from "./CategorySelector.module.css";
@@ -20,22 +19,7 @@ export interface CategorySelectorProps {
 export const CategorySelector = ({ options }: CategorySelectorProps) => {
   const params = useParams();
   const selectedCategory = params.category;
-  const [isOpenDropdown, setIsOpenDropdown] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
-  const toggleDropdown = () => {
-    setIsOpenDropdown((prev) => !prev);
-  };
-
-  useClickOutside(
-    dropdownRef,
-    useCallback(() => {
-      if (isOpenDropdown) {
-        setIsOpenDropdown(false);
-      }
-    }, [isOpenDropdown])
-  );
 
   const handleClickPrivateCategory = async (categoryPath: string) => {
     const { isLoggedIn } = await checkAuthentication();
@@ -57,27 +41,13 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
   };
 
   return (
-    <div className={styles.CategorySelector}>
-      <Button className={styles.trigger} variant="ghost" color="gray" onClick={toggleDropdown}>
+    <Dropdown.Root className={styles.CategorySelector}>
+      <Dropdown.Trigger className={styles.trigger}>
         <Text variant="label14">{selectedCategory}</Text>
         <CaretUpDown className={styles.icon} width={14} height={14} />
-      </Button>
-      {isOpenDropdown && (
-        <Flex
-          ref={dropdownRef}
-          className={styles.dropdown}
-          position="absolute"
-          left="0"
-          right="0"
-          bottom="40px"
-          direction="column"
-          align="stretch"
-          backgroundColor="floating"
-          borderWidth="1px"
-          borderColor="gray"
-          borderRadius="medium"
-          style={{ zIndex: "var(--dropdown)" }}
-        >
+      </Dropdown.Trigger>
+      <Dropdown.Content className={styles.content} side="top" align="start">
+        <Flex direction="column" align="stretch">
           {options.map(({ slug, label, isPrivate }) => (
             <Button
               key={slug}
@@ -92,7 +62,7 @@ export const CategorySelector = ({ options }: CategorySelectorProps) => {
             </Button>
           ))}
         </Flex>
-      )}
-    </div>
+      </Dropdown.Content>
+    </Dropdown.Root>
   );
 };

@@ -1,0 +1,52 @@
+.root {
+  position: relative;
+  width: fit-content;
+}
+
+.content {
+  --content-height: 0;
+  --offset: 0;
+
+  position: absolute;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.02),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  background-color: var(--bg-floating);
+  z-index: var(--dropdown);
+  transition:
+    opacity 0.3s,
+    transform 0.3s;
+
+  &[data-state="open"] {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &[data-state="close"] {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &.side-top {
+    top: calc((var(--content-height) + var(--offset)) * -1);
+  }
+
+  &.side-bottom {
+    bottom: calc((var(--content-height) + var(--offset)) * -1);
+  }
+
+  &.align-start {
+    left: 0;
+  }
+
+  &.align-center {
+    left: 50%;
+    transform: translate(-50%);
+  }
+
+  &.align-end {
+    right: 0;
+  }
+}
