@@ -18,6 +18,21 @@
     height: 14px;
     color: var(--fg-neutral-subtlest);
   }
+
+  .current {
+    --bg-selected-transparent: color-mix(in srgb, var(--bg-selected), var(--transparent) 50%);
+
+    color: var(--fg-brand-contrast);
+    background-color: var(--bg-selected-transparent);
+
+    &:hover {
+      background-color: var(--bg-selected-transparent);
+    }
+
+    &:active {
+      background-color: var(--bg-selected-transparent);
+    }
+  }
 }
 
 .SubTree {

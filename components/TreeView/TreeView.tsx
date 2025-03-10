@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { useState } from "react";
 import { CaretDown, CaretRight } from "@/assets/icon";
 import { Button } from "../Button";
@@ -59,7 +60,7 @@ export const TreeItem = ({
         variant="ghost"
         color="gray"
         fullWidth
-        className={styles.button}
+        className={clsx(styles.button, current && styles.current)}
         onClick={toggle}
         href={hasSubTree ? undefined : href}
       >
