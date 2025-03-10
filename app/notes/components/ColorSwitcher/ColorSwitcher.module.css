@@ -1,0 +1,24 @@
+.chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18px, 1fr));
+  gap: 4px 4px;
+  padding: 8px;
+  max-width: calc(18px * 5 + 4px * 4 + 16px);
+}
+
+.chip {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border-radius: var(--radius-full);
+
+  &.blue {
+    background-color: var(--blue-600);
+  }
+  &.green {
+    background-color: var(--green-600);
+  }
+  &.orange {
+    background-color: var(--orange-600);
+  }
+}

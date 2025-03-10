@@ -19,6 +19,45 @@
   --gray-900: hsl(0, 0%, 8%);
   --gray-950: hsl(0, 0%, 6%);
 
+  --blue-25: #f5faff;
+  --blue-50: #eff8ff;
+  --blue-100: #d1e9ff;
+  --blue-200: #b2ddff;
+  --blue-300: #84caff;
+  --blue-400: #53b1fd;
+  --blue-500: #2e90fa;
+  --blue-600: #1570ef;
+  --blue-700: #175cd3;
+  --blue-800: #1849a9;
+  --blue-900: #194185;
+  --blue-950: #102a56;
+
+  --green-25: #f6fef9;
+  --green-50: #ecfdf3;
+  --green-100: #d1fadf;
+  --green-200: #a6f4c5;
+  --green-300: #6ce9a6;
+  --green-400: #32d583;
+  --green-500: #12b76a;
+  --green-600: #039855;
+  --green-700: #027a48;
+  --green-800: #05603a;
+  --green-900: #054f31;
+  --green-950: #053321;
+
+  --orange-25: #fffaf5;
+  --orange-50: #fff6ed;
+  --orange-100: #ffead5;
+  --orange-200: #fddcab;
+  --orange-300: #feb273;
+  --orange-400: #fd853a;
+  --orange-500: #fb6514;
+  --orange-600: #ec4a0a;
+  --orange-700: #c4320a;
+  --orange-800: #9c2a10;
+  --orange-900: #7e2410;
+  --orange-950: #511c10;
+
   --brand-25: #f5faff;
   --brand-50: #eff8ff;
   --brand-100: #d1e9ff;
@@ -70,4 +109,64 @@
   --toast: 1600;
   --tooltip: 1700;
   --max: 2000;
+}
+
+[data-accent="gray"] {
+  --brand-25: var(--gray-25);
+  --brand-50: var(--gray-50);
+  --brand-100: var(--gray-100);
+  --brand-200: var(--gray-200);
+  --brand-300: var(--gray-300);
+  --brand-400: var(--gray-400);
+  --brand-500: var(--gray-500);
+  --brand-600: var(--gray-600);
+  --brand-700: var(--gray-700);
+  --brand-800: var(--gray-800);
+  --brand-900: var(--gray-900);
+  --brand-950: var(--gray-950);
+}
+
+[data-accent="blue"] {
+  --brand-25: var(--blue-25);
+  --brand-50: var(--blue-50);
+  --brand-100: var(--blue-100);
+  --brand-200: var(--blue-200);
+  --brand-300: var(--blue-300);
+  --brand-400: var(--blue-400);
+  --brand-500: var(--blue-500);
+  --brand-600: var(--blue-600);
+  --brand-700: var(--blue-700);
+  --brand-800: var(--blue-800);
+  --brand-900: var(--blue-900);
+  --brand-950: var(--blue-950);
+}
+
+[data-accent="green"] {
+  --brand-25: var(--green-25);
+  --brand-50: var(--green-50);
+  --brand-100: var(--green-100);
+  --brand-200: var(--green-200);
+  --brand-300: var(--green-300);
+  --brand-400: var(--green-400);
+  --brand-500: var(--green-500);
+  --brand-600: var(--green-600);
+  --brand-700: var(--green-700);
+  --brand-800: var(--green-800);
+  --brand-900: var(--green-900);
+  --brand-950: var(--green-950);
+}
+
+[data-accent="orange"] {
+  --brand-25: var(--orange-25);
+  --brand-50: var(--orange-50);
+  --brand-100: var(--orange-100);
+  --brand-200: var(--orange-200);
+  --brand-300: var(--orange-300);
+  --brand-400: var(--orange-400);
+  --brand-500: var(--orange-500);
+  --brand-600: var(--orange-600);
+  --brand-700: var(--orange-700);
+  --brand-800: var(--orange-800);
+  --brand-900: var(--orange-900);
+  --brand-950: var(--orange-950);
 }

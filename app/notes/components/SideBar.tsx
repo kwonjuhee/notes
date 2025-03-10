@@ -20,6 +20,7 @@ import styles from "./SideBar.module.css";
 import { SidebarHandle } from "./SidebarHandle";
 import { SideNavBar } from "./SideNavBar";
 import { SideNavBarProps } from "./SideNavBar/SideNavBar";
+import { ColorSwitcher } from "./ColorSwitcher";
 
 export interface SideBarProps {
   navItems: SideNavBarProps["navItems"];
@@ -98,6 +99,7 @@ const SidebarFooter = ({ categoryList }: { categoryList: Category[] }) => {
   return (
     <Flex justify="end" paddingX="12px" paddingY="8px" borderTopWidth="1px" borderColor="gray">
       {categoryList.length > 0 && <CategorySelector options={categoryList} />}
+      <ColorSwitcher />
       <ThemeToggle size="medium" />
     </Flex>
   );

@@ -1,4 +1,4 @@
-export const color = ["brand", "gray"] as const;
+export const color = ["brand", "green", "blue", "orange", "gray"] as const;
 export const bgColor = {
   page: "--bg-page",
   surface: "--bg-surface",
