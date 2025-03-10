@@ -27,26 +27,30 @@ const noteListToNavItems = ({
 }) => {
   const tree: TreeNode = { id: "ROOT", path: "/", childNodes: [] };
 
-  noteList.forEach(({ path }) => {
-    if (predicate(path)) {
-      const slugs = path.split("/");
+  noteList.forEach((note) => {
+    if (predicate(note.path)) {
+      const slugs = note.path.split("/");
 
       let subTree = tree.childNodes as TreeNode[];
-      slugs.forEach((slug, i) => {
+      slugs.reduce((path, slug, i) => {
+        const currentPath = [path, slug].filter(Boolean).join("/");
+
         const nodeIndex = subTree.findIndex((node) => slug === node.id);
 
         if (i === slugs.length - 1) {
-          subTree.push({ id: slug, path });
-          return;
+          subTree.push({ id: slug, path: currentPath });
+          return currentPath;
         }
 
         if (nodeIndex === -1) {
-          subTree.push({ id: slug, path, childNodes: [] });
+          subTree.push({ id: slug, path: currentPath, childNodes: [] });
           subTree = (subTree.at(-1) as Required<TreeNode>).childNodes;
-          return;
+        } else {
+          subTree = subTree[nodeIndex].childNodes as TreeNode[];
         }
-        subTree = subTree[nodeIndex].childNodes as TreeNode[];
-      });
+
+        return currentPath;
+      }, "");
     }
   });
 
