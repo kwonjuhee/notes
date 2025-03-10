@@ -23,12 +23,15 @@ export default async function Page({ params }: { params: { category: string; slu
     return <></>;
   }
 
-  const path = decodeURIComponent(`${params.category}/${params.slug.join("/")}`);
+  params.category = decodeURIComponent(params.category);
+  params.slug = params.slug.map((s) => decodeURIComponent(s));
+
+  const path = `${params.category}/${params.slug.join("/")}`;
   const source = await noteApi.getNoteByPath(path);
 
   const breadcrumbItems = params.slug.map((s) => ({ label: s }));
 
-  const title = decodeURIComponent(params.slug.at(-1)?.replace(markdownExtRegex, "") ?? "");
+  const title = params.slug.at(-1)?.replace(markdownExtRegex, "") ?? "";
 
   return (
     <>

@@ -13,7 +13,11 @@ export interface SideNavBarProps {
 export const SideNavBar = ({ navItems }: SideNavBarProps) => {
   const currentPath = usePathname();
 
-  return <TreeView>{renderNavItems({ navItems, currentPath })}</TreeView>;
+  return (
+    <TreeView>
+      {renderNavItems({ navItems, currentPath: decodeURIComponent(currentPath) })}
+    </TreeView>
+  );
 };
 
 const renderNavItems = ({ navItems, currentPath }: SideNavBarProps & { currentPath: string }) => {
