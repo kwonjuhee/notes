@@ -4,6 +4,7 @@ import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
 import { LoginForm } from "@/components/LoginForm";
 import { checkAuthentication } from "@/lib/auth";
+import { Note } from "@/types/note";
 import { MobileHeader } from "../components/MobileHeader";
 import { SideBar } from "../components/SideBar";
 import { TreeNode } from "../components/SideNavBar";
@@ -18,40 +19,34 @@ export async function generateStaticParams() {
     }));
 }
 
-const noteListToNavItems = ({
-  noteList,
-  predicate = () => true,
-}: {
-  noteList: Awaited<ReturnType<typeof noteApi.getNotesByCategory>>;
-  predicate?: (path: string) => boolean;
-}) => {
-  const tree: TreeNode = { id: "ROOT", path: "/", childNodes: [] };
+const noteListToNavItems = (noteList: Note[]) => {
+  const tree: TreeNode = { label: "ROOT", path: "/", childNodes: [] };
 
   noteList.forEach((note) => {
-    if (predicate(note.path)) {
-      const slugs = note.path.split("/");
+    let subTree = tree.childNodes as TreeNode[];
 
-      let subTree = tree.childNodes as TreeNode[];
-      slugs.reduce((path, slug, i) => {
-        const currentPath = [path, slug].filter(Boolean).join("/");
+    const slugs = note.path.split("/");
+    slugs.reduce((path, slug, i) => {
+      const currentPath = [path, slug].filter(Boolean).join("/");
 
-        const nodeIndex = subTree.findIndex((node) => slug === node.id);
-
-        if (i === slugs.length - 1) {
-          subTree.push({ id: slug, path: currentPath });
-          return currentPath;
-        }
-
-        if (nodeIndex === -1) {
-          subTree.push({ id: slug, path: currentPath, childNodes: [] });
-          subTree = (subTree.at(-1) as Required<TreeNode>).childNodes;
-        } else {
-          subTree = subTree[nodeIndex].childNodes as TreeNode[];
-        }
-
+      if (i === slugs.length - 1) {
+        const fileNode = { path: currentPath, label: slug };
+        subTree.push(fileNode);
         return currentPath;
-      }, "");
-    }
+      }
+
+      const dirNode = subTree.find((node) => node.path === currentPath);
+
+      if (!dirNode) {
+        const newDirNode = { path: currentPath, label: slug, childNodes: [] };
+        subTree.push(newDirNode);
+        subTree = newDirNode.childNodes;
+      } else {
+        subTree = dirNode.childNodes as TreeNode[];
+      }
+
+      return currentPath;
+    }, "");
   });
 
   return tree.childNodes as TreeNode[];
@@ -85,7 +80,7 @@ export default async function Layout({
   }
 
   const noteList = await noteApi.getNotesByCategory(categorySlug);
-  const navItems = noteListToNavItems({ noteList });
+  const navItems = noteListToNavItems(noteList);
 
   return (
     <Flex width="100%">

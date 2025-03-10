@@ -11,46 +11,46 @@ export const Primary: StoryObj<typeof SideNavBar> = {
   args: {
     navItems: [
       {
-        id: "Item1",
+        label: "Item1",
         path: "",
         childNodes: [
           {
-            id: "Item1-1",
+            label: "Item1-1",
             path: "",
             childNodes: [
-              { id: "item1-1-1", path: "" },
-              { id: "item1-1-2", path: "" },
-              { id: "item1-1-3", path: "" },
+              { label: "item1-1-1", path: "" },
+              { label: "item1-1-2", path: "" },
+              { label: "item1-1-3", path: "" },
             ],
           },
           {
-            id: "Item1-2",
+            label: "Item1-2",
             path: "",
             childNodes: [
-              { id: "item1-2-1", path: "" },
-              { id: "item1-2-2", path: "" },
-              { id: "item1-2-3", path: "" },
+              { label: "item1-2-1", path: "" },
+              { label: "item1-2-2", path: "" },
+              { label: "item1-2-3", path: "" },
             ],
           },
         ],
       },
       {
-        id: "Item2",
+        label: "Item2",
         path: "",
         childNodes: [
           {
-            id: "Item2-1",
+            label: "Item2-1",
             path: "",
             childNodes: [
-              { id: "item2-1-1", path: "" },
-              { id: "item2-1-2", path: "" },
-              { id: "item2-1-3", path: "" },
+              { label: "item2-1-1", path: "" },
+              { label: "item2-1-2", path: "" },
+              { label: "item2-1-3", path: "" },
             ],
           },
         ],
       },
-      { id: "item1", path: "" },
-      { id: "item2", path: "" },
+      { label: "item1", path: "" },
+      { label: "item2", path: "" },
     ],
   },
 };

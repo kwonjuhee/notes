@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { TreeView } from "@/components/TreeView";
 import { SubTree, TreeItem } from "@/components/TreeView/TreeView";
 
-export type TreeNode = { id: string; path: string; childNodes?: TreeNode[] };
+export type TreeNode = { path: string; label: string; childNodes?: TreeNode[] };
 
 export interface SideNavBarProps {
   navItems: TreeNode[];
@@ -17,14 +17,14 @@ export const SideNavBar = ({ navItems }: SideNavBarProps) => {
 };
 
 const renderNavItems = ({ navItems, currentPath }: SideNavBarProps & { currentPath: string }) => {
-  return navItems.map(({ id, path, childNodes }) => (
+  return navItems.map(({ path, label, childNodes }) => (
     <TreeItem
-      key={id}
+      key={path}
       href={`/notes/${path}`}
       current={`/notes/${path}` === currentPath}
       defaultExpanded={currentPath.startsWith(`/notes/${path}`)}
     >
-      {id}
+      {label}
       {childNodes && <SubTree>{renderNavItems({ navItems: childNodes, currentPath })}</SubTree>}
     </TreeItem>
   ));
