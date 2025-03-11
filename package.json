@@ -10,6 +10,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "build-tokens": "vite-node styles/scripts/build-tokens.ts",
     "prepare": "husky install",
     "plop": "plop",
     "postinstall": "patch-package"
@@ -59,6 +60,7 @@
     "plop": "^4.0.1",
     "postcss-custom-media": "^11.0.5",
     "storybook": "^8.0.0",
+    "style-dictionary": "^4.3.3",
     "typescript": "^5",
     "unist-util-visit": "^5.0.0"
   }

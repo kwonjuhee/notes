@@ -1,63 +1,43 @@
-:root {
-  /* background */
+:root [data-theme="light"] {
+  --fg-error: red;
+  --border-error: red;
   --bg-page: var(--white);
   --bg-surface: var(--gray-25);
   --bg-floating: var(--white);
-
   --bg-gray-solid: var(--gray-600);
   --bg-gray-solid-hovered: var(--gray-700);
-  --bg-gray-solid-pressed: color-mix(in hsl, var(--bg-gray-solid-hovered), var(--black) 7%);
+  --bg-gray-solid-pressed: color-mix(in hsl, var(--gray-700), var(--black) 7%);
   --bg-gray-subtle: var(--gray-200);
   --bg-gray-subtle-hovered: var(--gray-300);
-  --bg-gray-subtle-pressed: color-mix(in hsl, var(--bg-gray-subtle-hovered), var(--black) 3%);
-
+  --bg-gray-subtle-pressed: color-mix(in hsl, var(--gray-300), var(--black) 3%);
   --bg-brand-solid: var(--brand-600);
   --bg-brand-solid-hovered: var(--brand-700);
-  --bg-brand-solid-pressed: color-mix(in srgb, var(--bg-brand-solid-hovered), var(--black) 5%);
+  --bg-brand-solid-pressed: color-mix(in srgb, var(--brand-700), var(--black) 5%);
   --bg-brand-subtle: var(--brand-100);
   --bg-brand-subtle-hovered: var(--brand-200);
-  --bg-brand-subtle-pressed: color-mix(in srgb, var(--bg-brand-subtle-hovered), var(--black) 3%);
-
+  --bg-brand-subtle-pressed: color-mix(in srgb, var(--brand-200), var(--black) 3%);
   --bg-transparent: var(--transparent);
   --bg-transparent-hovered: color-mix(in hsl, var(--gray-200), var(--transparent) 40%);
   --bg-transparent-pressed: color-mix(in hsl, var(--gray-200), var(--transparent) 20%);
+  --bg-transparent-brand: var(--transparent);
   --bg-transparent-brand-hovered: color-mix(in srgb, var(--brand-200), var(--transparent) 60%);
   --bg-transparent-brand-pressed: color-mix(in srgb, var(--brand-200), var(--transparent) 40%);
-
-  /* foreground */
+  --bg-selected: var(--brand-100);
+  --bg-disabled: var(--gray-100);
   --fg-neutral: var(--gray-800);
   --fg-neutral-bold: var(--gray-900);
   --fg-neutral-muted: var(--gray-600);
   --fg-neutral-subtle: var(--gray-500);
   --fg-neutral-subtlest: var(--gray-400);
-
   --fg-gray: var(--gray-500);
   --fg-gray-contrast: var(--gray-700);
-
   --fg-brand: var(--brand-600);
   --fg-brand-contrast: var(--brand-700);
-
-  --fg-error: red;
-
-  /* border */
-  --border: var(--gray-200);
-
-  --border-gray: var(--gray-300);
-  --border-gray-hovered: var(--gray-400);
-  --border-gray-focused: var(--gray-400);
-  --border-gray-bold: var(--gray-400);
-
-  --border-brand: var(--brand-200);
-  --border-brand-hovered: var(--brand-300);
-  --border-brand-focused: var(--brand-300);
-  --border-brand-bold: var(--brand-300);
-
-  --border-error: red;
-
-  /* state */
-  --bg-selected: var(--brand-100);
   --fg-selected: var(--brand-700);
+  --border: var(--gray-200);
+  --border-gray: var(--gray-300);
+  --border-gray-bold: var(--gray-400);
+  --border-brand: var(--brand-200);
+  --border-brand-bold: var(--brand-300);
   --border-selected: var(--brand-700);
-
-  --bg-disabled: var(--gray-100);
 }
