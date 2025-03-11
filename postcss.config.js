@@ -1,7 +1,7 @@
 const postcssConfig = {
   plugins: {
     "@csstools/postcss-global-data": {
-      files: ["styles/tokens/breakpoints.css"],
+      files: ["styles/tokens/semantic/breakpoints.css"],
     },
     "postcss-custom-media": {},
   },

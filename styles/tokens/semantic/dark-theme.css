@@ -1,0 +1,65 @@
+:root {
+  [data-theme="dark"] {
+    /* background */
+    --bg-page: var(--gray-950);
+    --bg-surface: var(--gray-900);
+    --bg-floating: var(--gray-850);
+
+    --bg-gray-solid: var(--gray-700);
+    --bg-gray-solid-hovered: var(--gray-600);
+    --bg-gray-solid-pressed: color-mix(in srgb, var(--bg-gray-solid-hovered), var(--white) 5%);
+    --bg-gray-subtle: var(--gray-800);
+    --bg-gray-subtle-hovered: var(--gray-750);
+    --bg-gray-subtle-pressed: color-mix(in srgb, var(--bg-gray-subtle-hovered), var(--white) 3%);
+
+    --bg-brand-solid: var(--brand-700);
+    --bg-brand-solid-hovered: var(--brand-600);
+    --bg-brand-solid-pressed: color-mix(in srgb, var(--bg-brand-solid-hovered), var(--white) 5%);
+    --bg-brand-subtle: var(--brand-950);
+    --bg-brand-subtle-hovered: var(--brand-900);
+    --bg-brand-subtle-pressed: color-mix(in srgb, var(--bg-brand-subtle-hovered), var(--white) 3%);
+
+    --bg-transparent: var(--transparent);
+    --bg-transparent-hovered: color-mix(in hsl, var(--gray-750), var(--transparent) 20%);
+    --bg-transparent-pressed: color-mix(in hsl, var(--gray-750), var(--transparent) 5%);
+    --bg-transparent-brand-hovered: color-mix(in srgb, var(--brand-900), var(--transparent) 50%);
+    --bg-transparent-brand-pressed: color-mix(in srgb, var(--brand-900), var(--transparent) 40%);
+
+    /* foreground */
+    --fg-neutral: var(--gray-100);
+    --fg-neutral-bold: var(--gray-50);
+    --fg-neutral-muted: var(--gray-300);
+    --fg-neutral-subtle: var(--gray-400);
+    --fg-neutral-subtlest: var(--gray-500);
+
+    --fg-gray: var(--gray-400);
+    --fg-gray-contrast: var(--gray-200);
+
+    --fg-brand: var(--brand-500);
+    --fg-brand-contrast: var(--brand-200);
+
+    --fg-error: red;
+
+    /* border */
+    --border: var(--gray-800);
+
+    --border-gray: var(--gray-700);
+    --border-gray-hovered: var(--gray-600);
+    --border-gray-focused: var(--gray-600);
+    --border-gray-bold: var(--gray-600);
+
+    --border-brand: var(--brand-900);
+    --border-brand-hovered: var(--brand-800);
+    --border-brand-focused: var(--brand-800);
+    --border-brand-bold: var(--brand-800);
+
+    --border-error: red;
+
+    /* state */
+    --bg-selected: var(--brand-900);
+    --fg-selected: var(--brand-300);
+    --border-selected: var(--brand-300);
+
+    --bg-disabled: var(--gray-800);
+  }
+}
