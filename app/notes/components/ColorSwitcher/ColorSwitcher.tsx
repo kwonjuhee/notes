@@ -1,11 +1,10 @@
 "use client";
 
-import { Button } from "@/components/Button";
-import styles from "./ColorSwitcher.module.css";
+import clsx from "clsx";
+import { MaginWand } from "@/assets/icon";
 import { Dropdown } from "@/components/Dropdown";
 import { color } from "@/types/token";
-import { MaginWand } from "@/assets/icon";
-import clsx from "clsx";
+import styles from "./ColorSwitcher.module.css";
 
 export const ColorSwitcher = () => {
   return (
@@ -19,9 +18,10 @@ export const ColorSwitcher = () => {
             .filter((colorName) => colorName !== "brand" && colorName !== "gray")
             .map((colorName) => (
               <button
+                key={colorName}
                 className={clsx(styles.chip, styles[colorName])}
                 onClick={() => {
-                  document.body.setAttribute("data-accent", colorName);
+                  document.body.setAttribute("data-brand-color", colorName);
                 }}
               />
             ))}

@@ -1,5 +1,6 @@
 @import "./tokens/base/index.css";
 @import "./tokens/semantic/index.css";
+@import "./tokens/brand-color.css";
 
 @font-face {
   font-family: "Pretendard";
