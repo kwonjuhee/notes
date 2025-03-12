@@ -1,26 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fgColor, fontSize, fontWeight } from "@/types/token";
+import { Flex } from "../Flex";
 import { Text } from "./Text";
 
 const meta: Meta<typeof Text> = {
   component: Text,
-  argTypes: {
-    as: {
-      control: false,
-    },
-    size: {
-      control: "select",
-      options: fontSize,
-    },
-    weight: {
-      control: "select",
-      options: fontWeight,
-    },
-    color: {
-      control: "select",
-      options: fgColor,
-    },
-  },
 };
 export default meta;
 
@@ -37,14 +20,14 @@ const variants = [
 ] as const;
 
 export const Primary: StoryObj<typeof Text> = {
-  render: () => (
-    <>
+  render: (args) => (
+    <Flex direction="column">
       {variants.map((variant) => (
-        <Text key={variant} as="div" variant={variant}>
+        <Text key={variant} variant={variant} {...args}>
           {variant}
         </Text>
       ))}
-    </>
+    </Flex>
   ),
   argTypes: {
     size: { control: false },

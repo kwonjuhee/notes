@@ -15,6 +15,9 @@ const config: StorybookConfig = {
   features: {
     experimentalRSC: true,
   },
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+  },
   webpackFinal: (config) => {
     if (config.resolve) {
       config.resolve.alias = {

@@ -1,29 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import * as iconSVGs from "@/assets/icon";
-import { color, radius } from "@/types/token";
 import { Button } from "./Button";
 import { IconButton } from "./IconButton";
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  argTypes: {
-    size: {
-      control: "select",
-      options: ["small", "medium", "large"],
-    },
-    variant: {
-      control: "select",
-      options: ["solid", "subtle", "outline", "ghost"],
-    },
-    color: {
-      control: "radio",
-      options: color,
-    },
-    radius: {
-      control: "select",
-      options: radius,
-    },
-  },
 };
 export default meta;
 
