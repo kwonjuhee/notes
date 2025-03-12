@@ -2,13 +2,18 @@ import StyleDictionary from "style-dictionary";
 
 const BASE_PATH = "styles/tokens";
 
+const formatName = (path: string[]) => {
+  return path
+    .filter((part) => part !== "DEFAULT")
+    .join("-")
+    .replace(/ /g, "")
+    .toLowerCase();
+};
+
 StyleDictionary.registerTransform({
-  name: "name/remove-default",
+  name: "name/custom-css-var",
   type: "name",
-  filter: (token) => token.path.includes("DEFAULT"),
-  transform: (token) => {
-    return token.path.filter((part) => part !== "DEFAULT").join("-");
-  },
+  transform: (token) => formatName(token.path),
 });
 
 (async () => {
@@ -18,6 +23,7 @@ StyleDictionary.registerTransform({
       platforms: {
         css: {
           transformGroup: "css",
+          transforms: ["name/custom-css-var"],
           buildPath: `${BASE_PATH}/base/`,
           files: [
             {
@@ -37,7 +43,7 @@ StyleDictionary.registerTransform({
       platforms: {
         css: {
           transformGroup: "css",
-          transforms: ["name/remove-default"],
+          transforms: ["name/custom-css-var"],
           buildPath: `${BASE_PATH}/semantic/`,
           files: [
             {
@@ -59,7 +65,7 @@ StyleDictionary.registerTransform({
       platforms: {
         css: {
           transformGroup: "css",
-          transforms: ["name/remove-default"],
+          transforms: ["name/custom-css-var"],
           buildPath: `${BASE_PATH}/semantic/`,
           files: [
             {
