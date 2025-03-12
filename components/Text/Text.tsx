@@ -50,7 +50,7 @@ export const Text = ({
     style: {
       "--font-size": size && `var(--font-size-${size})`,
       "--font-weight": weight && `var(--font-weight-${weight})`,
-      "--color": color && `var(--${color})`,
+      "--color": color && `var(--fg-${color})`,
       ...style,
     } as React.CSSProperties,
   };

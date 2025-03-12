@@ -1,6 +1,6 @@
 import { formatValue, getResponsiveCustomProperties } from "@/utils/responsive";
 import { Responsive } from "./responsive";
-import { BgColor, bgColor, Color, Radius } from "./token";
+import { BgColor, Color, Radius } from "./token";
 
 export type StyleProps = {
   backgroundColor?: Responsive<BgColor>;
@@ -27,7 +27,7 @@ export const getStyleCustomProperties = (props: StyleProps) => {
   } = props;
   const responsiveCustomProperties = getResponsiveCustomProperties({
     "--background-color": backgroundColor
-      ? formatValue(backgroundColor, (v: BgColor) => `var(${bgColor[v]})`)
+      ? formatValue(backgroundColor, (v: BgColor) => `var(--bg-${v})`)
       : undefined,
     "--border-width": borderWidth,
     "--border-top-width": borderTopWidth,
