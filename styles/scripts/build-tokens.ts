@@ -86,7 +86,7 @@ StyleDictionary.registerFormat({
               options: {
                 outputReferences: true,
                 showFileHeader: false,
-                selector: `:root [data-theme="light"]`,
+                selector: `:root, [data-theme="light"]`,
               },
             },
           ],
@@ -108,7 +108,7 @@ StyleDictionary.registerFormat({
               options: {
                 outputReferences: true,
                 showFileHeader: false,
-                selector: `:root [data-theme="dark"]`,
+                selector: `[data-theme="dark"]`,
               },
             },
           ],

@@ -1,4 +1,4 @@
-:root [data-theme="light"] {
+:root, [data-theme="light"] {
   --fg-error: red;
   --border-error: red;
   --bg-page: var(--white);
