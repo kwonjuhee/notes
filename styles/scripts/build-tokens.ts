@@ -3,15 +3,6 @@ import StyleDictionary from "style-dictionary";
 const BASE_PATH = "styles/tokens";
 
 StyleDictionary.registerTransform({
-  name: "color/color-mix",
-  type: "value",
-  filter: (token) => typeof token.$value === "string" && token.$value.includes("color-mix"),
-  transform: (token) => {
-    return token.$value.replace(/\{(.+?)\}/g, "var(--$1)");
-  },
-});
-
-StyleDictionary.registerTransform({
   name: "name/remove-default",
   type: "name",
   filter: (token) => token.path.includes("DEFAULT"),
@@ -27,7 +18,6 @@ StyleDictionary.registerTransform({
       platforms: {
         css: {
           transformGroup: "css",
-          transforms: ["color/color-mix"],
           buildPath: `${BASE_PATH}/base/`,
           files: [
             {
@@ -47,7 +37,7 @@ StyleDictionary.registerTransform({
       platforms: {
         css: {
           transformGroup: "css",
-          transforms: ["color/color-mix", "name/remove-default"],
+          transforms: ["name/remove-default"],
           buildPath: `${BASE_PATH}/semantic/`,
           files: [
             {
@@ -69,7 +59,7 @@ StyleDictionary.registerTransform({
       platforms: {
         css: {
           transformGroup: "css",
-          transforms: ["color/color-mix", "name/remove-default"],
+          transforms: ["name/remove-default"],
           buildPath: `${BASE_PATH}/semantic/`,
           files: [
             {
