@@ -37,7 +37,7 @@
       "hovered": { "$value": "color-mix(in srgb, {Brand.900}, {Transparent} 50%)" },
       "pressed": { "$value": "color-mix(in srgb, {Brand.900}, {Transparent} 40%)" }
     },
-    "selected": { "$value": "{Brand.900}" },
+    "selected": { "$value": "color-mix(in srgb, {Brand.900}, {Transparent} 70%)" },
     "disabled": { "$value": "{Gray.800}" }
   },
   "fg": {
@@ -57,7 +57,7 @@
       "contrast": { "$value": "{Brand.200}" }
     },
     "error": { "$value": "red" },
-    "selected": { "$value": "{Brand.300}" }
+    "selected": { "$value": "{Brand.400}" }
   },
   "border": {
     "DEFAULT": { "$value": "{Gray.800}" },
@@ -70,6 +70,6 @@
       "bold": { "$value": "{Brand.800}" }
     },
     "error": { "$value": "red" },
-    "selected": { "$value": "{Brand.300}" }
+    "selected": { "$value": "{Brand.400}" }
   }
 }

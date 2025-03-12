@@ -22,7 +22,7 @@
   --bg-transparent-brand: var(--transparent);
   --bg-transparent-brand-hovered: color-mix(in srgb, var(--brand-200), var(--transparent) 60%);
   --bg-transparent-brand-pressed: color-mix(in srgb, var(--brand-200), var(--transparent) 40%);
-  --bg-selected: var(--brand-100);
+  --bg-selected: color-mix(in srgb, var(--brand-100), var(--transparent) 30%);
   --bg-disabled: var(--gray-100);
   --fg-neutral: var(--gray-800);
   --fg-neutral-bold: var(--gray-900);
@@ -33,11 +33,11 @@
   --fg-gray-contrast: var(--gray-700);
   --fg-brand: var(--brand-600);
   --fg-brand-contrast: var(--brand-700);
-  --fg-selected: var(--brand-700);
+  --fg-selected: var(--brand-600);
   --border: var(--gray-200);
   --border-gray: var(--gray-300);
   --border-gray-bold: var(--gray-400);
   --border-brand: var(--brand-200);
   --border-brand-bold: var(--brand-300);
-  --border-selected: var(--brand-700);
+  --border-selected: var(--brand-600);
 }
