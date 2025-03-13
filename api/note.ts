@@ -3,7 +3,7 @@ import { checkAuthentication } from "@/lib/auth";
 import { Category } from "@/types/category";
 import { Note } from "@/types/note";
 import { decodeBase64 } from "@/utils/endecoder";
-import { isMarkdownFile, isPrivatePath } from "@/utils/markdown";
+import { isMarkdownFile, isPrivatePath, wikilinkRegex } from "@/utils/markdown";
 import { githubApi } from "./github";
 import { Blob, GetFileContentResponseData } from "./github.types";
 
@@ -78,9 +78,17 @@ export const getCategoryList = async (): Promise<Category[]> => {
   }
 };
 
+const getBacklinks = async (noteName: string) => {
+  const notes = await noteApi.getNoteList();
+  const notesWithcontent = await Promise.all(notes.map((node) => noteApi.getNoteByPath(node.path)));
+
+  return notesWithcontent.filter((data) => wikilinkRegex(noteName).test(data.content));
+};
+
 export const noteApi = {
   getNoteList,
   getNotesByCategory,
   getNoteByPath,
   getCategoryList,
+  getBacklinks,
 };
