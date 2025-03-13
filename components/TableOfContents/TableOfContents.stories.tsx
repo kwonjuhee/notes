@@ -32,11 +32,20 @@ export const Primary: StoryObj<typeof TableOfContents> = {
     const topLevel = Math.max(...tocNodes.map(({ level }) => level));
 
     return (
-      <nav className={styles.TableOfContents}>
+      <nav
+        className={styles.TableOfContents}
+        style={
+          {
+            "--indicator-height": "25px",
+            "--indicator-position": "0",
+          } as React.CSSProperties
+        }
+      >
         <TOCList
           tocNodes={tocNodes}
           currentItem={{ ...TOC_ITEMS[0], current: true, index: 0 }}
           topLevel={topLevel}
+          onChangeTocItemHeight={() => {}}
         />
       </nav>
     );

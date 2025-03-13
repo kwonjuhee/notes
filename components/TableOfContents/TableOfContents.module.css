@@ -3,18 +3,20 @@
   border-left: 1px solid var(--border);
   padding-left: 4px;
 
-  --tocitem-height: 25px;
-  --current-tocitem-index: 0;
+  --indicator-height: 0;
+  --indicator-position: 0;
 
   &::before {
     content: "";
     position: absolute;
     top: 0;
     left: -1px;
-    height: var(--tocitem-height);
-    border-left: 1px solid var(--black);
-    transform: translateY(calc(var(--tocitem-height) * var(--current-tocitem-index)));
-    transition: transform 0.3s;
+    height: var(--indicator-height);
+    border-left: 1px solid var(--border-selected);
+    transform: translateY(var(--indicator-position));
+    transition:
+      height 0.3s,
+      transform 0.3s;
   }
 }
 
@@ -23,6 +25,7 @@
   --indent-count: 1;
 
   display: inline-block;
+  width: 100%;
   padding: 4px;
   padding-left: calc(var(--indent-size) * var(--indent-count));
 
@@ -30,10 +33,16 @@
   font-size: var(--font-size-14);
   font-weight: var(--font-weight-regular);
 
-  &.active,
-  &:hover {
-    color: var(--fg-neutral);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--fg-neutral);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+    }
+  }
+
+  &.active {
+    color: var(--fg-selected);
     font-weight: var(--font-weight-medium);
-    cursor: pointer;
   }
 }
