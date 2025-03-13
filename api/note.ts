@@ -49,7 +49,7 @@ const getNotesByCategory = async (categorySlug: string) => {
   return notes.filter((note) => note.path.startsWith(categorySlug));
 };
 
-const getNoteByPath = async (path: string) => {
+const getNoteByPath = async (path: string): Promise<Note & { content: string }> => {
   if (!isMarkdownFile(path)) throw new Error("Invalid path");
 
   const data = await githubApi.repository.getContent(path);
@@ -57,7 +57,11 @@ const getNoteByPath = async (path: string) => {
   const isDir = Array.isArray(data);
   if (isDir || data.type !== "file") throw new Error("Invalid path");
 
-  return Buffer.from(data.content, "base64").toString();
+  return {
+    path: data.path,
+    name: data.name,
+    content: Buffer.from(data.content, "base64").toString(),
+  };
 };
 
 export const getCategoryList = async (): Promise<Category[]> => {

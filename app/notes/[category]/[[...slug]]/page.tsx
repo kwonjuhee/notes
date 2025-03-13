@@ -27,7 +27,7 @@ export default async function Page({ params }: { params: { category: string; slu
   params.slug = params.slug.map((s) => decodeURIComponent(s));
 
   const path = `${params.category}/${params.slug.join("/")}`;
-  const source = await noteApi.getNoteByPath(path);
+  const { content: source } = await noteApi.getNoteByPath(path);
 
   const breadcrumbItems = params.slug.map((s) => ({ label: s }));
 
