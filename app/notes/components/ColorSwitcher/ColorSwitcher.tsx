@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { MaginWand } from "@/assets/icon";
 import { Dropdown } from "@/components/Dropdown";
-import { color } from "@/types/token";
+import { colors } from "@/types/token";
 import styles from "./ColorSwitcher.module.css";
 
 export const ColorSwitcher = () => {
@@ -14,12 +14,12 @@ export const ColorSwitcher = () => {
       </Dropdown.Trigger>
       <Dropdown.Content side="top" align="center">
         <div className={styles.chips}>
-          {color
+          {colors
             .filter((colorName) => colorName !== "brand" && colorName !== "gray")
             .map((colorName) => (
               <button
                 key={colorName}
-                className={clsx(styles.chip, styles[colorName])}
+                className={clsx(styles.chip, styles[`color-${colorName}`])}
                 onClick={() => {
                   document.body.setAttribute("data-brand-color", colorName);
                 }}

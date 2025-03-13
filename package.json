@@ -58,6 +58,7 @@
     "lint-staged": "^15.2.0",
     "patch-package": "^8.0.0",
     "plop": "^4.0.1",
+    "postcss-advanced-variables": "^5.0.0",
     "postcss-custom-media": "^11.0.5",
     "storybook": "^8.0.0",
     "style-dictionary": "^4.3.3",

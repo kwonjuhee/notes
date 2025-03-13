@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ColorSwitcher } from "./ColorSwitcher";
 import { Box } from "@/components/Box";
+import { ColorSwitcher } from "./ColorSwitcher";
 
 const meta: Meta<typeof ColorSwitcher> = {
   title: "notes/ColorSwitcher",

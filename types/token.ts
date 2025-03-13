@@ -22,9 +22,9 @@ export type Breakpoint = keyof typeof breakpoints;
 
 // prettier-ignore
 export const colors: Color[] = [
-  "gray", "brand", "red", "yellow", "green",
-  "bluegray", "bluelight", "blue", "indigo",
-  "purple", "pink", "rose", "orange"
+  "gray", "brand", "red", "orange", "yellow",
+  "green", "bluegray", "bluelight", "blue", "indigo",
+  "purple", "pink", "rose"
 ];
 
 export const fontSize = [11, 12, 14, 16, 20, 24, 30] as const;

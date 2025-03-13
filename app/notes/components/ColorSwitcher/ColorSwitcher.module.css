@@ -12,13 +12,9 @@
   padding: 0;
   border-radius: var(--radius-full);
 
-  &.blue {
-    background-color: var(--blue-600);
-  }
-  &.green {
-    background-color: var(--green-600);
-  }
-  &.orange {
-    background-color: var(--orange-600);
+  @each $color in $colors {
+    &.color-$(color) {
+      background-color: var(--$(color)-500);
+    }
   }
 }
