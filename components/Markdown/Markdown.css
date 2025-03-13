@@ -52,10 +52,10 @@
     padding-left: 24px;
 
     & ul {
-      margin-bottom: 0;
+      margin-top: var(--gap-xs);
     }
     & ol {
-      margin-bottom: 0;
+      margin-top: var(--gap-xs);
     }
   }
 
@@ -102,6 +102,7 @@
   a {
     color: var(--fg-selected);
     text-decoration: none;
+    overflow-wrap: anywhere;
 
     @media (hover: hover) {
       &:hover {
@@ -115,10 +116,13 @@
   }
 
   img {
+    border-radius: var(--radius-medium);
+    margin-bottom: var(--gap-m);
     max-width: 100%;
   }
 
   table {
+    margin-bottom: var(--gap-m);
     border-spacing: 0;
     border-collapse: collapse;
 
