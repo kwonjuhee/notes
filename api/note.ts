@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+import { RequestError } from "octokit";
 import { cache } from "react";
 import { checkAuthentication } from "@/lib/auth";
 import { Category } from "@/types/category";
@@ -50,18 +52,26 @@ const getNotesByCategory = async (categorySlug: string) => {
 };
 
 const getNoteByPath = async (path: string): Promise<Note & { content: string }> => {
-  if (!isMarkdownFile(path)) throw new Error("Invalid path");
+  try {
+    if (!isMarkdownFile(path)) throw new Error("Invalid path");
 
-  const data = await githubApi.repository.getContent(path);
+    const data = await githubApi.repository.getContent(path);
 
-  const isDir = Array.isArray(data);
-  if (isDir || data.type !== "file") throw new Error("Invalid path");
+    const isDir = Array.isArray(data);
+    if (isDir || data.type !== "file") throw new Error("Invalid path");
 
-  return {
-    path: data.path,
-    name: data.name,
-    content: Buffer.from(data.content, "base64").toString(),
-  };
+    return {
+      path: data.path,
+      name: data.name,
+      content: Buffer.from(data.content, "base64").toString(),
+    };
+  } catch (e) {
+    if (e instanceof RequestError && e.status === 404) {
+      notFound();
+    }
+
+    throw e;
+  }
 };
 
 export const getCategoryList = async (): Promise<Category[]> => {
