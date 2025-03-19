@@ -1,0 +1,36 @@
+.link {
+  stroke: var(--border-gray);
+  stroke-width: 1;
+  transition: all 0.2s;
+
+  &.active {
+    stroke: var(--border-selected);
+  }
+}
+
+.node {
+  transition: all 0.2s;
+
+  .circle {
+    fill: var(--bg-gray-solid);
+  }
+
+  .label {
+    fill: var(--fg-neutral-muted);
+    font-size: var(--font-size-12);
+    text-anchor: middle;
+  }
+
+  &.active {
+    .circle {
+      fill: var(--bg-brand-solid);
+    }
+    .label {
+      fill: var(--fg-selected);
+    }
+  }
+
+  &.inactive {
+    opacity: 0.5;
+  }
+}

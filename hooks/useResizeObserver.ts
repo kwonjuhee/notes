@@ -10,7 +10,7 @@ type UseResizeObserverProps<T> = {
   onResize?: (size: Size) => void;
 };
 
-export const useResizeObserver = <T extends HTMLElement>({
+export const useResizeObserver = <T extends Element>({
   ref,
   onResize: _onResize,
 }: UseResizeObserverProps<T>) => {

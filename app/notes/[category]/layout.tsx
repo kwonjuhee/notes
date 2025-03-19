@@ -83,9 +83,9 @@ export default async function Layout({
   const navItems = noteListToNavItems(noteList);
 
   return (
-    <Flex width="100%">
+    <Flex width="100%" height="100%">
       <SideBar navItems={navItems} categoryList={categoryList} />
-      <Box flexGrow={1} minWidth="0">
+      <Box flexGrow={1} minWidth="0" height="100%" overflowY="auto">
         <MobileHeader />
         {children}
       </Box>
