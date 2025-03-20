@@ -2,6 +2,7 @@ import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { Flex } from "@/components/Flex";
+import { LinksGraph } from "@/components/LinksGraph";
 import { Markdown } from "@/components/Markdown";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
@@ -20,7 +21,14 @@ export async function generateStaticParams({ params }: { params: { category: str
 
 export default async function Page({ params }: { params: { category: string; slug?: string[] } }) {
   if (!params.slug) {
-    return <></>;
+    const [nodes, links] = await Promise.all([
+      noteApi
+        .getNoteList()
+        .then((notes) => notes.map((note) => ({ id: note.path, label: note.name }))),
+      noteApi.getLinks(),
+    ]);
+
+    return <LinksGraph data={{ nodes, links }} />;
   }
 
   params.category = decodeURIComponent(params.category);

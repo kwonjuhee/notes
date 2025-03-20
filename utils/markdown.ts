@@ -3,9 +3,9 @@ import { CLOUDINARY_URL } from "@/constants/markdown";
 export const markdownExtRegex = /\.md$/;
 export const imageExtRegex = /\.(jpg|jpeg|png|webp|avif|svg)$/;
 export const privatePathRegex = /^_.*/;
-
-export const wikilinkRegex = (noteName: string) =>
-  new RegExp(`(?<!!)\\[\\[${escapeRegex(noteName)}(?:[#|][^\\]]+)?\\]\\]`, "g");
+export const wikilinkRegex = /\[\[([^[\]|#]+)(?:[|#][^[\]]+)?\]\]/g;
+export const wikilinkByFileNameRegex = (fileName: string) =>
+  new RegExp(`(?<!!)\\[\\[${escapeRegex(fileName)}(?:[#|][^\\]]+)?\\]\\]`, "g");
 
 export const isMarkdownFile = (path: string) => markdownExtRegex.test(path);
 

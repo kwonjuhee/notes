@@ -5,7 +5,13 @@ import { checkAuthentication } from "@/lib/auth";
 import { Category } from "@/types/category";
 import { Note } from "@/types/note";
 import { decodeBase64 } from "@/utils/endecoder";
-import { isMarkdownFile, isPrivatePath, wikilinkRegex } from "@/utils/markdown";
+import {
+  isMarkdownFile,
+  isPrivatePath,
+  markdownExtRegex,
+  wikilinkByFileNameRegex,
+  wikilinkRegex,
+} from "@/utils/markdown";
 import { githubApi } from "./github";
 import { Blob, GetFileContentResponseData } from "./github.types";
 
@@ -48,7 +54,7 @@ const transformBlobToNote = (blob: Blob): Note => {
 const getNotesByCategory = async (categorySlug: string) => {
   const notes = await getNoteList();
 
-  return notes.filter((note) => note.path.startsWith(categorySlug));
+  return notes.filter((note) => note.path.startsWith(`${categorySlug}/`));
 };
 
 const getNoteByPath = async (path: string): Promise<Note & { content: string }> => {
@@ -88,11 +94,39 @@ export const getCategoryList = async (): Promise<Category[]> => {
   }
 };
 
+const getLinks = async () => {
+  const notes = await noteApi.getNoteList();
+  const notesWithContent = await Promise.all(notes.map((node) => noteApi.getNoteByPath(node.path)));
+
+  return notesWithContent.reduce(
+    (acc, note) => {
+      const matches = Array.from(note.content.matchAll(wikilinkRegex));
+
+      if (!matches) return acc;
+
+      const targetNotes = matches
+        .map(([, targetNote]) =>
+          notes.find((e) => e.name.replace(markdownExtRegex, "") === targetNote)
+        )
+        .filter(Boolean) as Note[];
+
+      return [
+        ...acc,
+        ...targetNotes.map((targetNote) => ({
+          source: note.path,
+          target: targetNote.path,
+        })),
+      ];
+    },
+    [] as Array<{ source: string; target: string }>
+  );
+};
+
 const getBacklinks = async (noteName: string) => {
   const notes = await noteApi.getNoteList();
   const notesWithcontent = await Promise.all(notes.map((node) => noteApi.getNoteByPath(node.path)));
 
-  return notesWithcontent.filter((data) => wikilinkRegex(noteName).test(data.content));
+  return notesWithcontent.filter((data) => wikilinkByFileNameRegex(noteName).test(data.content));
 };
 
 export const noteApi = {
@@ -100,5 +134,6 @@ export const noteApi = {
   getNotesByCategory,
   getNoteByPath,
   getCategoryList,
+  getLinks,
   getBacklinks,
 };
