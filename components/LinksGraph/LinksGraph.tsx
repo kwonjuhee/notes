@@ -2,6 +2,7 @@
 
 import {
   drag,
+  extent,
   forceCenter,
   forceCollide,
   forceLink,
@@ -14,6 +15,7 @@ import {
   SimulationLinkDatum,
   SimulationNodeDatum,
   zoom,
+  zoomIdentity,
 } from "d3";
 import { useEffect, useRef } from "react";
 import { useResizeObserver } from "@/hooks/useResizeObserver";
@@ -115,13 +117,30 @@ export const LinksGraph = ({ width, height, data }: LinksGraphProps) => {
 
         /** zoom */
         const zoomer = zoom<SVGSVGElement, null>()
-          .scaleExtent([0.5, 10])
+          .scaleExtent([0.1, 10])
           .on("zoom", ({ transform }) => {
             link.attr("transform", transform);
             nodeGroup.attr("transform", transform);
           });
 
         svg.call(zoomer);
+
+        simulation.tick(100);
+
+        const xExtent = extent(nodeGroup.data(), (d) => d.x);
+        const yExtent = extent(nodeGroup.data(), (d) => d.y);
+
+        const xScale = (width ?? size.width) / ((xExtent[1]! - xExtent[0]!) / 0.8);
+        const yScale = (height ?? size.height) / ((yExtent[1]! - yExtent[0]!) / 0.8);
+        const minScale = Math.min(xScale, yScale);
+
+        svg.call(
+          zoomer.transform,
+          zoomIdentity
+            .translate((width ?? size.width) / 2, (height ?? size.height) / 2)
+            .scale(Math.max(0.1, minScale))
+            .translate(-(xExtent[0]! + xExtent[1]!) / 2, -(yExtent[0]! + yExtent[1]!) / 2)
+        );
 
         /** node drag */
         nodeGroup.call(
