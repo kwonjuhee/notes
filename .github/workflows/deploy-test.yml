@@ -1,13 +1,5 @@
 name: Vercel Preview Deployment
 
-env:
-  GITHUB_OWNER: kwonjuhee
-  GITHUB_REPO: notes-backup
-  GITHUB_AUTH: ${{ secrets.GH_AUTH }}
-  MY_PASSWORD: ${{ secrets.MY_PASSWORD }}
-  JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
-  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-
 on:
   push:
     branches:
@@ -24,22 +16,14 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Generate env file
-        run: |
-          echo "GITHUB_OWNER=$GITHUB_OWNER" >> .env
-          echo "GITHUB_REPO=$GITHUB_REPO" >> .env
-          echo "GITHUB_AUTH=$GITHUB_AUTH" >> .env
-          echo "MY_PASSWORD=$MY_PASSWORD" >> .env
-          echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> .env
-          
-      - name: Build project
-        run: npm run build
-
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
         
-      - name: Deploy preview
-        run: npx vercel --token $VERCEL_TOKEN --yes
+      - name: Build Project Artifacts
+        run: vercel build --token=$VERCEL_TOKEN
+        
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=$VERCEL_TOKEN
