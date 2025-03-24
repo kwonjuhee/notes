@@ -14,13 +14,13 @@ import { useRootStore } from "@/store/useRootStore";
 import { Category } from "@/types/category";
 import { Note } from "@/types/note";
 import { CategorySelector } from "./CategorySelector";
+import { ColorSwitcher } from "./ColorSwitcher";
 import { SearchInput } from "./SearchInput";
 import { SearchItem } from "./SearchItem";
 import styles from "./SideBar.module.css";
 import { SidebarHandle } from "./SidebarHandle";
 import { SideNavBar } from "./SideNavBar";
 import { SideNavBarProps } from "./SideNavBar/SideNavBar";
-import { ColorSwitcher } from "./ColorSwitcher";
 
 export interface SideBarProps {
   navItems: SideNavBarProps["navItems"];
