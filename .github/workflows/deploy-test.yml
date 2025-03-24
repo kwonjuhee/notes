@@ -39,4 +39,4 @@ jobs:
         run: npm run build
 
       - name: Deploy preview
-        run: npx vercel --token=$VERCEL_TOKEN
+        run: npx vercel --token $VERCEL_TOKEN
