@@ -14,9 +14,11 @@ export async function generateStaticParams({ params }: { params: { category: str
   const category = params.category;
   const markdownList = await noteApi.getNotesByCategory(category);
 
-  return markdownList.map((md) => ({
-    slug: md.path?.split("/"),
-  }));
+  return markdownList.map((md) => {
+    return {
+      slug: md.path?.split("/").slice(1),
+    };
+  });
 }
 
 export default async function Page({ params }: { params: { category: string; slug?: string[] } }) {
