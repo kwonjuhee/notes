@@ -1,15 +1,15 @@
 import matter from "gray-matter";
 import Link from "next/link";
-import { postApi } from "@/api/post";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
+import { getPostList } from "@/domains/post/post.lib";
 import { toYYYYMMDD } from "@/utils/date";
 import { decodeBase64 } from "@/utils/endecoder";
 import { markdownExtRegex } from "@/utils/markdown";
 import { PostItem } from "./components/PostItem";
 
 export default async function Page() {
-  const postList = await postApi.getPostList();
+  const postList = await getPostList();
 
   return (
     <Box maxWidth="690px" marginX="auto" paddingX="16px" paddingY="70px">

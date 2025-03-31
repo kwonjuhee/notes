@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { searchNotesByTitle } from "@/api/search";
 import { Box } from "@/components/Box";
 import { IconButton } from "@/components/Button";
 import { Flex } from "@/components/Flex";
@@ -10,9 +9,9 @@ import { ScrollArea } from "@/components/ScrollArea";
 import { Text } from "@/components/Text";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { SIDEBAR_BREAKPOINT } from "@/constants/breakpoint";
+import { searchNotesByTitle } from "@/domains/note/note.api";
+import { Category, Note } from "@/domains/note/note.types";
 import { useRootStore } from "@/store/useRootStore";
-import { Category } from "@/types/category";
-import { Note } from "@/types/note";
 import { CategorySelector } from "./CategorySelector";
 import { ColorSwitcher } from "./ColorSwitcher";
 import { SearchInput } from "./SearchInput";

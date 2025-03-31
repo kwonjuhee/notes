@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { noteApi } from "@/api/note";
+import { getCategoryList } from "@/domains/note/note.lib";
 
 export default async function Page() {
-  const category = await noteApi.getCategoryList();
+  const category = await getCategoryList();
 
   if (category.length === 0) {
     return <></>;

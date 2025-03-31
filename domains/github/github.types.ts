@@ -1,4 +1,4 @@
-import { GithubClient } from "./client";
+import { GithubClient } from "./github.api";
 
 export type GetRefResponseData = Awaited<ReturnType<GithubClient["rest"]["git"]["getRef"]>>["data"];
 

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { login } from "@/actions/auth";
+import { login } from "@/domains/auth/auth.actions";
 import { Box } from "../Box";
 import { Button } from "../Button";
 import { Flex } from "../Flex";

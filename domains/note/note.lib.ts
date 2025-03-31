@@ -1,9 +1,8 @@
 import { notFound } from "next/navigation";
 import { RequestError } from "octokit";
 import { cache } from "react";
-import { checkAuthentication } from "@/lib/auth";
-import { Category } from "@/types/category";
-import { Note } from "@/types/note";
+import { checkAuthentication } from "@/domains/auth/auth.actions";
+import { Category, Note } from "@/domains/note/note.types";
 import { decodeBase64 } from "@/utils/endecoder";
 import {
   isMarkdownFile,
@@ -12,10 +11,10 @@ import {
   wikilinkByFileNameRegex,
   wikilinkRegex,
 } from "@/utils/markdown";
-import { githubApi } from "./github";
-import { Blob, GetFileContentResponseData } from "./github.types";
+import { githubApi } from "../github/github.api";
+import { Blob, GetFileContentResponseData } from "../github/github.types";
 
-const getNoteList = cache(async (): Promise<Note[]> => {
+export const getNoteList = cache(async (): Promise<Note[]> => {
   const { ref } = await githubApi.gitDatabase.getRef();
   const [{ tree }, categoryList] = await Promise.all([
     await githubApi.gitDatabase.getGitTree(ref),
@@ -51,13 +50,13 @@ const transformBlobToNote = (blob: Blob): Note => {
   };
 };
 
-const getNotesByCategory = async (categorySlug: string) => {
+export const getNotesByCategory = async (categorySlug: string) => {
   const notes = await getNoteList();
 
   return notes.filter((note) => note.path.startsWith(`${categorySlug}/`));
 };
 
-const getNoteByPath = async (path: string): Promise<Note & { content: string }> => {
+export const getNoteByPath = async (path: string): Promise<Note & { content: string }> => {
   try {
     if (!isMarkdownFile(path)) throw new Error("Invalid path");
 
@@ -94,9 +93,9 @@ export const getCategoryList = async (): Promise<Category[]> => {
   }
 };
 
-const getLinks = async () => {
-  const notes = await noteApi.getNoteList();
-  const notesWithContent = await Promise.all(notes.map((node) => noteApi.getNoteByPath(node.path)));
+export const getLinks = async () => {
+  const notes = await getNoteList();
+  const notesWithContent = await Promise.all(notes.map((node) => getNoteByPath(node.path)));
 
   return notesWithContent.reduce(
     (acc, note) => {
@@ -122,18 +121,9 @@ const getLinks = async () => {
   );
 };
 
-const getBacklinks = async (noteName: string) => {
-  const notes = await noteApi.getNoteList();
-  const notesWithcontent = await Promise.all(notes.map((node) => noteApi.getNoteByPath(node.path)));
+export const getBacklinks = async (noteName: string) => {
+  const notes = await getNoteList();
+  const notesWithcontent = await Promise.all(notes.map((node) => getNoteByPath(node.path)));
 
   return notesWithcontent.filter((data) => wikilinkByFileNameRegex(noteName).test(data.content));
-};
-
-export const noteApi = {
-  getNoteList,
-  getNotesByCategory,
-  getNoteByPath,
-  getCategoryList,
-  getLinks,
-  getBacklinks,
 };
