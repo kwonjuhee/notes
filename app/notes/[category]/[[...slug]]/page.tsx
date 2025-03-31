@@ -1,4 +1,3 @@
-import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { Flex } from "@/components/Flex";
@@ -7,12 +6,15 @@ import { Markdown } from "@/components/Markdown";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
 import { TocHeader } from "@/components/TocHeader";
+import { getLinks, getNoteByPath, getNoteList, getNotesByCategory } from "@/domains/note/note.lib";
 import { markdownExtRegex } from "@/utils/markdown";
 import { LinksToThisPage } from "./components/LinksToThisPage";
 
 export async function generateStaticParams({ params }: { params: { category: string } }) {
   const category = params.category;
-  const markdownList = await noteApi.getNotesByCategory(category);
+  const markdownList = await getNotesByCategory(category);
+
+  await Promise.all(markdownList.map(({ path }) => getNoteByPath(path)));
 
   return markdownList.map((md) => {
     return {
@@ -24,10 +26,8 @@ export async function generateStaticParams({ params }: { params: { category: str
 export default async function Page({ params }: { params: { category: string; slug?: string[] } }) {
   if (!params.slug) {
     const [nodes, links] = await Promise.all([
-      noteApi
-        .getNoteList()
-        .then((notes) => notes.map((note) => ({ id: note.path, label: note.name }))),
-      noteApi.getLinks(),
+      getNoteList().then((notes) => notes.map((note) => ({ id: note.path, label: note.name }))),
+      getLinks(),
     ]);
 
     return <LinksGraph data={{ nodes, links }} />;
@@ -37,7 +37,7 @@ export default async function Page({ params }: { params: { category: string; slu
   params.slug = params.slug.map((s) => decodeURIComponent(s));
 
   const path = `${params.category}/${params.slug.join("/")}`;
-  const { content: source } = await noteApi.getNoteByPath(path);
+  const { content: source } = await getNoteByPath(path);
 
   const breadcrumbItems = params.slug.map((s) => ({ label: s }));
 

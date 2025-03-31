@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation";
-import { noteApi } from "@/api/note";
 import { Box } from "@/components/Box";
 import { Flex } from "@/components/Flex";
 import { LoginForm } from "@/components/LoginForm";
-import { checkAuthentication } from "@/lib/auth";
-import { Note } from "@/types/note";
+import { checkAuthentication } from "@/domains/auth/auth.actions";
+import { getCategoryList, getNotesByCategory } from "@/domains/note/note.lib";
+import { Note } from "@/domains/note/note.types";
 import { MobileHeader } from "../components/MobileHeader";
 import { SideBar } from "../components/SideBar";
 import { TreeNode } from "../components/SideNavBar";
 
 export async function generateStaticParams() {
-  const categoryList = await noteApi.getCategoryList();
+  const categoryList = await getCategoryList();
 
   return categoryList
     .filter((category) => !category.isPrivate)
@@ -60,7 +60,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const categorySlug = params.category;
-  const categoryList = await noteApi.getCategoryList();
+  const categoryList = await getCategoryList();
   const category = categoryList.find(({ slug }) => slug === categorySlug);
 
   if (!category) {
@@ -79,7 +79,7 @@ export default async function Layout({
     );
   }
 
-  const noteList = await noteApi.getNotesByCategory(categorySlug);
+  const noteList = await getNotesByCategory(categorySlug);
   const navItems = noteListToNavItems(noteList);
 
   return (

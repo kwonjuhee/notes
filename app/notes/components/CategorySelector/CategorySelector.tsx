@@ -8,8 +8,8 @@ import { Flex } from "@/components/Flex";
 import { LoginForm } from "@/components/LoginForm";
 import { Modal } from "@/components/Modal";
 import { Text } from "@/components/Text";
-import { checkAuthentication } from "@/lib/auth";
-import { Category } from "@/types/category";
+import { checkAuthentication } from "@/domains/auth/auth.actions";
+import { Category } from "@/domains/note/note.types";
 import styles from "./CategorySelector.module.css";
 
 export interface CategorySelectorProps {

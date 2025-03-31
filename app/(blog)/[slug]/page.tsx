@@ -1,18 +1,18 @@
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
-import { postApi } from "@/api/post";
 import { Box } from "@/components/Box";
 import { Divider } from "@/components/Divider";
 import { Flex } from "@/components/Flex";
 import { Markdown } from "@/components/Markdown";
 import { TableOfContents } from "@/components/TableOfContents";
 import { Text } from "@/components/Text";
+import { getPostBySlug, getPostList } from "@/domains/post/post.lib";
 import { toYYYYMMDD } from "@/utils/date";
 import { decodeBase64 } from "@/utils/endecoder";
 import { markdownExtRegex } from "@/utils/markdown";
 
 export async function generateStaticParams() {
-  const postList = await postApi.getPostList();
+  const postList = await getPostList();
 
   return postList.map(({ name }) => ({
     slug: name.replace(markdownExtRegex, ""),
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await postApi.getPostBySlug(params.slug + ".md");
+  const post = await getPostBySlug(params.slug + ".md");
 
   if (!post) notFound();
 

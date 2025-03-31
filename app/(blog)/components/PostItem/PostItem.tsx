@@ -1,6 +1,6 @@
 import { Flex } from "@/components/Flex";
 import { Text } from "@/components/Text";
-import { Post } from "@/types/post";
+import { Post } from "@/domains/post/post.types";
 import styles from "./PostItem.module.css";
 
 export const PostItem = ({ title, description, created }: Partial<Post>) => {

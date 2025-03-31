@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { noteApi } from "@/api/note";
 import { Graph } from "@/assets/icon";
 import { Box } from "@/components/Box";
 import { Chip } from "@/components/Chip";
 import { Flex } from "@/components/Flex";
 import { Text } from "@/components/Text";
+import { getBacklinks } from "@/domains/note/note.lib";
 import { markdownExtRegex } from "@/utils/markdown";
 import styles from "./LinksToThisPage.module.css";
 
@@ -13,7 +13,7 @@ export interface LinksToThisPageProps {
 }
 
 export const LinksToThisPage = async ({ currentPage }: LinksToThisPageProps) => {
-  const backlinks = await noteApi.getBacklinks(currentPage);
+  const backlinks = await getBacklinks(currentPage);
 
   if (backlinks.length === 0) return;
 

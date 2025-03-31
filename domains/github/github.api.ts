@@ -1,6 +1,21 @@
+import { Octokit } from "octokit";
 import { getEnvVar } from "@/utils/env";
-import { GithubClient, githubClient } from "./client";
 import { GetContentResponseData, GetGitTreeResponseData, GetRefResponseData } from "./github.types";
+
+const githubClient = new Octokit({
+  auth: getEnvVar("GITHUB_AUTH"),
+  request: {
+    fetch: (url: string, options: RequestInit): Promise<Response> => {
+      const modifiedOptions: RequestInit = {
+        ...options,
+        cache: "force-cache",
+      };
+      return fetch(url, modifiedOptions);
+    },
+  },
+});
+
+export type GithubClient = Octokit;
 
 class GithubApi {
   protected client: GithubClient;

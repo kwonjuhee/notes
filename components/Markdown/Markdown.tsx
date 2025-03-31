@@ -8,8 +8,8 @@ import rehypeSlug from "rehype-slug";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
-import { githubApi } from "@/api/github";
 import { MARKDOWN_ID } from "@/constants/markdown";
+import { githubApi } from "@/domains/github/github.api";
 import { getImageUrl, isImageFile, isMarkdownFile } from "@/utils/markdown";
 import { Text } from "../Text";
 
